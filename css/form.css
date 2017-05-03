@@ -12,19 +12,19 @@ fieldset{
 }
 
 textarea {
-	width: 60%;
+	width:60%;
 	resize: none;
 }
 
-input[type=number]{
-	width:5%;
-}
-
-input[type=datetime-local]{
+input [type=number]{
 	width:15%;
 }
 
-input[type=month]{
+input [type=datetime-local]{
+	width:30%;
+}
+
+input [type=month]{
 	width:15%;
 }
 
