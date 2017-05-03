@@ -1,0 +1,70 @@
+#logo
+{
+    width: 10%;
+	float: left;
+	position: absolute;
+}
+
+#samaeHeader{
+	width : 75%;
+	float: left;
+	font-family: arial;
+	margin-top: -15px;
+	margin: auto;
+}
+
+#samaeFooter{
+	width: 100%;
+	float: left;
+	text-align: right;
+}
+
+#reportDate{
+	width: 10%;
+	margin-top: 20px;
+	margin-left: 880px;
+	float: right;
+	font-family: arial;
+	position: absolute;
+	text-align: center;
+}
+
+#samaeHeader h4, h5, p{
+	text-align:center;
+}
+
+#samaeHeader h3{
+	font-size: 20px;
+}
+
+#samaeHeader h4{
+	font-size: 14px;
+}
+
+#report {
+	margin-top: 100px;
+}
+
+#report table, p{
+	margin:auto;
+}
+ 
+table, th, td {
+	border-collapse: collapse;
+	border: 1px solid black;
+	border-width: 2px;
+	padding:  3px 10px 3px 10px;
+}
+
+th{
+	font-family: arial;
+    font-weight: bold;
+	text-align : center;
+	background-color: #80bfff;
+}
+
+
+ td{
+	font-family: arial;
+	text-align : left;
+}

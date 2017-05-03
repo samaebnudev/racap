@@ -1,0 +1,41 @@
+form, label, h3 {
+	color:black;
+	font-weight:bold;
+}
+
+h3{
+	text-align:center;
+}
+
+fieldset{
+	border-style:none;
+}
+
+textarea {
+	width: 60%;
+	resize: none;
+}
+
+input[type=number]{
+	width:5%;
+}
+
+input[type=datetime-local]{
+	width:15%;
+}
+
+input[type=month]{
+	width:15%;
+}
+
+#formBuscaGlosa {
+	margin-top:0.1%
+}
+
+#descResumida{
+	width:25%;
+}
+
+:disabled{
+	background:#dddddd;
+}
