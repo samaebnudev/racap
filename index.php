@@ -65,6 +65,8 @@ include "conecta_banco.inc";
 <input type="button" value="Causas de RACAP" />
 &nbsp;&nbsp;
 <input type="button" value="Status das Ações" />
+&nbsp;&nbsp;
+<input type="button" value="Motivos de Abertura de RACAP's" />
 </p>
 <br/>
 </div>
