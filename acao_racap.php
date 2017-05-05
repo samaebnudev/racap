@@ -89,11 +89,6 @@ include "conecta_banco.inc";
 	
 	<br/><br/>
 	
-	<label for='prazoAcao'>Prazo da Ação:</label>
-	<input type='datetime-local' name='prazoAcao' id='prazoAcao' required/>
-	
-	<br/><br/>
-	
 	<label for="observacaoAcao">Observações: </label>
 	<br/>
 	<textarea name="observacaoAcao" id="observacaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
