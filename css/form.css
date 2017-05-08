@@ -1,41 +1,45 @@
 form, label, h3 {
-	color:black;
-	font-weight:bold;
+    color:black;
+    font-weight:bold;
 }
 
 h3{
-	text-align:center;
+    text-align:center;
 }
 
 fieldset{
-	border-style:none;
+    border-style:none;
 }
 
 textarea {
-	width:60%;
-	resize: none;
+    width:60%;
+    resize: none;
 }
 
 input [type=number]{
-	width:15%;
+    width:15%;
 }
 
 input [type=datetime-local]{
-	width:30%;
+    width:30%;
 }
 
 input [type=month]{
-	width:15%;
+    width:15%;
 }
 
 #formBuscaGlosa {
-	margin-top:0.1%
+    margin-top:0.1%
 }
 
 #descResumida{
-	width:25%;
+    width:25%;
 }
 
 :disabled{
-	background:#dddddd;
+    background:#dddddd;
+}
+
+.formBusca {
+    text-align: center;
 }
