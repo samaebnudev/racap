@@ -20,6 +20,7 @@ $privilegio = 1;
         <link rel="stylesheet" href="css/accordion.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/buscaPerfilUsuario.js"></script>
     </head>
 
     <body>
@@ -45,15 +46,27 @@ $privilegio = 1;
         </div>
         <br/>
 
-        <form method="POST" id="buscaPerfil">
-            <label for="selectBuscaPerfil">Buscar: </label>
-            <select id="selectBuscaPerfil" name="selectBuscaPerfil">
-                <option>Selecione o Perfil...</option>
+        <form method="POST" id="buscaBanco">
+            <label for="selectbuscaBanco">Buscar: </label>
+            <select id="selectbuscaBanco" name="selectbuscaBanco">
+                <option></option>
+                <?php
+                $query = "SELECT * FROM racap_perfil";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_assoc($sql);
+
+                if (mysqli_affected_rows($conexao) > 0) {
+                    echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                    while ($row = mysqli_fetch_array($sql)) {
+                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                    }
+                }
+                ?>
             </select>
         </form>
         <hr>
 
-        <form method="POST" id="cadTipoUsuario" action="usuario_manage.php">
+        <form method="POST" id="cadPerfilUsuario" action="perfil_usuario_manage.php">
             <?php
             /* if ($_SESSION['tipoPrivilegio'] == 2){
               echo "<fieldset disabled>";
@@ -62,14 +75,14 @@ $privilegio = 1;
             //}*/
             ?>
             <input type="hidden" name="operacao" value="inclui"/>
-            
+
             <label for="sequencial">ID:</label>
-            <input type="number" step="1" min="0" name="sequencial" id="seqTipoUsuario" readonly />
-            
+            <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
+
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            
-            <label for="nomePerfil">Perfil: </label>
-            <input type="text" name="nomePerfil" id="nomePerfil" required/>
+
+            <label for="descricao">Perfil: </label>
+            <input type="text" name="descricao" id="descricao" required/>
             <br/><br/>
 
             <p align="center">

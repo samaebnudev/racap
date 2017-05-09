@@ -20,6 +20,7 @@ $privilegio = 1;
         <link rel="stylesheet" href="css/accordion.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/buscaTipoRacap.js"></script>
     </head>
 
     <body>
@@ -44,28 +45,39 @@ $privilegio = 1;
             </div>
         </div>
         <br/>
-        <form id="buscaTipoRACAP" method="POST">
-            <label for="selectbuscaTipoRACAP">Buscar Tipo de RACAP: </label>
-            <select id="selectbuscaTipoRACAP">
-                <option>Selecione o tipo de RACAP a Buscar...</option>
+        <form method="POST" id="buscaBanco">
+            <label for="selectbuscaBanco">Buscar: </label>
+            <select id="selectbuscaBanco" name="selectbuscaBanco">
+                <option></option>
+                <?php
+                $query = "SELECT * FROM racap_tipo_racap";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_assoc($sql);
+
+                if (mysqli_affected_rows($conexao) > 0) {
+                    echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                    while ($row = mysqli_fetch_array($sql)) {
+                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                    }
+                }
+                ?>
             </select>
         </form>
         <hr>
-        <form method="POST" id="cadTipoUsuario" action="usuario_manage.php">
+        <form method="POST" id="cadTipoRacap" action="tipo_racap_manage.php">
             <?php
-            /*if ($_SESSION['tipoPrivilegio'] == 2) {
-                echo "<fieldset disabled>";
-            } else {*/
-                echo "<fieldset>";
+            /* if ($_SESSION['tipoPrivilegio'] == 2) {
+              echo "<fieldset disabled>";
+              } else { */
+            echo "<fieldset>";
             //}
             ?>
-            <input type="hidden" name="operacao" value="inclui"/>
             <label for="sequencial">ID:</label>
 
-            <input type="number" step="1" min="0" name="sequencial" id="idTipoRacap" readonly/>
+            <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <label for="nomeTipoRacap">Tipo de RACAP: </label>
-            <input type="text" name="nomeTipoRacap" id="nomeTipoRacap" required/>
+            <label for="descricao">Tipo de RACAP: </label>
+            <input type="text" name="descricao" id="descricao" required/>
             <br/><br/>
 
             <p align="center">
