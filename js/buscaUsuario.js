@@ -1,34 +1,36 @@
-$(document).ready(function( ) {
-	
-	$('#buscaUsuario').on('submit',function(){
-		
-		var sequencial = $('#barraBuscaUsuario');
-		
-		$.ajax({
-		url: 'busca_usuario_manage.php',
-		dataType:"json",
-		type: 'POST',
-		data: sequencial,
-		success: function(data){
-				if (data.success==true){
-					$('#seqUsuario').val(data.idUsuario);
-					$('#nomeUsuario').val(data.nomeUsuario);
-					$('#tipoUsuario').val(data.tipoPrivilegio);
-					
-					if (data.flgAtivo == "S"){
-						$('#flgAtivo').prop("checked",true);
-					} else{
-						$('#flgAtivo').prop("checked",false);
-					}
-					
-				}else {
-					alert ("Sequencial inv·lido.");
-					}
-			}
-		});
-		
-	return false;
-		
-	});
-    
+$(document).ready(function ( ) {
+
+     $('#buscaBanco').on('change', function () {
+
+        var sequencial = $('#selectbuscaBanco');
+
+        $.ajax({
+            url: 'busca_usuario.php',
+            dataType: "json",
+            type: 'POST',
+            data: sequencial,
+            success: function (data) {
+                if (data.success == true) {
+                    $('#sequencial').val(data.id);
+                    $('#matUsuario').val(data.matUsuario);
+                    $('#nomeUsuario').val(data.nomeUsuario);
+                    $('#setorUsuario').val(data.setorUsuario)
+                    $('#perfilUsuario').val(data.perfilUsuario);
+
+                    if (data.flgAtivo == "S") {
+                        $('#flgAtivo').prop("checked", true);
+                    } else {
+                        $('#flgAtivo').prop("checked", false);
+                    }
+
+                } else {
+                    alert("Sequencial inv√°lido.");
+                }
+            }
+        });
+
+        return false;
+
+    });
+
 });

@@ -40,6 +40,10 @@ input [type=month]{
     background:#dddddd;
 }
 
-.formBusca {
-    text-align: center;
+.formBusca{
+ text-align: center;
+}
+
+.formBuscaInner {
+ display:inline-block;  
 }

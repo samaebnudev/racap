@@ -40,86 +40,73 @@ include "getIP.php";
 $login = $_POST['usuario'];
 $password = $_POST['senha'];
 
-$query = "SELECT * FROM glosa_usuario WHERE nomeUsuario = '$login'";
+$query = "SELECT * FROM racap_usuario WHERE matServidor = '$login'";
 $sql = mysqli_query($conexao, $query);
 
 if (mysqli_affected_rows($conexao) == 1) {
 
     $row = mysqli_fetch_assoc($sql);
 
-    /* C�digo antigo: 
-      if (password_verify ($password , $row['senha']) and $row['flgAtivo'] == "S"){
-
-      C�digo Locaweb:
-      if (crypt ($password , $row['senha']) == $row['senha'] and $row['flgAtivo'] == "S"){
-     */
-
     if (password_verify($password, $row['senha']) and $row['flgAtivo'] == "S") {
 
         $idUsuario = $row ['id'];
-        $tipoPrivilegio = $row ['tipoPrivilegio'];
+        $tipoPrivilegio = $row ['perfil_acesso'];
         $flgAtivo = $row ['flgAtivo'];
+        $nomeUsuario = $row ['nomeServidor'];
 
         $_SESSION ['id'] = $idUsuario;
         $_SESSION ['tipoPrivilegio'] = $tipoPrivilegio;
-        $_SESSION ['nomeUsuario'] = $login;
+        $_SESSION ['nomeUsuario'] = $row ['nomeServidor'];
         $_SESSION ['senha'] = $password;
         $_SESSION ['flgAtivo'] = $flgAtivo;
 
         $dataRegistro = date("Y-m-d H:i:s");
         $ocorrencia = "Entrou no Sistema.";
         $ip = get_client_ip_env();
-        $query = "INSERT INTO glosa_log (id, dataRegistro, ocorrencia, usuario, ip) 
-		VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
+        $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+		VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
         $sql = mysqli_query($conexao, $query);
 
         mysqli_close($conexao);
-        header("Location:index2.php");
-    }
-
-    /*
-      C�digo Locaweb:
-      elseif (crypt ($password , $row['senha']) == $row['senha'] and $row['flgAtivo'] == "N"){
-     */ elseif (password_verify($password, $row['senha']) and $row['flgAtivo'] == "N") {
+        header("Location:index.php");
+    } elseif (password_verify($password, $row['senha']) and $row['flgAtivo'] == "N") {
 
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = utf8_encode("Tentativa de login com usu�rio inativo.");
+        $ocorrencia = "Tentativa de login com usuário inativo.";
         $ip = get_client_ip_env();
-        $query = "INSERT INTO glosa_log (id, dataRegistro, ocorrencia, usuario, ip) 
-		VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
+        $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+		VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
         $sql = mysqli_query($conexao, $query);
 
-        echo "<script> alert ('ESTE USU�RIO FOI DESATIVADO PELO ADMINISTRADOR DO SISTEMA.');</script>";
+        echo "<script> alert ('ESTE USUÁRIO FOI DESATIVADO PELO ADMINISTRADOR DO SISTEMA.');</script>";
         mysqli_close($conexao);
         echo "<script>voltar ();</script>";
-    }
-
-    /*
-      C�digo Locaweb:
-      elseif (crypt ($password , $row['senha']) != $row['senha']){
-     */ elseif (!password_verify($password, $row['senha'])) {
+    } 
+    
+    elseif (!password_verify($password, $row['senha'])) {
 
         $dataRegistro = date("Y-m-d H:i:s");
         $ocorrencia = "Tentativa de login. Senha Incorreta.";
         $ip = get_client_ip_env();
-        $query = "INSERT INTO glosa_log (id, dataRegistro, ocorrencia, usuario, ip) 
-		VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
+        $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+		VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
         $sql = mysqli_query($conexao, $query);
 
         echo "<script> alert ('SENHA INCORRETA.');</script>";
         mysqli_close($conexao);
         echo "<script>voltar ();</script>";
     }
-} else {
+} 
 
+else {
     $dataRegistro = date("Y-m-d H:i:s");
-    $ocorrencia = utf8_encode("Tentativa de login. Usu�rio e/ou senha incorreto(s).");
+    $ocorrencia = "Tentativa de login. Usuário e/ou senha incorreto(s).";
     $ip = get_client_ip_env();
-    $query = "INSERT INTO glosa_log (id, dataRegistro, ocorrencia, usuario, ip) 
-	VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
+    $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+	VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
     $sql = mysqli_query($conexao, $query);
 
-    echo "<script> alert ('USU�RIO E/OU SENHA INCORRETOS.');</script>";
+    echo "<script> alert ('USUÁRIO E/OU SENHA INCORRETOS.');</script>";
     mysqli_close($conexao);
     echo "<script>voltar ();</script>";
 }
