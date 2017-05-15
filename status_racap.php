@@ -47,7 +47,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </div>
         <br/>
 
-        <form method="POST" id="buscaBanco">
+        <form method="POST" id="buscaBanco" style="text-align: center;">
             <label for="selectbuscaBanco">Buscar: </label>
             <select id="selectbuscaBanco" name="selectbuscaBanco">
                 <option></option>
@@ -69,13 +69,13 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
         <form method="POST" id="cadStatusRacap" action="status_racap_manage.php">
             <?php
-            /* if ($_SESSION['tipoPrivilegio'] == 2){
+            if ($_SESSION['tipoPrivilegio'] == 2){
               echo "<fieldset disabled>";
-              } else { */
-            echo "<fieldset>";
-            //}*/
+              } else { 
+                echo "<fieldset>";
+            }
             ?>
-
+            <label for="sequencial">ID: </label>
             <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label for="descricao">Status da RACAP: </label>

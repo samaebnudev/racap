@@ -11,6 +11,7 @@
 <?php
 session_start();
 date_default_timezone_set('Brazil/East');
+header("Content-type: text/html; charset=utf-8");
 include "conecta_banco.inc";
 include "getIP.php";
 

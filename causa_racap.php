@@ -68,11 +68,11 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
 <form method="POST" id="cadCausaRacap" action="causa_racap_manage.php">
     <?php
-    /* if ($_SESSION['tipoPrivilegio'] == 2) {
+     if ($_SESSION['tipoPrivilegio'] == 2) {
       echo "<fieldset disabled>";
-      } else { */
-    echo "<fieldset>";
-    //}
+      } else { 
+        echo "<fieldset>";
+    }
     ?>
 
     <label for="sequencial">ID:</label>
