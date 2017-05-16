@@ -25,7 +25,7 @@ include "getIP.php";
 if (isset($_POST['sequencial'])) {
     $sequencial = $_POST ['sequencial'];
 } else {
-    $sequencial = "999999";
+    $sequencial = "0";
 }
 
 $descricao = $_POST['descricao'];

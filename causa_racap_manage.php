@@ -11,6 +11,7 @@
 <?php
 session_start();
 date_default_timezone_set('Brazil/East');
+header("Content-type: text/html; charset=utf-8");
 include "conecta_banco.inc";
 include "getIP.php";
 
@@ -24,7 +25,7 @@ include "getIP.php";
 if (isset($_POST['sequencial'])) {
     $sequencial = $_POST ['sequencial'];
 } else {
-    $sequencial = "999999";
+    $sequencial = "0";
 }
 
 $descricao = $_POST['descricao'];

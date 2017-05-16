@@ -18,7 +18,7 @@ include "getIP.php";
 if (isset($_POST['sequencial'])) {
     $sequencial = $_POST ['sequencial'];
 } else {
-    $sequencial = "999999";
+    $sequencial = "0";
 }
 
 $codSetor = $_POST['codSetor'];
@@ -62,7 +62,7 @@ if (mysqli_affected_rows($conexao) == 1) {
     if ($sql) {
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = utf8_encode("Incluiu Setor: " . $descricao);
+        $ocorrencia = utf8_encode("Incluiu Setor: " . $nomeSetor);
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";

@@ -46,8 +46,8 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </div>
         <br/>
 
-        <form method="POST" id="buscaBanco">
-            <label for="selectbuscaBanco">Buscar Causa da RACAP: </label>
+        <form method="POST" id="buscaBanco" style="text-align: center;">
+            <label for="selectbuscaBanco">Buscar RACAP: </label>
             <select id="selectbuscaBanco" name="selectbuscaBanco">
                 <option></option>
                 <?php
@@ -66,7 +66,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </form>
         <hr>
 
-        <form method="POST" id="cadRACAP" action="racap_manage.php">
+        <form method="POST" id="cadRACAP" action="racap_manage.php" enctype="multipart/form-data">
             <?php
             if ($_SESSION['tipoPrivilegio'] == 2) {
                 echo "<fieldset disabled>";
@@ -136,9 +136,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
             <br/><br/>
             <label for="motivoDescricao">Motivo da RACAP (Descrição): </label>
-            <input type="text" maxlength="50" id="motivoDescricao" required/>
+            <input type="text" maxlength="50" id="motivoDescricao" name="motivoDescricao" required/>
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;
             <label for="setorRacap">Setor: </label>
             <select id="setorRacap" name="setorRacap" required>
                 <option></option>
@@ -156,7 +156,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 ?>
             </select>
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;
             <label for="causaRacap">Causa da RACAP: </label>
             <select id="causaRacap" name="causaRacap">
                 <option></option>
@@ -180,13 +180,13 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <input type='datetime-local' name='prazoRacap' id='prazoRacap' style="width:18%;"required/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label for="anexoRacap" title="Anexar Arquivos na RACAP se houver.">Anexar Arquivo:</label>
-            <input type="file" name="arquivo" name="anexoRacap" id="anexoRacap"/>
-            
+            <input type="file" name="anexoRacap" id="anexoRacap"/>
+
             <br/><br/>
             <label for="historicoRACAP">Histórico da RACAP: </label>
-            <br/>
+            <p align="center">
             <textarea name="históricoRACAP" id="históricoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
-
+            </p>
             <p align="center">
                 <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
                 &nbsp;&nbsp;

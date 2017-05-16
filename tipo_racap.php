@@ -46,7 +46,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             </div>
         </div>
         <br/>
-        <form method="POST" id="buscaBanco">
+        <form method="POST" id="buscaBanco" style="text-align: center;">
             <label for="selectbuscaBanco">Buscar: </label>
             <select id="selectbuscaBanco" name="selectbuscaBanco">
                 <option></option>
