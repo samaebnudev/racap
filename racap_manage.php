@@ -22,18 +22,27 @@ include 'racap_anexo.php';
  * and open the template in the editor.
  */
 
+$bufferSequencial = $_POST['sequencial'];
+//echo "Buffer Sequencial: ".$bufferSequencial."<br/>";
+$sequencial = "0";
 
-if (isset($_POST['sequencial'])) {
-    $sequencial = $_POST ['sequencial'];
-} else {
-    $sequencial = "0";
+if ($bufferSequencial != NULL){
+    //echo "Buffer Sequencial não está vazio <br/>";
+    $sequencial = $bufferSequencial;
 }
 
+//echo "Sequencial: ".$sequencial."<br/>";
+
 $statusRacap = $_POST['statusRacap'];
+//echo "Status RACAP: ".$statusRacap."<br/>";
 $tipoRacap = $_POST['tipoRacap'];
+//echo "Tipo RACAP: ".$tipoRacap."<br/>";
 $motivoAbertura = $_POST['motivoAbertura'];
-$motivoDescricao = utf8_encode($_POST['motivoDescricao']);
+//echo "Motivo de Abertura da RACAP".$motivoAbertura."<br/>";
+$motivoDescricao = $_POST['motivoDescricao'];
+//echo "Descricao do Motivo da RACAP: ".$motivoDescricao."<br/>";
 $setorRacap = $_POST['setorRacap'];
+//echo "Setor: ".$setorRacap."<br/>";
 
 if (isset($_POST['causaRacap'])) {
     $causaRacap = $_POST['causaRacap'];
@@ -41,7 +50,11 @@ if (isset($_POST['causaRacap'])) {
     $causaRacap = NULL;
 }
 
+//echo "Causa da RACAP: ".$causaRacap."<br/>";
+
 $dataAbertura = date("Y-m-d H:i:s");
+
+//echo "Data de Abertura: ".$dataAbertura."<br/>";
 
 if (isset($_POST['prazoRacap'])) {
     $dateBuffer = explode("T", $_POST['prazoRacap']);
@@ -51,25 +64,29 @@ if (isset($_POST['prazoRacap'])) {
     $prazoRacap = NULL;
 }
 
-$históricoRACAP = $_POST['históricoRACAP'];
+//echo "Data de Prazo: ".$prazoRacap."<br/>";
+
+$historicoRACAP = $_POST['historicoRACAP'];
+
+//echo "Histórico: ".$historicoRACAP."<br/>";
 
 $query = "SELECT * FROM racap_racap WHERE id = '$sequencial'";
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
-
+    //echo "Entrou no UPDATE </br>";
     $query = "UPDATE racap_racap
             SET status_racap = '$statusRacap', tipo_racap = '$tipoRacap',
             prazo_racap = '$prazoRacap',
             motivo_abertura_racap_id = '$motivoAbertura', 
             motivo_racap = '$motivoDescricao', setor_racap = '$setorRacap',
-            historico_racap = '$históricoRACAP', causa_racap = '$causaRacap'
+            historico_racap = '$historicoRACAP', causa_racap = '$causaRacap'
             WHERE id = '$sequencial'";
     $sql = mysqli_query($conexao, $query);
 
     if ($sql) {
-
+        //echo "UPDATE com sucesso, registrando LOG </br>";
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
         $ocorrencia = utf8_encode("Alterou RACAP: " . $sequencial);
@@ -78,17 +95,18 @@ if (mysqli_affected_rows($conexao) == 1) {
 		 VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
         $sql = mysqli_query($conexao, $query);
 
-        $racapMensagem = "RACAP alterada com sucesso. \n";
+        $racapMensagem = "RACAP alterada com sucesso.";
     } else {
-        $racapMensagem = "Falha na alteração. RACAP não pôde ser alterada. \n";
+        $racapMensagem = "Falha na alteração. RACAP não pôde ser alterada.";
     }
 } elseif (mysqli_affected_rows($conexao) == 0) {
-    $query = "INSERT INTO racap_racap (id, status_racap, tipo_racap, data_racap
+    //echo "Entrou no INSERT </br>";
+    $query = "INSERT INTO racap_racap (id, status_racap, tipo_racap, data_racap,
         prazo_racap, motivo_abertura_racap_id, motivo_racap, setor_racap,
         historico_racap, causa_racap)
 	VALUES ('$sequencial', '$statusRacap', '$tipoRacap', '$dataAbertura',
         '$prazoRacap', '$motivoAbertura', '$motivoDescricao', '$setorRacap',
-        '$históricoRACAP', '$causaRacap')";
+        '$historicoRACAP', '$causaRacap')";
 
     $sql = mysqli_query($conexao, $query);
 
@@ -101,13 +119,16 @@ if (mysqli_affected_rows($conexao) == 1) {
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
         $sql = mysqli_query($conexao, $query);
 
-        $racapMensagem = "RACAP incluída com sucesso. \n";
+        $racapMensagem = "RACAP incluída com sucesso.";
     } else {
-        $racapMensagem = "Falha na inclusão. RACAP não pôde ser inserida. \n";
+        $racapMensagem = "Falha na inclusão. RACAP não pôde ser inserida.";
     }
 }
 
 if ($_FILES['anexoRacap']) {
+    $nome_final = $_FILES['anexoRacap']['name'];
+    //echo $nome_final."<br/>";
+    $pasta = "uploads/";
     $anexoMensagem = anexaArquivo();
 } else {
     $anexoMensagem = "";
@@ -121,9 +142,10 @@ if ($anexoMensagem == "Upload efetuado com sucesso!"){
 
         if ($sql) {
             $sequencial = $row['id'];
-            $url = $_UP['pasta'] . $nome_final;
+           // echo "Max Sequencial: ".$sequencial."<br/>";
+            $url = $pasta . $nome_final;
 
-            $query = "INSERT INTO racap_anexo (id, racap_id, nome_arquivo, url)
+            $query = "INSERT INTO racap_anexo (id, id_racap, nome_arquivo, url)
                             VALUES ('0','$sequencial','$nome_final','$url')";
             $sql = mysqli_query($conexao, $query);
 
@@ -138,9 +160,9 @@ if ($anexoMensagem == "Upload efetuado com sucesso!"){
             }
         }
     } elseif ($sequencial != 0) {
-        $url = $_UP['pasta'] . $nome_final;
+        $url = $pasta . $nome_final;
 
-        $query = "INSERT INTO racap_anexo (id, racap_id, nome_arquivo, url)
+        $query = "INSERT INTO racap_anexo (id, id_racap, nome_arquivo, url)
                             VALUES ('0','$sequencial','$nome_final','$url')";
         $sql = mysqli_query($conexao, $query);
 
@@ -156,9 +178,9 @@ if ($anexoMensagem == "Upload efetuado com sucesso!"){
     }
 }
 
-$alertMessage = $racapMensagem . $anexoMensagem;
+$alertMessage = $racapMensagem."\\n".$anexoMensagem;
 
-$message = "<script> alert ('$alertMessage');</script>";
-echo $message;
-/*$urlBack = "<script>voltar ();</script>";
-echo $urlBack;*/
+echo '<script type="text/javascript">alert("'.$alertMessage.'");</script>';
+
+$urlBack = "<script>voltar ();</script>";
+echo $urlBack;

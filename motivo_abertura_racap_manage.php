@@ -21,7 +21,7 @@ include "getIP.php";
  * and open the template in the editor.
  */
 
-//Incluir ou Alterar privilegios de usuário.
+//Incluir ou Alterar Motivo de Abertura de RACAP.
 if (isset($_POST['sequencial'])) {
     $sequencial = $_POST ['sequencial'];
 } else {

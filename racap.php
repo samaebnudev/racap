@@ -20,6 +20,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <link rel="stylesheet" href="css/form.css">
         <link rel="stylesheet" href="css/accordion.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/buscaRacap.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -75,7 +76,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             }
             ?>
             <label for="sequencial">ID:</label>
-            <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
+            <input type="number" step="1" name="sequencial" id="sequencial" readonly />
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -185,7 +186,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <br/><br/>
             <label for="historicoRACAP">Histórico da RACAP: </label>
             <p align="center">
-            <textarea name="históricoRACAP" id="históricoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
+            <textarea name="historicoRACAP" id="historicoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
             </p>
             <p align="center">
                 <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
