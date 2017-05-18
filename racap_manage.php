@@ -125,13 +125,13 @@ if (mysqli_affected_rows($conexao) == 1) {
     }
 }
 
-if ($_FILES['anexoRacap']) {
+if ($_FILES['anexoRacap'] && $racapMensagem == "RACAP incluída com sucesso.") {
     $nome_final = $_FILES['anexoRacap']['name'];
     //echo $nome_final."<br/>";
     $pasta = "uploads/";
     $anexoMensagem = anexaArquivo();
 } else {
-    $anexoMensagem = "";
+    $anexoMensagem = "Arquivo não foi enviado ao servidor.";
 }
 
 if ($anexoMensagem == "Upload efetuado com sucesso!"){

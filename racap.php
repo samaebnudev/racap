@@ -186,7 +186,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <br/><br/>
             <label for="historicoRACAP">Histórico da RACAP: </label>
             <p align="center">
-            <textarea name="historicoRACAP" id="historicoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
+                <textarea name="historicoRACAP" id="historicoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
             </p>
             <p align="center">
                 <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
@@ -195,6 +195,31 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             </p>
         </fieldset>
     </form>
+
+    <button class='accordion'>Anexos da RACAP.</button>
+    <div class='panel'>
+        <table>
+            <thead>
+                <tr><th>Arquivo</th><th>Baixar</th><th>Excluir</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>XPTO.jpg</td><td><input type="button" value="Baixar"/></td><td><input type="button" value="Excluir"/></td></tr>
+            </tbody>
+        </table>
+        <br/>
+    </div>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].onclick = function () {
+                this.classList.toggle("active");
+                this.nextElementSibling.classList.toggle("show");
+            };
+        }
+    </script>
 
 </body>
 </html>
