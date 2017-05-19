@@ -125,7 +125,8 @@ if (mysqli_affected_rows($conexao) == 1) {
     }
 }
 
-if ($_FILES['anexoRacap'] && $racapMensagem == "RACAP incluída com sucesso.") {
+if ($_FILES['anexoRacap'] && ($racapMensagem == "RACAP incluída com sucesso." 
+    || $racapMensagem == "RACAP alterada com sucesso.")) {
     $nome_final = $_FILES['anexoRacap']['name'];
     //echo $nome_final."<br/>";
     $pasta = "uploads/";

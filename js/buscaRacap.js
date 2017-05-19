@@ -3,7 +3,6 @@ $(document).ready(function ( ) {
     $('#buscaBanco').on('change', function () {
 
         var sequencial = $('#selectbuscaBanco');
-        console.log(sequencial.val());
 
         $.ajax({
             url: 'busca_racap.php',
@@ -12,7 +11,6 @@ $(document).ready(function ( ) {
             data: sequencial,
             success: function (data) {
                 if (data.success == true) {
-                    console.log("Sucesso");
                     $('#sequencial').val(data.id);
                     $('#statusRacap').val(data.statusRacap);
                     $('#tipoRacap').val(data.tipoRacap);
@@ -30,8 +28,9 @@ $(document).ready(function ( ) {
                     
 
                 } else {
-                    console.log("Fracasso");
-                    alert("Sequencial inválido.");
+                    $('#cadRACAP').each(function (){
+                        this.reset();
+                    });
                 }
             }
         });

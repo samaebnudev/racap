@@ -21,6 +21,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <link rel="stylesheet" href="css/accordion.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script type="text/javascript" src="js/buscaRacap.js"></script>
+        <script type="text/javascript" src="js/buscaRacapAnexo.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -196,19 +197,22 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </fieldset>
     </form>
 
-    <button class='accordion'>Anexos da RACAP.</button>
-    <div class='panel'>
-        <table>
-            <thead>
-                <tr><th>Arquivo</th><th>Baixar</th><th>Excluir</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>XPTO.jpg</td><td><input type="button" value="Baixar"/></td><td><input type="button" value="Excluir"/></td></tr>
-            </tbody>
-        </table>
-        <br/>
-    </div>
-
+    <form id="tabelaAnexos" method="POST">
+        <button class='accordion' id="thing">Anexos da RACAP:</button>
+        <div class='panel'>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Arquivo</th><th>Baixar</th></tr>
+                </thead>
+                <tbody id="listaAnexos">
+                </tbody>
+            </table>
+            <br/>
+        </div>
+        <p align="center">
+            <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
+        </p>
+    </form>
     <script>
         var acc = document.getElementsByClassName("accordion");
         var i;
