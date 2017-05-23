@@ -127,15 +127,16 @@ if (mysqli_affected_rows($conexao) == 1) {
 
 if ($_FILES['anexoRacap'] && ($racapMensagem == "RACAP incluída com sucesso." 
     || $racapMensagem == "RACAP alterada com sucesso.")) {
-    $nome_final = $_FILES['anexoRacap']['name'];
+    //$nome_final = $_FILES['anexoRacap']['name'];
     //echo $nome_final."<br/>";
     $pasta = "uploads/";
     $anexoMensagem = anexaArquivo();
+    $nome_final = $anexoMensagem [1];
 } else {
-    $anexoMensagem = "Arquivo não foi enviado ao servidor.";
+    $anexoMensagem [0] = "Arquivo não foi enviado ao servidor.";
 }
 
-if ($anexoMensagem == "Upload efetuado com sucesso!"){
+if ($anexoMensagem [0] == "Upload efetuado com sucesso!"){
     if ($sequencial == "0") {
         $query = "SELECT MAX(id) AS id FROM racap_racap;";
         $sql = mysqli_query($conexao, $query);
@@ -179,7 +180,7 @@ if ($anexoMensagem == "Upload efetuado com sucesso!"){
     }
 }
 
-$alertMessage = $racapMensagem."\\n".$anexoMensagem;
+$alertMessage = $racapMensagem."\\n".$anexoMensagem [0];
 
 echo '<script type="text/javascript">alert("'.$alertMessage.'");</script>';
 

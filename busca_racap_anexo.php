@@ -15,7 +15,7 @@ $userDados = array('success' => false,
 $tableBuffer = "";
 $tableButtonDown = "<input type='button' value='Download'/>";
 $tableButtonDel = "<input type='button' value='Excluir Anexo'/>";
-$tableCheckStart = "<input type='checkbox' name='excluiAnexo' value='";
+$tableCheckStart = "<input type='radio' name='excluiAnexo' value='";
 $tableCheckEnd = "' required/>";
 $tableCheckEnd2 = "' />";
 
@@ -29,22 +29,30 @@ if (isset($_POST['selectbuscaBanco'])) {
 
     if (mysqli_affected_rows($conexao) > 0) {
         $userDados ['success'] = true;
+        $id = $row['id'];
         $nomeArquivo = $row['nome_arquivo'];
         $url = $row['url'];
 
-        $tableBuffer = "<tr><td>" . $nomeArquivo . "</td><td><a target='_blank'
-        href='" . $url . "'>" . $tableButtonDown . "</a></td><td>" . $tableButtonDel . "</td>
-        </tr>";
+        /* $tableBuffer = "<tr><td>" . $nomeArquivo . "</td><td><a target='_blank'
+          href='" . $url . "'>" . $tableButtonDown . "</a></td><td>" . $tableButtonDel . "</td>
+          </tr>"; */
+
+        $tableBuffer = "<tr><td>".$tableCheckStart.$id.$tableCheckEnd."</td><td>"
+        .$nomeArquivo."</td><td><a target='_blank' href='".$url."'>".$tableButtonDown."</a></td></tr>";
 
         $userDados['tableData'] = $userDados['tableData'] . $tableBuffer;
 
         while ($row = mysqli_fetch_array($sql)) {
+            $id = $row['id'];
             $nomeArquivo = $row['nome_arquivo'];
             $url = $row['url'];
 
-            $tableBuffer = "<tr><td>" . $nomeArquivo . "</td><td><a target='_blank'
-        href='" . $url . "'>" . $tableButtonDown . "</a></td><td>" . $tableButtonDel . "</td>
-        </tr>";
+            /* $tableBuffer = "<tr><td>" . $nomeArquivo . "</td><td><a target='_blank'
+              href='" . $url . "'>" . $tableButtonDown . "</a></td><td>" . $tableButtonDel . "</td>
+              </tr>"; */
+
+            $tableBuffer = "<tr><td>".$tableCheckStart.$id.$tableCheckEnd2."</td><td>"
+            .$nomeArquivo."</td><td><a target='_blank' href='".$url."'>".$tableButtonDown."</a></td></tr>";
 
             $userDados['tableData'] = $userDados['tableData'] . $tableBuffer;
         }

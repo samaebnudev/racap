@@ -196,23 +196,24 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             </p>
         </fieldset>
     </form>
-
-    <form id="tabelaAnexos" method="POST">
-        <button class='accordion' id="thing">Anexos da RACAP:</button>
-        <div class='panel'>
-            <table>
-                <thead>
-                    <tr><th>ID</th><th>Arquivo</th><th>Baixar</th></tr>
-                </thead>
-                <tbody id="listaAnexos">
-                </tbody>
-            </table>
-            <br/>
-        </div>
-        <p align="center">
-            <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
-        </p>
-    </form>
+    <div id="anexosRacap">
+        <form id="tabelaAnexos" method="POST">
+            <button class='accordion' id="thing">Anexos da RACAP:</button>
+            <div class='panel'>
+                <table>
+                    <thead>
+                        <tr><th>Seleciona</th><th>Arquivo</th><th>Baixar</th></tr>
+                    </thead>
+                    <tbody id="listaAnexos">
+                    </tbody>
+                </table>
+                <br/>
+            </div>
+            <p align="center">
+                <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
+            </p>
+        </form>
+    </div>
     <script>
         var acc = document.getElementsByClassName("accordion");
         var i;
