@@ -58,9 +58,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 $row = mysqli_fetch_assoc($sql);
 
                 if (mysqli_affected_rows($conexao) > 0) {
-                    echo "<option value=" . $row['id'] . ">" . $row['motivo_racap'] . "</option>";
+                    echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
                     while ($row = mysqli_fetch_array($sql)) {
-                        echo "<option value=" . $row['id'] . ">" . $row['motivo_racap'] . "</option>";
+                        echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
                     }
                 }
                 ?>
@@ -208,10 +208,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     </tbody>
                 </table>
                 <br/>
+                <p align="center">
+                    <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
+                </p>
             </div>
-            <p align="center">
-                <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
-            </p>
         </form>
     </div>
     <script>

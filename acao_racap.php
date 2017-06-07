@@ -46,53 +46,101 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </div>
         <br/>
 
-        <form>
-            <label>Buscar: </label>
-            <select>
-                <option>Selecione a Ação...</option>
+        <form method="POST" id="buscaBanco" style="text-align: center;">
+            <label for="selectbuscaBanco">Buscar: </label>
+            <select id="selectbuscaBanco" name="selectbuscaBanco">
+                <option></option>
+                <?php
+                $query = "SELECT * FROM racap_acao";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_assoc($sql);
+
+                if (mysqli_affected_rows($conexao) > 0) {
+                    echo "<option value=" . $row['id'] . ">Ação da RACAP: " . $row['id_racap'] . " - " . $row['descricao_acao'] . "</option>";
+                    while ($row = mysqli_fetch_array($sql)) {
+                        echo "<option value=" . $row['id'] . ">Ação da RACAP: " . $row['id_racap'] . " - " . $row['descricao_acao'] . "</option>";
+                    }
+                }
+                ?>
             </select>
         </form>
         <hr>
 
-        <form method="POST" id="cadTipoUsuario" action="usuario_manage.php">
+        <form method="POST" id="cadAcao" action="acao_manage.php">
             <?php
-            /* if ($_SESSION['tipoPrivilegio'] == 2){
-              echo "<fieldset disabled>";
-              } else { */
-            echo "<fieldset>";
-            //}*/
+            if ($_SESSION['tipoPrivilegio'] == 2) {
+                echo "<fieldset disabled>";
+            } else {
+                echo "<fieldset>";
+            }
             ?>
-            <input type="hidden" name="operacao" value="incluiTipoUsuario"/>
+
             <label for="sequencial">ID:</label>
-            <input type="number" step="1" min="0" name="sequencial" id="seqTipoUsuario" readonly />
+            <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <label>RACAP: </label>
-            <select>
-                <option>Selecione a RACAP...</option>
+            <label for="selectRacap">RACAP: </label>
+            <select id="selectRacap" name="selectRacap" required>
+                <option></option>
+                <?php
+                $query = "SELECT * FROM racap_racap";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_assoc($sql);
+
+                if (mysqli_affected_rows($conexao) > 0) {
+                    echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
+                    while ($row = mysqli_fetch_array($sql)) {
+                        echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
+                    }
+                }
+                ?>
             </select>
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <label>Status da Ação: </label>
-            <select>
-                <option>Selecione o Status...</option>
+            <label for="selectStatusAcao">Status da Ação: </label>
+            <select id="selectStatusAcao" name="selectStatusAcao" required>
+                <option></option>
+                <?php
+                $query = "SELECT * FROM racap_status_acao";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_assoc($sql);
+
+                if (mysqli_affected_rows($conexao) > 0) {
+                    echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                    while ($row = mysqli_fetch_array($sql)) {
+                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                    }
+                }
+                ?>
             </select>
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br/><br/>
 
-            <label>Responsável: </label>
-            <select>
-                <option>Selecione o Responsável...</option>
+            <label for="selectResponsavel">Responsável: </label>
+            <select id="selectResponsavel" name="selectResponsavel" required>
+                <option></option>
+                <?php
+                $query = "SELECT id, nomeServidor FROM racap_usuario";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_assoc($sql);
+
+                if (mysqli_affected_rows($conexao) > 0) {
+                    echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                    while ($row = mysqli_fetch_array($sql)) {
+                        echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                    }
+                }
+                ?>
             </select>
 
             <br/><br/>
 
             <label for="observacaoAcao">Observações: </label>
-            <br/>
+            <p style="text-align: center;">
             <textarea name="observacaoAcao" id="observacaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
-
+            </p>
             <p align="center">
                 <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar Tipo de Usuário"/>
                 &nbsp;&nbsp;
