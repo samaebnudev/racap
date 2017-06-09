@@ -189,6 +189,69 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <p align="center">
                 <textarea name="historicoRACAP" id="historicoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
             </p>
+
+            <button type="button" class='accordion' id="thing2">Ações da RACAP:</button>
+            <div class='panel'>
+                <fieldset>
+
+                </fieldset>
+                <label for="sequencialAcao">ID:</label>
+                <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly />
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <input type="hidden" id="idRacap" name="idRacap" />
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <label for="selectStatusAcao">Status da Ação: </label>
+                <select id="selectStatusAcao" name="selectStatusAcao" required>
+                    <option></option>
+                    <?php
+                    $query = "SELECT * FROM racap_status_acao";
+                    $sql = mysqli_query($conexao, $query);
+                    $row = mysqli_fetch_assoc($sql);
+
+                    if (mysqli_affected_rows($conexao) > 0) {
+                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                        while ($row = mysqli_fetch_array($sql)) {
+                            echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+
+                <br/><br/>
+
+                <label for="selectResponsavel">Responsável: </label>
+                <select id="selectResponsavel" name="selectResponsavel" required>
+                    <option></option>
+                    <?php
+                    $query = "SELECT id, nomeServidor FROM racap_usuario";
+                    $sql = mysqli_query($conexao, $query);
+                    $row = mysqli_fetch_assoc($sql);
+
+                    if (mysqli_affected_rows($conexao) > 0) {
+                        echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                        while ($row = mysqli_fetch_array($sql)) {
+                            echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+
+                <br/><br/>
+
+                <label for="observacaoAcao">Observações: </label>
+                <p style="text-align: center;">
+                    <textarea name="observacaoAcao" id="observacaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
+                </p>
+                <br/>
+                <p align="center">
+                    <input type="submit" value="Gravar Ação" formaction="" disabled/>
+                </p>
+            </div>
+
             <p align="center">
                 <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
                 &nbsp;&nbsp;
@@ -198,7 +261,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
     </form>
     <div id="anexosRacap">
         <form id="tabelaAnexos" method="POST">
-            <button class='accordion' id="thing">Anexos da RACAP:</button>
+            <button type="button" class='accordion' id="thing">Anexos da RACAP:</button>
             <div class='panel'>
                 <table>
                     <thead>

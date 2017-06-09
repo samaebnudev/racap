@@ -51,7 +51,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <select id="selectbuscaBanco" name="selectbuscaBanco">
                 <option></option>
                 <?php
-                $query = "SELECT * FROM racap_acao";
+                $query = "SELECT * FROM racap_acao ORDER BY id_racap";
                 $sql = mysqli_query($conexao, $query);
                 $row = mysqli_fetch_assoc($sql);
 

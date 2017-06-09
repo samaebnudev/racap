@@ -33,6 +33,10 @@ $(document).ready(function ( ) {
     $("#thing").click(function (e) {
         e.preventDefault();
     });
+    
+    $("#thing2").click(function (e) {
+        e.preventDefault();
+    });
 
 });
 
