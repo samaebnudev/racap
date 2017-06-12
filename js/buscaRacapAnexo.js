@@ -17,10 +17,12 @@ $(document).ready(function ( ) {
             data: sequencial,
             success: function (data) {
                 if (data.success == true) {
+                   // $("#formAcaoFieldset").children().attr('disabled', '');
                     $("#listaAnexos").empty();
                     $("#listaAnexos").append(data.tableData);
 
                 } else {
+                    //$("#formAcaoFieldset").children().attr('disabled', 'true');
                     $("#listaAnexos").empty();
                 }
             }

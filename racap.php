@@ -67,227 +67,231 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             </select>
         </form>
         <hr>
-
-        <form method="POST" id="cadRACAP" action="racap_manage.php" enctype="multipart/form-data">
-            <?php
-            if ($_SESSION['tipoPrivilegio'] == 2) {
-                echo "<fieldset disabled>";
-            } else {
-                echo "<fieldset>";
-            }
-            ?>
-            <label for="sequencial">ID:</label>
-            <input type="number" step="1" name="sequencial" id="sequencial" readonly />
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <label for="statusRacap">Status da RACAP: </label>
-            <select id="statusRacap" name="statusRacap" required>
-                <option></option>
-                <?php
-                $query = "SELECT * FROM racap_status_racap";
-                $sql = mysqli_query($conexao, $query);
-                $row = mysqli_fetch_assoc($sql);
-
-                if (mysqli_affected_rows($conexao) > 0) {
-                    echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                    while ($row = mysqli_fetch_array($sql)) {
-                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                    }
-                }
-                ?>
-            </select>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <label for="tipoRacap">Tipo da RACAP: </label>
-            <select id="tipoRacap" name="tipoRacap" required>
-                <option></option>
-                <?php
-                $query = "SELECT * FROM racap_tipo_racap";
-                $sql = mysqli_query($conexao, $query);
-                $row = mysqli_fetch_assoc($sql);
-
-                if (mysqli_affected_rows($conexao) > 0) {
-                    echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                    while ($row = mysqli_fetch_array($sql)) {
-                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                    }
-                }
-                ?>
-            </select>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <label for="motivoAbertura">Motivo de Abertura: </label>
-            <select id="motivoAbertura" name="motivoAbertura" required>
-                <option></option>
-                <?php
-                $query = "SELECT * FROM racap_motivo_abertura";
-                $sql = mysqli_query($conexao, $query);
-                $row = mysqli_fetch_assoc($sql);
-
-                if (mysqli_affected_rows($conexao) > 0) {
-                    echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                    while ($row = mysqli_fetch_array($sql)) {
-                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                    }
-                }
-                ?>
-            </select>
-
-            <br/><br/>
-            <label for="motivoDescricao">Motivo da RACAP (Descrição): </label>
-            <input type="text" maxlength="50" id="motivoDescricao" name="motivoDescricao" required/>
-
-            &nbsp;&nbsp;
-            <label for="setorRacap">Setor: </label>
-            <select id="setorRacap" name="setorRacap" required>
-                <option></option>
-                <?php
-                $query = "SELECT * FROM racap_setor";
-                $sql = mysqli_query($conexao, $query);
-                $row = mysqli_fetch_assoc($sql);
-
-                if (mysqli_affected_rows($conexao) > 0) {
-                    echo "<option value=" . $row['id'] . ">" . $row['nomeSetor'] . "</option>";
-                    while ($row = mysqli_fetch_array($sql)) {
-                        echo "<option value=" . $row['id'] . ">" . $row['nomeSetor'] . "</option>";
-                    }
-                }
-                ?>
-            </select>
-
-            &nbsp;&nbsp;
-            <label for="causaRacap">Causa da RACAP: </label>
-            <select id="causaRacap" name="causaRacap">
-                <option></option>
-                <?php
-                $query = "SELECT * FROM racap_causa";
-                $sql = mysqli_query($conexao, $query);
-                $row = mysqli_fetch_assoc($sql);
-
-                if (mysqli_affected_rows($conexao) > 0) {
-                    echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                    while ($row = mysqli_fetch_array($sql)) {
-                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                    }
-                }
-                ?>
-            </select>
-
-            <br/><br/>
-
-            <label for='prazoRacap'>Prazo da RACAP:</label>
-            <input type='datetime-local' name='prazoRacap' id='prazoRacap' style="width:18%;"required/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <label for="anexoRacap" title="Anexar Arquivos na RACAP se houver.">Anexar Arquivo:</label>
-            <input type="file" name="anexoRacap" id="anexoRacap"/>
-
-            <br/><br/>
-            <label for="historicoRACAP">Histórico da RACAP: </label>
-            <p align="center">
-                <textarea name="historicoRACAP" id="historicoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
-            </p>
-
-            <button type="button" class='accordion' id="thing2">Ações da RACAP:</button>
-            <div class='panel'>
+        <button type="button" class='accordion' id="thing3">RACAP's:</button>
+        <div class='panel'>
+            <form method="POST" id="cadRACAP" action="racap_manage.php" enctype="multipart/form-data">
                 <fieldset>
+                    <label for="sequencial">ID:</label>
+                    <input type="number" step="1" name="sequencial" id="sequencial" readonly />
 
-                </fieldset>
-                <label for="sequencialAcao">ID:</label>
-                <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="statusRacap">Status da RACAP: </label>
+                    <select id="statusRacap" name="statusRacap" required>
+                        <option></option>
+                        <?php
+                        $query = "SELECT * FROM racap_status_racap";
+                        $sql = mysqli_query($conexao, $query);
+                        $row = mysqli_fetch_assoc($sql);
 
-                <input type="hidden" id="idRacap" name="idRacap" />
-
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                <label for="selectStatusAcao">Status da Ação: </label>
-                <select id="selectStatusAcao" name="selectStatusAcao" required>
-                    <option></option>
-                    <?php
-                    $query = "SELECT * FROM racap_status_acao";
-                    $sql = mysqli_query($conexao, $query);
-                    $row = mysqli_fetch_assoc($sql);
-
-                    if (mysqli_affected_rows($conexao) > 0) {
-                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                        while ($row = mysqli_fetch_array($sql)) {
+                        if (mysqli_affected_rows($conexao) > 0) {
                             echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            while ($row = mysqli_fetch_array($sql)) {
+                                echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            }
                         }
-                    }
-                    ?>
+                        ?>
+                    </select>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="tipoRacap">Tipo da RACAP: </label>
+                    <select id="tipoRacap" name="tipoRacap" required>
+                        <option></option>
+                        <?php
+                        $query = "SELECT * FROM racap_tipo_racap";
+                        $sql = mysqli_query($conexao, $query);
+                        $row = mysqli_fetch_assoc($sql);
+
+                        if (mysqli_affected_rows($conexao) > 0) {
+                            echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            while ($row = mysqli_fetch_array($sql)) {
+                                echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="motivoAbertura">Motivo de Abertura: </label>
+                    <select id="motivoAbertura" name="motivoAbertura" required>
+                        <option></option>
+                        <?php
+                        $query = "SELECT * FROM racap_motivo_abertura";
+                        $sql = mysqli_query($conexao, $query);
+                        $row = mysqli_fetch_assoc($sql);
+
+                        if (mysqli_affected_rows($conexao) > 0) {
+                            echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            while ($row = mysqli_fetch_array($sql)) {
+                                echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+
+                    <br/><br/>
+                    <label for="motivoDescricao">Motivo da RACAP (Descrição): </label>
+                    <input type="text" maxlength="50" id="motivoDescricao" name="motivoDescricao" required/>
+
+                    &nbsp;&nbsp;
+                    <label for="setorRacap">Setor: </label>
+                    <select id="setorRacap" name="setorRacap" required>
+                        <option></option>
+                        <?php
+                        $query = "SELECT * FROM racap_setor";
+                        $sql = mysqli_query($conexao, $query);
+                        $row = mysqli_fetch_assoc($sql);
+
+                        if (mysqli_affected_rows($conexao) > 0) {
+                            echo "<option value=" . $row['id'] . ">" . $row['nomeSetor'] . "</option>";
+                            while ($row = mysqli_fetch_array($sql)) {
+                                echo "<option value=" . $row['id'] . ">" . $row['nomeSetor'] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+
+                    &nbsp;&nbsp;
+                    <label for="causaRacap">Causa da RACAP: </label>
+                    <select id="causaRacap" name="causaRacap">
+                        <option></option>
+                        <?php
+                        $query = "SELECT * FROM racap_causa";
+                        $sql = mysqli_query($conexao, $query);
+                        $row = mysqli_fetch_assoc($sql);
+
+                        if (mysqli_affected_rows($conexao) > 0) {
+                            echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            while ($row = mysqli_fetch_array($sql)) {
+                                echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+
+                    <br/><br/>
+
+                    <label for='prazoRacap'>Prazo da RACAP:</label>
+                    <input type='datetime-local' name='prazoRacap' id='prazoRacap' style="width:18%;"required/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="anexoRacap" title="Anexar Arquivos na RACAP se houver.">Anexar Arquivo:</label>
+                    <input type="file" name="anexoRacap" id="anexoRacap"/>
+
+                    <br/><br/>
+                    <label for="historicoRACAP">Histórico da RACAP: </label>
+                    <p align="center">
+                        <textarea name="historicoRACAP" id="historicoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
+                    <p align="center">
+                        <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
+                        &nbsp;&nbsp;
+                        <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+
+        <button type="button" class='accordion' id="thing2">Ações da RACAP:</button>
+        <div class='panel'>
+            <form name="buscaAcaoRacap" method="POST" enctype="multipart/form-data" style="text-align: center;">
+                <label for="selectAcaoRacap">Buscar: </label>
+                <select id="selectAcaoRacap" name="selectAcaoRacap">
+                    <option>Buscar Ações...</option>
                 </select>
+            </form>
+            <hr>
+            <form method="POST" action="">
+                <fieldset id="formAcaoFieldset">
+                    <label for="sequencialAcao">ID:</label>
+                    <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly />
 
-                <br/><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <label for="selectResponsavel">Responsável: </label>
-                <select id="selectResponsavel" name="selectResponsavel" required>
-                    <option></option>
-                    <?php
-                    $query = "SELECT id, nomeServidor FROM racap_usuario";
-                    $sql = mysqli_query($conexao, $query);
-                    $row = mysqli_fetch_assoc($sql);
+                    <input type="hidden" id="idRacap" name="idRacap" />
 
-                    if (mysqli_affected_rows($conexao) > 0) {
-                        echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
-                        while ($row = mysqli_fetch_array($sql)) {
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="selectStatusAcao">Status da Ação: </label>
+                    <select id="selectStatusAcao" name="selectStatusAcao" required>
+                        <option></option>
+                        <?php
+                        $query = "SELECT * FROM racap_status_acao";
+                        $sql = mysqli_query($conexao, $query);
+                        $row = mysqli_fetch_assoc($sql);
+
+                        if (mysqli_affected_rows($conexao) > 0) {
+                            echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            while ($row = mysqli_fetch_array($sql)) {
+                                echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="selectResponsavel">Responsável: </label>
+                    <select id="selectResponsavel" name="selectResponsavel" required>
+                        <option></option>
+                        <?php
+                        $query = "SELECT id, nomeServidor FROM racap_usuario";
+                        $sql = mysqli_query($conexao, $query);
+                        $row = mysqli_fetch_assoc($sql);
+
+                        if (mysqli_affected_rows($conexao) > 0) {
                             echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                            while ($row = mysqli_fetch_array($sql)) {
+                                echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                            }
                         }
-                    }
-                    ?>
-                </select>
+                        ?>
+                    </select>
 
-                <br/><br/>
+                    <br/><br/>
 
-                <label for="observacaoAcao">Observações: </label>
-                <p style="text-align: center;">
-                    <textarea name="observacaoAcao" id="observacaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
-                </p>
-                <br/>
-                <p align="center">
-                    <input type="submit" value="Gravar Ação" formaction="" disabled/>
-                </p>
-            </div>
+                    <label for="observacaoAcao">Observações: </label>
+                    <p style="text-align: center;">
+                        <textarea name="observacaoAcao" id="observacaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
+                    </p>
+                    <br/>
+                    <p align="center">
+                        <input type="submit" value="Gravar Ação" disabled/>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
 
-            <p align="center">
-                <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
-                &nbsp;&nbsp;
-                <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
-            </p>
-        </fieldset>
-    </form>
-    <div id="anexosRacap">
-        <form id="tabelaAnexos" method="POST">
-            <button type="button" class='accordion' id="thing">Anexos da RACAP:</button>
-            <div class='panel'>
-                <table>
-                    <thead>
-                        <tr><th>Seleciona</th><th>Arquivo</th><th>Baixar</th></tr>
-                    </thead>
-                    <tbody id="listaAnexos">
-                    </tbody>
-                </table>
-                <br/>
-                <p align="center">
-                    <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
-                </p>
-            </div>
-        </form>
-    </div>
-    <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
+        <div id="anexosRacap">
+            <form id="tabelaAnexos" method="POST">
+                <button type="button" class='accordion' id="thing">Anexos da RACAP:</button>
+                <div class='panel'>
+                    <table>
+                        <thead>
+                            <tr><th>Seleciona</th><th>Arquivo</th><th>Baixar</th></tr>
+                        </thead>
+                        <tbody id="listaAnexos">
+                        </tbody>
+                    </table>
+                    <br/>
+                    <p align="center">
+                        <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
+                    </p>
+                </div>
+            </form>
+        </div>
 
-        for (i = 0; i < acc.length; i++) {
-            acc[i].onclick = function () {
-                this.classList.toggle("active");
-                this.nextElementSibling.classList.toggle("show");
-            };
-        }
-    </script>
+        <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
 
-</body>
+            for (i = 0; i < acc.length; i++) {
+                acc[i].onclick = function () {
+                    this.classList.toggle("active");
+                    this.nextElementSibling.classList.toggle("show");
+                };
+            }
+        </script>
+
+    </body>
 </html>
