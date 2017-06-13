@@ -22,6 +22,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script type="text/javascript" src="js/buscaRacap.js"></script>
         <script type="text/javascript" src="js/buscaRacapAnexo.js"></script>
+        <script type="text/javascript" src="js/buscaRacapAcao.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -66,7 +67,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 ?>
             </select>
         </form>
+        
         <hr>
+        
         <button type="button" class='accordion' id="thing3">RACAP's:</button>
         <div class='panel'>
             <form method="POST" id="cadRACAP" action="racap_manage.php" enctype="multipart/form-data">
@@ -201,64 +204,62 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 </select>
             </form>
             <hr>
-            <form method="POST" action="">
-                <fieldset id="formAcaoFieldset">
-                    <label for="sequencialAcao">ID:</label>
-                    <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly />
+            <form method="POST" action="" id="racapAcaoRacap">
+                <label for="sequencialAcao">ID:</label>
+                <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly/>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <input type="hidden" id="idRacap" name="idRacap" />
+                <input type="hidden" id="idRacap" name="idRacap" required/>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <label for="selectStatusAcao">Status da Ação: </label>
-                    <select id="selectStatusAcao" name="selectStatusAcao" required>
-                        <option></option>
-                        <?php
-                        $query = "SELECT * FROM racap_status_acao";
-                        $sql = mysqli_query($conexao, $query);
-                        $row = mysqli_fetch_assoc($sql);
+                <label for="selectStatusAcao">Status da Ação: </label>
+                <select id="selectStatusAcao" name="selectStatusAcao" required>
+                    <option></option>
+                    <?php
+                    $query = "SELECT * FROM racap_status_acao";
+                    $sql = mysqli_query($conexao, $query);
+                    $row = mysqli_fetch_assoc($sql);
 
-                        if (mysqli_affected_rows($conexao) > 0) {
+                    if (mysqli_affected_rows($conexao) > 0) {
+                        echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                        while ($row = mysqli_fetch_array($sql)) {
                             echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                            while ($row = mysqli_fetch_array($sql)) {
-                                echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
-                            }
                         }
-                        ?>
-                    </select>
+                    }
+                    ?>
+                </select>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <label for="selectResponsavel">Responsável: </label>
-                    <select id="selectResponsavel" name="selectResponsavel" required>
-                        <option></option>
-                        <?php
-                        $query = "SELECT id, nomeServidor FROM racap_usuario";
-                        $sql = mysqli_query($conexao, $query);
-                        $row = mysqli_fetch_assoc($sql);
+                <label for="selectResponsavel">Responsável: </label>
+                <select id="selectResponsavel" name="selectResponsavel" required>
+                    <option></option>
+                    <?php
+                    $query = "SELECT id, nomeServidor FROM racap_usuario";
+                    $sql = mysqli_query($conexao, $query);
+                    $row = mysqli_fetch_assoc($sql);
 
-                        if (mysqli_affected_rows($conexao) > 0) {
+                    if (mysqli_affected_rows($conexao) > 0) {
+                        echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                        while ($row = mysqli_fetch_array($sql)) {
                             echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
-                            while ($row = mysqli_fetch_array($sql)) {
-                                echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
-                            }
                         }
-                        ?>
-                    </select>
+                    }
+                    ?>
+                </select>
 
-                    <br/><br/>
+                <br/><br/>
 
-                    <label for="observacaoAcao">Observações: </label>
-                    <p style="text-align: center;">
-                        <textarea name="observacaoAcao" id="observacaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
-                    </p>
-                    <br/>
-                    <p align="center">
-                        <input type="submit" value="Gravar Ação" disabled/>
-                    </p>
-                </fieldset>
+                <label for="observacaoAcao">Observações: </label>
+                <p style="text-align: center;">
+                    <textarea name="observacaoAcao" id="observacaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
+                </p>
+                <br/>
+                <p align="center">
+                    <input type="submit" value="Gravar Ação" id="racapAcaoSubmit"/>
+                </p>
             </form>
         </div>
 

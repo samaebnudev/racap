@@ -1,0 +1,45 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+include "conecta_banco.inc";
+
+$userDados = array('success' => false,
+    'selectData' => ""
+);
+
+$buffer = "";
+$optionStart = "<option value='";
+$optionEnd = "</option>";
+
+
+if (isset($_POST['selectbuscaBanco'])) {
+    $sequencial = $_POST['selectbuscaBanco'];
+
+    $query = "SELECT id, descricao_acao FROM racap_acao WHERE id_racap = '$sequencial'";
+    $sql = mysqli_query($conexao, $query);
+    $row = mysqli_fetch_assoc($sql);
+
+    if (mysqli_affected_rows($conexao) > 0) {
+        $userDados ['success'] = true;
+        $id = $row['id'];
+        $descricaoAcao = $row['descricao_acao'];
+
+        $buffer = $optionStart . $id . "'>" . $descricaoAcao . $optionEnd;
+        $userDados ['selectData'] = $userDados ['selectData'] . $buffer;
+
+        while ($row = mysqli_fetch_array($sql)) {
+            $id = $row['id'];
+            $descricaoAcao = $row['descricao_acao'];
+
+            $buffer = $optionStart . $id . "'>" . $descricaoAcao . $optionEnd;
+            $userDados ['selectData'] = $userDados ['selectData'] . $buffer;
+        }
+    }
+}
+
+echo json_encode($userDados);
