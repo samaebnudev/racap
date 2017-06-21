@@ -23,6 +23,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <script type="text/javascript" src="js/buscaRacap.js"></script>
         <script type="text/javascript" src="js/buscaRacapAnexo.js"></script>
         <script type="text/javascript" src="js/geraSelectAcao.js"></script>
+        <script type="text/javascript" src="js/racapBuscaAcao.js"></script>
         <script src="js/index.js"></script>
     </head>
 
