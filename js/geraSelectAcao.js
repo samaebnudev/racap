@@ -10,7 +10,7 @@ $(document).ready(function ( ) {
         var sequencial = $('#selectbuscaBanco');
         
         $.ajax({
-            url: 'busca_racap_acao.php',
+            url: 'gera_select_acao.php',
             dataType: "json",
             type: 'POST',
             data: sequencial,
