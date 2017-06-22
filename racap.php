@@ -205,7 +205,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 </select>
             </form>
             <hr>
-            <form method="POST" action="" id="racapAcaoRacap">
+            <form method="POST" action="racap_acao_manage.php" id="racapAcaoRacap">
                 <label for="sequencialAcao">ID:</label>
                 <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly/>
 
@@ -253,9 +253,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
                 <br/><br/>
 
-                <label for="observacaoAcao">Observações: </label>
+                <label for="descricaoAcao">Descrição da Ação: </label>
                 <p style="text-align: center;">
-                    <textarea name="observacaoAcao" id="observacaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
+                    <textarea name="descricaoAcao" id="descricaoAcao" rows="6" cols="140" wrap="hard" required></textarea>
                 </p>
                 <br/>
                 <p align="center">
