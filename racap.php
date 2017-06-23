@@ -195,10 +195,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 </fieldset>
             </form>
         </div>
-
+        <hr>
         <button type="button" class='accordion' id="thing2">Ações da RACAP:</button>
         <div class='panel'>
-            <form name="buscaAcaoRacap" method="POST" enctype="multipart/form-data" style="text-align: center;">
+            <form id="buscaAcaoRacap" method="POST" enctype="multipart/form-data" style="text-align: center;">
                 <label for="selectAcaoRacap">Buscar: </label>
                 <select id="selectAcaoRacap" name="selectAcaoRacap">
                     <option>Buscar Ações...</option>
@@ -210,7 +210,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly/>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+                <input type="hidden" name="urlBack" id="urlBack" value="racap.php"/>
                 <input type="hidden" id="idRacap" name="idRacap" required/>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -263,7 +263,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 </p>
             </form>
         </div>
-
+        <hr>
         <div id="anexosRacap">
             <form id="tabelaAnexos" method="POST">
                 <button type="button" class='accordion' id="thing">Anexos da RACAP:</button>

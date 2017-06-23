@@ -65,7 +65,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </div>
 
         <?php
-        $divPanel2 = "<button class='accordion'>Configuração das RACAP's</button>
+        $divPanel2 = "<hr><button class='accordion'>Configuração das RACAP's</button>
         <div class='panel'>
             <p align='center'>
                 <a href='tipo_racap.php'>
@@ -92,7 +92,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <br/>
         </div>";
 
-        $divPanel3 = "<button class='accordion'>Configurações Adicionais</button>
+        $divPanel3 = "<hr><button class='accordion'>Configurações Adicionais</button>
         <div class='panel'>
             <p align='center'>
                 <a href='usuario.php'>

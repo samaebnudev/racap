@@ -20,7 +20,7 @@ $(document).ready(function ( ) {
                     $('#idRacap').val(data.id_racap);
                     $('#selectStatusAcao').val(data.status_acao);
                     $('#selectResponsavel').val(data.responsavel_acao);
-                    $('#observacaoAcao').val(data.observacao_acao);
+                    $('#descricaoAcao').val(data.descricao_acao);
                 } else {
                     $('#racapAcaoRacap').each(function () {
                         this.reset();

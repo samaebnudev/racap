@@ -3,8 +3,8 @@
         alert(chamada+": "+texto);
     }
 	
-	function voltar (){
-		window.location.href = 'racap.php';
+	function voltar (var e){
+		window.location.href = e;
 	}
 </script>
 
@@ -31,6 +31,7 @@ $idRacap = $_POST['idRacap'];
 $selectStatusAcao = $_POST['selectStatusAcao'];
 $selectResponsavel = $_POST['selectResponsavel'];
 $descricaoAcao = $_POST['descricaoAcao'];
+$urlVoltar = $_POST ['urlBack'];
 
 $query = "SELECT * FROM racap_perfil WHERE id = '$sequencial'";
 $sql = mysqli_query($conexao, $query);
@@ -52,13 +53,15 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         $message = "<script> alert ('Ação da RACAP alterada com sucesso.');</script>";
         echo $message;
-        $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        //$urlBack = "<script>window.location.href = '.$urlVoltar.';</script)";
+        //echo $urlBack;
+        header("url:".$urlVoltar);
     } else {
         $message = "<script> alert ('Falha na alteração. Ação da RACAP não pôde ser alterada.');</script>";
         echo $message;
-        $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        //$urlBack = "<script>window.location.href = '.$urlVoltar.';</script)";
+        //echo $urlBack;
+        header("url:".$urlVoltar);
     }
 }
 elseif (mysqli_affected_rows($conexao) == 0) {
@@ -80,12 +83,14 @@ elseif (mysqli_affected_rows($conexao) == 0) {
 
         $message = "<script> alert ('Ação da RACAP incluída com sucesso.');</script>";
         echo $message;
-        $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        //$urlBack = "<script>window.location.href = '.$urlVoltar.';</script)";
+        //echo $urlBack;
+        header("url:".$urlVoltar);
     } else {
         $message = "<script> alert ('Falha na inclusão. Ação da RACAP não pôde ser inserida.');</script>";
         echo $message;
-        $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        //$urlBack = "<script>window.location.href = '.$urlVoltar.';</script)";
+        //echo $urlBack;
+        header("url:".$urlVoltar);
     }
 }

@@ -7,6 +7,7 @@
  */
 
 include "conecta_banco.inc";
+header("Content-type: text/html; charset=utf-8");
 
 $userDados = array('success' => false,
     'selectData' => ""
@@ -19,6 +20,7 @@ $optionEnd = "</option>";
 
 if (isset($_POST['selectbuscaBanco'])) {
     $sequencial = $_POST['selectbuscaBanco'];
+    //$sequencial = 1;
 
     $query = "SELECT id, descricao_acao FROM racap_acao WHERE id_racap = '$sequencial'";
     $sql = mysqli_query($conexao, $query);
@@ -28,7 +30,10 @@ if (isset($_POST['selectbuscaBanco'])) {
         $userDados ['success'] = true;
         $id = $row['id'];
         $descricaoAcao = $row['descricao_acao'];
-
+        
+        $buffer = $optionStart."'>".$optionEnd;
+        $userDados ['selectData'] = $userDados ['selectData'] . $buffer;
+        
         $buffer = $optionStart . $id . "'>" . $descricaoAcao . $optionEnd;
         $userDados ['selectData'] = $userDados ['selectData'] . $buffer;
 
@@ -43,3 +48,4 @@ if (isset($_POST['selectbuscaBanco'])) {
 }
 
 echo json_encode($userDados);
+   // echo $userDados['selectData'];

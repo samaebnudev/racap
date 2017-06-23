@@ -18,7 +18,7 @@ $(document).ready(function ( ) {
                 if (data.success == true) {
                    // $("#formAcaoFieldset").children().attr('disabled', '');
                     $("#selectAcaoRacap").empty();
-                    $("#selectAcaoRacap").append(data.tableData);
+                    $("#selectAcaoRacap").append(data.selectData);
                     
 
                 } else {
