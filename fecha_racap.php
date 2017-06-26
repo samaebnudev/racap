@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "conecta_banco.inc";
+date_default_timezone_set('Brazil/East');
 
 if ($_SESSION['nomeUsuario'] == '') {
     header("Location:login.php");
@@ -20,6 +21,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <link rel="stylesheet" href="css/form.css">
         <link rel="stylesheet" href="css/accordion.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="js/fechaRacap.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -46,60 +48,86 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </div>
         <br/>
 
-        <form>
-            <label>Buscar: </label>
-            <select>
-                <option>Selecione o Fechamento...</option>
+        <form method="POST" id="buscaBanco" style="text-align: center;">
+            <label for="selectbuscaBanco">Buscar: </label>
+            <select id="selectbuscaBanco" name="selectbuscaBanco">
+                <option></option>
+                <?php
+                $query = "SELECT * FROM racap_fecha_racap";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_assoc($sql);
+
+                if (mysqli_affected_rows($conexao) > 0) {
+                    echo "<option value=" . $row['id'] . ">" . $row['observacao_racap'] . "</option>";
+                    while ($row = mysqli_fetch_array($sql)) {
+                        echo "<option value=" . $row['id'] . ">" . $row['observacao_racap'] . "</option>";
+                    }
+                }
+                ?>
             </select>
         </form>
         <hr>
 
-        <form method="POST" id="cadRACAP" action="usuario_manage.php">
-            <?php
-            /* if ($_SESSION['tipoPrivilegio'] == 2){
-              echo "<fieldset disabled>";
-              } else { */
-            echo "<fieldset>";
-            //}*/
-            ?>
-            <input type="hidden" name="operacao" value="incluiTipoUsuario"/>
-            <label for="sequencial">ID:</label>
-            <input type="number" step="1" min="0" name="sequencial" id="seqTipoUsuario" readonly />
+        <form method="POST" id="cadFechaRacap" action="fecha_racap_manage.php">
+            <fieldset>
+                <label for="sequencial">ID:</label>
+                <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <label for="racapId">ID da RACAP: </label>
-            <select>
-                <option>Selecione a RACAP...</option>
-            </select>
+                <label for="idRacap">RACAP: </label>
+                <select id="idRacap" name="idRacap" required>
+                    <option></option>
+                    <?php
+                    $query = "SELECT * FROM racap_racap WHERE status_racap = '1'";
+                    $sql = mysqli_query($conexao, $query);
+                    $row = mysqli_fetch_assoc($sql);
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    if (mysqli_affected_rows($conexao) > 0) {
+                        echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
+                        while ($row = mysqli_fetch_array($sql)) {
+                            echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
 
-            <label for='dataFechamento'>Data de Fechamento:</label>
-            <input type='datetime-local' name='dataFechamento' id='dataFechamento' required/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for='racapPrazo'>RACAP no Prazo: Sim 
+                    <input type='radio' name='racapPrazo' id='racapPrazoSim' class="noClick" value='S'/>
+                </label>
+                <label>Não
+                    <input type='radio' name='racapPrazo' id='racapPrazoNao' class="noClick" value='N'/>
+                </label>
 
-            <label for="racapPrazo">RACAP no Prazo: Sim <input type="radio" name="racapPrazo" id="racapPrazoSim" value="S"/></label>
-            <label>Não <input type="radio" name="racapPrazo" id="racapPrazoNao" value="N"/></label>
+                <?php
+                $dataFechamento = date("Y-m-d H:i:s");
+                echo "<input type='hidden' name='dataFechamento' id='dataFechamento' value='$dataFechamento'";
+                ?>
 
-            <br/><br/>
+                <br/><br/><br/>
 
-            <label for="racapEficiencia">RACAP Eficiente: Sim <input type="radio" name="racapEficiencia" id="racapEficienciaSim" value="S"/></label>
-            <label>Não <input type="radio" name="racapEficiencia" id="racapEficienciaNao" value="N"/></label>
+                <label for="racapEficiencia">RACAP Eficiente: Sim 
+                    <input type="radio" name="racapEficiencia" id="racapEficienciaSim" value="S"/>
+                </label>
+                <label>
+                    Não <input type="radio" name="racapEficiencia" id="racapEficienciaNao" value="N"/>
+                </label>
 
-            <br/><br/>
-            <label for="observacaoRACAP">Observações: </label>
-            <br/>
-            <textarea name="observacaoRACAP" id="observacaoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
+                <br/><br/>
+                <label for="observacaoRACAP">Observações: </label>
+                <p align="center">
+                <textarea name="observacaoRACAP" id="observacaoRACAP" rows="6" cols="140" wrap="hard" required></textarea>
+                </p>
+                
+                <p align="center">
+                    <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
+                    &nbsp;&nbsp;
+                    <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
+                </p>
+            </fieldset>
+        </form>
 
-            <p align="center">
-                <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
-                &nbsp;&nbsp;
-                <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
-            </p>
-        </fieldset>
-    </form>
-
-</body>
+    </body>
 </html>
