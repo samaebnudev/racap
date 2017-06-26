@@ -67,11 +67,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </form>
         <hr>
 
-        <form method="POST" id="cadAcao" action="racap_acao_manage.php">
+        <form method="POST" id="cadAcao" action="racap_acao_manage_2.php">
             <fieldset>
                 <label for="sequencialAcao">ID:</label>
                 <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly />
-                <input type="hidden" name="urlBack" id="urlBack" value="acao_racap.php"/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <label for="idRacap">RACAP: </label>

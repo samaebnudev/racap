@@ -210,7 +210,6 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly/>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="hidden" name="urlBack" id="urlBack" value="racap.php"/>
                 <input type="hidden" id="idRacap" name="idRacap" required/>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

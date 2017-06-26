@@ -4,7 +4,7 @@
     }
 	
 	function voltar (){
-		window.location.href = 'racap.php';
+		window.location.href = 'acao_racap.php';
 	}
 </script>
 
