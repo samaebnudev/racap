@@ -131,7 +131,11 @@ if ($_FILES['anexoRacap'] && ($racapMensagem == "RACAP incluída com sucesso."
     //echo $nome_final."<br/>";
     $pasta = "uploads/";
     $anexoMensagem = anexaArquivo();
-    $nome_final = $anexoMensagem [1];
+    $anexoMensagemCount = count($anexoMensagem);
+    
+    if ($anexoMensagemCount == 2){
+        $nome_final = $anexoMensagem [1];
+    }
 } else {
     $anexoMensagem [0] = "Arquivo não foi enviado ao servidor.";
 }

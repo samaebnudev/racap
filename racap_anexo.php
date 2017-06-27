@@ -28,7 +28,7 @@ function anexaArquivo() {
     $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
 // Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
     if ($_FILES['anexoRacap']['error'] != 0) {
-        $messageAnexo [0] = "Não foi possível fazer o upload, erro:" . $_UP['erros'][$_FILES['anexoRacap']['error']];
+        $messageAnexo [0] = "Não foi possível fazer o upload, erro: " . $_UP['erros'][$_FILES['anexoRacap']['error']];
         return $messageAnexo; // Para a execução do script
     }
 // Caso script chegue a esse ponto, não houve erro com o upload e o PHP pode continuar
