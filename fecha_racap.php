@@ -109,7 +109,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <br/><br/><br/>
 
                 <label for="racapEficiencia">RACAP Eficiente: Sim 
-                    <input type="radio" name="racapEficiencia" id="racapEficienciaSim" value="S"/>
+                    <input type="radio" name="racapEficiencia" id="racapEficienciaSim" value="S" required/>
                 </label>
                 <label>
                     Não <input type="radio" name="racapEficiencia" id="racapEficienciaNao" value="N"/>
