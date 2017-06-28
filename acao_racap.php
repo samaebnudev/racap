@@ -52,7 +52,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <select id="selectAcaoRacap" name="selectAcaoRacap">
                 <option></option>
                 <?php
-                $query = "SELECT * FROM racap_acao ORDER BY id_racap";
+                $query = "SELECT racap_acao.id, descricao_acao FROM racap_acao, racap_racap 
+                         WHERE racap_acao.id = racap_racap.id AND racap_racap.status_racap = '1'
+                         ORDER BY id_racap";
                 $sql = mysqli_query($conexao, $query);
                 $row = mysqli_fetch_assoc($sql);
 
@@ -77,7 +79,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <select id="idRacap" name="idRacap" required>
                     <option></option>
                     <?php
-                    $query = "SELECT * FROM racap_racap";
+                    $query = "SELECT * FROM racap_racap WHERE status_racap = '1'";
                     $sql = mysqli_query($conexao, $query);
                     $row = mysqli_fetch_assoc($sql);
 

@@ -1,12 +1,7 @@
 $(document).ready(function ( ) {
-
+    
     $('#selectAcaoRacap').prop("disabled", true);
-    $('#sequencialAcao').prop("disabled", true);
-    $('#idRacap').prop("disabled", true);
-    $('#selectStatusAcao').prop("disabled", true);
-    $('#selectResponsavel').prop("disabled", true);
-    $('#observacaoAcao').prop("disabled", true);
-    $('#racapAcaoSubmit').prop("disabled", true);
+    $("#racapAcaoRacap :input").prop("disabled", true);
 
     $('#buscaBanco').on('change', function () {
 
@@ -21,6 +16,17 @@ $(document).ready(function ( ) {
                 if (data.success == true) {
                     $('#sequencial').val(data.id);
                     $('#statusRacap').val(data.statusRacap);
+
+                    if (data.statusRacap != '1') {
+                        $("#cadRACAP :input").prop("disabled", true);
+                        $('#selectAcaoRacap').prop("disabled", false);
+                        $("#racapAcaoRacap :input").prop("disabled", true);
+                    } else {
+                        $('#selectAcaoRacap').prop("disabled", false);
+                        $("#cadRACAP :input").prop("disabled", false);
+                        $("#racapAcaoRacap :input").prop("disabled", false);
+                    }
+
                     $('#tipoRacap').val(data.tipoRacap);
                     $('#motivoAbertura').val(data.motivoAbertura);
                     $('#motivoDescricao').val(data.motivoDescricao);
@@ -34,29 +40,15 @@ $(document).ready(function ( ) {
 
                     $('#historicoRACAP').val(data.historicoRACAP);
 
-                    $('#selectAcaoRacap').prop("disabled", false);
-                    $('#sequencialAcao').prop("disabled", false);
-                    $('#idRacap').prop("disabled", false);
-                    $('#idRacap').val(sequencial.val());
-                    $('#selectStatusAcao').prop("disabled", false);
-                    $('#selectResponsavel').prop("disabled", false);
-                    $('#observacaoAcao').prop("disabled", false);
-                    $('#racapAcaoSubmit').prop("disabled", false);
-
 
                 } else {
                     $('#cadRACAP').each(function () {
                         this.reset();
                     });
-
+                    
+                    $("#cadRACAP :input").prop("disabled", false);
                     $('#selectAcaoRacap').prop("disabled", true);
-                    $('#sequencialAcao').prop("disabled", true);
-                    $('#idRacap').prop("disabled", true);
-                    $('#idRacap').val("");
-                    $('#selectStatusAcao').prop("disabled", true);
-                    $('#selectResponsavel').prop("disabled", true);
-                    $('#observacaoAcao').prop("disabled", true);
-                    $('#racapAcaoSubmit').prop("disabled", true);
+                    $("#racapAcaoRacap :input").prop("disabled", true);
 
                 }
             }
