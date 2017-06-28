@@ -40,7 +40,7 @@ $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
 
-    $query = "UPDATE racap_fecha_racap SET id_racap = '$idRacap', data_fechamento = '$dataFechamento'
+    $query = "UPDATE racap_fecha_racap SET id_racap = '$idRacap', data_fechamento = '$dataFechamento',
              prazo_racap = '$racapPrazo', eficacia_racap = '$racapEficiencia',
              observacao_racap = '$observacaoRACAP'
              WHERE id = '$sequencial'";

@@ -70,8 +70,6 @@ $(document).ready(function ( ) {
                     
                     $('#observacaoRACAP').val(data.observacaoRACAP);
                 } else {
-                    alert("Sequencial inválido.");
-                    
                     $('#cadFechaRacap').each(function(){
                         this.reset();
                     });
