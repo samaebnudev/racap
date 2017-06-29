@@ -34,6 +34,12 @@ $dataFechamento = $_POST ['dataFechamento'];
 $racapEficiencia = $_POST['racapEficiencia'];
 $observacaoRACAP = $_POST['observacaoRACAP'];
 
+$query = "SELECT status_racap FROM racap_racap WHERE id = '$idRacap'";
+$sql = mysqli_query($conexao, $query);
+$row = mysqli_fetch_assoc($sql);
+
+$status = $row['status_racap'];
+
 $query = "SELECT * FROM racap_fecha_racap WHERE id = '$sequencial'";
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);

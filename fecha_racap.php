@@ -79,7 +79,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <select id="idRacap" name="idRacap" required>
                     <option></option>
                     <?php
-                    $query = "SELECT * FROM racap_racap WHERE status_racap = '1'";
+                    $query = "SELECT id, motivo_racap FROM racap_racap";
                     $sql = mysqli_query($conexao, $query);
                     $row = mysqli_fetch_assoc($sql);
 
@@ -124,7 +124,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <p align="center">
                     <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
                     &nbsp;&nbsp;
-                    <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
+                    <input type="reset" class="btn" value="Limpar" id="limpaForm" name="limpaForm" title="Limpa os dados do Formulário"/>
                 </p>
             </fieldset>
         </form>

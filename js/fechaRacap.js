@@ -11,6 +11,14 @@ $(document).ready(function ( ) {
         return false;
     });
 
+    $('#cadFechaRacap').submit(function () {
+        $('#idRacap').prop('disabled', false);
+    });
+    
+    $('#limpaForm').click(function () {
+        $('#idRacap').prop('disabled', false);
+    });
+
     $('#idRacap').change(function () {
         var sequencial = $('#cadFechaRacap').serialize();
 
@@ -44,35 +52,35 @@ $(document).ready(function ( ) {
                 if (data.success == true) {
                     $('#sequencial').val(data.id);
                     $('#idRacap').val(data.idRacap);
-                    /*TODO: Colocar Aqui controle para o checkbox do Prazo*/
+                    $('#idRacap').prop('disabled', true);
 
                     if (data.prazoRacap == "S") {
                         $("#racapPrazoSim").prop("checked", true);
                         $("#racapPrazoNao").prop("checked", false);
-                    }
-                    else if (data.prazoRacap == "N") {
+                    } else if (data.prazoRacap == "N") {
                         $("#racapPrazoNao").prop("checked", true);
                         $("#racapPrazoSim").prop("checked", false);
                     }
 
                     $('#dataFechamento').val(data.dataFechamento);
-                    
-                    /*TODO: Colocar Aqui controle para o checkbox da Eficiência*/
-                    
+
+
                     if (data.eficaciaRacap == "S") {
                         $("#racapEficienciaSim").prop("checked", true);
                         $("#racapEficienciaNao").prop("checked", false);
-                    }
-                    else if (data.eficaciaRacap == "N") {
+                    } else if (data.eficaciaRacap == "N") {
                         $("#racapEficienciaNao").prop("checked", true);
                         $("#racapEficienciaSim").prop("checked", false);
                     }
-                    
+
                     $('#observacaoRACAP').val(data.observacaoRACAP);
                 } else {
-                    $('#cadFechaRacap').each(function(){
+                    $('#cadFechaRacap').each(function () {
                         this.reset();
                     });
+
+                    //$('#idRacap').prop('readonly', false);
+                    $('#idRacap').prop('disabled', false);
                 }
             }
         });
