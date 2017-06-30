@@ -98,14 +98,14 @@ if (isset($_SESSION['id'])) {
             <select name="byUserNomeUsuario" id="byUserNomeUsuario" required>
                 <option></option>
                 <?php
-                $query = "SELECT id, nomeUsuario FROM glosa_usuario";
+                $query = "SELECT id, nomeServidor FROM racap_usuario";
                 $sql = mysqli_query($conexao, $query);
                 $row = mysqli_fetch_assoc($sql);
 
                 if (mysqli_affected_rows($conexao) > 0) {
-                    echo "<option value=" . $row['id'] . ">" . $row['nomeUsuario'] . "</option>";
+                    echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
                     while ($row = mysqli_fetch_array($sql)) {
-                        echo "<option value=" . $row['id'] . ">" . $row['nomeUsuario'] . "</option>";
+                        echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
                     }
                 }
                 ?>

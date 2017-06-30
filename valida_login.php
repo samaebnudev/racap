@@ -9,6 +9,7 @@
 <?php
 session_start();
 date_default_timezone_set('Brazil/East');
+header("Content-type: text/html; charset=utf-8");
 
 // Fix for removed Session functions
 function fix_session_register() {
@@ -73,6 +74,7 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         $dataRegistro = date("Y-m-d H:i:s");
         $ocorrencia = "Tentativa de login com usuário inativo.";
+        $nomeUsuario = $row ['nomeServidor'];
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 		VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
@@ -80,13 +82,14 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         echo "<script> alert ('ESTE USUÁRIO FOI DESATIVADO PELO ADMINISTRADOR DO SISTEMA.');</script>";
         mysqli_close($conexao);
-        echo "<script>voltar ();</script>";
+       echo "<script>voltar ();</script>";
     } 
     
     elseif (!password_verify($password, $row['senha'])) {
 
         $dataRegistro = date("Y-m-d H:i:s");
         $ocorrencia = "Tentativa de login. Senha Incorreta.";
+        $nomeUsuario = $row ['nomeServidor'];
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 		VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
@@ -94,7 +97,7 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         echo "<script> alert ('SENHA INCORRETA.');</script>";
         mysqli_close($conexao);
-        echo "<script>voltar ();</script>";
+       echo "<script>voltar ();</script>";
     }
 } 
 
@@ -102,12 +105,13 @@ else {
     $dataRegistro = date("Y-m-d H:i:s");
     $ocorrencia = "Tentativa de login. Usuário e/ou senha incorreto(s).";
     $ip = get_client_ip_env();
+    $nomeUsuario = $login;
     $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 	VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
     $sql = mysqli_query($conexao, $query);
 
     echo "<script> alert ('USUÁRIO E/OU SENHA INCORRETOS.');</script>";
     mysqli_close($conexao);
-    echo "<script>voltar ();</script>";
+   echo "<script>voltar ();</script>";
 }
 ?>
