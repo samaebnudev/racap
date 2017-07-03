@@ -7,7 +7,20 @@ if ($_SESSION['nomeUsuario'] == '') {
 }
 
 $privilegio = $_SESSION['tipoPrivilegio'];
-//$privilegio = 1;
+
+if (isset($_SESSION['id'])) {
+    if ($_SESSION['tipoPrivilegio'] != '1') {
+        $dataRegistro = date("Y-m-d H:i:s");
+        $ocorrencia = "Tentativa de acesso sem privilégio administrativo em causa_racap.php";
+        $usuario = $_SESSION['nomeUsuario'];
+        $ip = get_client_ip_env();
+        $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+		VALUES ('0', '$dataRegistro', '$ocorrencia', '$usuario', '$ip')";
+        $sql = mysqli_query($conexao, $query);
+        header("Location:index.php");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

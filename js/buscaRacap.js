@@ -26,7 +26,8 @@ $(document).ready(function ( ) {
                         $("#cadRACAP :input").prop("disabled", false);
                         $("#racapAcaoRacap :input").prop("disabled", false);
                     }
-
+                    
+                    $('#idRacap').val(data.id);
                     $('#tipoRacap').val(data.tipoRacap);
                     $('#motivoAbertura').val(data.motivoAbertura);
                     $('#motivoDescricao').val(data.motivoDescricao);

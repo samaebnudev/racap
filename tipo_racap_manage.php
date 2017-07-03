@@ -43,7 +43,7 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = utf8_encode("Alterou Tipo de RACAP: " . $sequencial);
+        $ocorrencia = "Alterou Tipo de RACAP: " . $sequencial;
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 		 VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
@@ -69,7 +69,7 @@ if (mysqli_affected_rows($conexao) == 1) {
     if ($sql) {
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = utf8_encode("Incluiu Tipo de RACAP: " . $descricao);
+        $ocorrencia = "Incluiu Tipo de RACAP: " . $descricao;
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";

@@ -6,7 +6,6 @@ if ($_SESSION['nomeUsuario'] == '') {
     header("Location:login.php");
 }
 $privilegio = $_SESSION['tipoPrivilegio'];
-//$privilegio = 1;
 ?>
 
 <!DOCTYPE html>

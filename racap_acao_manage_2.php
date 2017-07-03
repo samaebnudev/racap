@@ -72,7 +72,7 @@ elseif (mysqli_affected_rows($conexao) == 0) {
     if ($sql) {
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = utf8_encode("Incluiu Ação da RACAP: " . $descricaoAcao);
+        $ocorrencia = "Incluiu Ação da RACAP: " . $descricaoAcao;
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";

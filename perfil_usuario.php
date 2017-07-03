@@ -2,11 +2,22 @@
 session_start();
 include "conecta_banco.inc";
 
-//if ($_SESSION['nomeUsuario']==''){
-//header("Location:login.php");
-//}
-//$privilegio = $_SESSION['tipoPrivilegio'];
-$privilegio = 1;
+if ($_SESSION['nomeUsuario']==''){
+header("Location:login.php");
+}
+
+if (isset($_SESSION['id'])) {
+    if ($_SESSION['tipoPrivilegio'] != '1') {
+        $dataRegistro = date("Y-m-d H:i:s");
+        $ocorrencia = "Tentativa de acesso sem privilégio administrativo em perfil_usuario.php";
+        $usuario = $_SESSION['nomeUsuario'];
+        $ip = get_client_ip_env();
+        $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+		VALUES ('0', '$dataRegistro', '$ocorrencia', '$usuario', '$ip')";
+        $sql = mysqli_query($conexao, $query);
+        header("Location:index.php");
+    }
+}
 ?>
 
 <!DOCTYPE html>

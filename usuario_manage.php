@@ -52,7 +52,7 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = utf8_encode("Alterou usuário ID: " . $sequencial);
+        $ocorrencia = "Alterou usuário ID: " . $sequencial;
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log 
          (id, dataRegistro, ocorrencia, usuario, ip) 

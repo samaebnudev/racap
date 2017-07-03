@@ -7,7 +7,19 @@ if ($_SESSION['nomeUsuario'] == '') {
 }
 
 $privilegio = $_SESSION['tipoPrivilegio'];
-//$privilegio = 1;
+
+if (isset($_SESSION['id'])) {
+    if ($_SESSION['tipoPrivilegio'] != '1') {
+        $dataRegistro = date("Y-m-d H:i:s");
+        $ocorrencia = "Tentativa de acesso sem privilégio administrativo em status_racap.php";
+        $usuario = $_SESSION['nomeUsuario'];
+        $ip = get_client_ip_env();
+        $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+		VALUES ('0', '$dataRegistro', '$ocorrencia', '$usuario', '$ip')";
+        $sql = mysqli_query($conexao, $query);
+        header("Location:index.php");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,26 +80,20 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <hr>
 
         <form method="POST" id="cadStatusRacap" action="status_racap_manage.php">
-            <?php
-            if ($_SESSION['tipoPrivilegio'] == 2){
-              echo "<fieldset disabled>";
-              } else { 
-                echo "<fieldset>";
-            }
-            ?>
-            <label for="sequencial">ID: </label>
-            <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <label for="descricao">Status da RACAP: </label>
-            <input type="text" name="descricao" id="descricao" required/><br/><br/>
+            <fieldset>
+                <label for="sequencial">ID: </label>
+                <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="descricao">Status da RACAP: </label>
+                <input type="text" name="descricao" id="descricao" required/><br/><br/>
 
-            <p align="center">
-                <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar Status de RACAP"/>
-                &nbsp;&nbsp;
-                <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
-            </p>
-        </fieldset>
-    </form>
+                <p align="center">
+                    <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar Status de RACAP"/>
+                    &nbsp;&nbsp;
+                    <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
+                </p>
+            </fieldset>
+        </form>
 
-</body>
+    </body>
 </html>

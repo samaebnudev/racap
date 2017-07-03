@@ -21,8 +21,10 @@ include "getIP.php";
  * and open the template in the editor.
  */
 
-if (isset($_POST['sequencialAcao'])) {
-    $sequencial = $_POST ['sequencialAcao'];
+$bufferSequencial = $_POST['sequencialAcao'];
+
+if ($bufferSequencial != NULL) {
+    $sequencial = $bufferSequencial;
 } else {
     $sequencial = "0";
 }
@@ -62,17 +64,14 @@ if (mysqli_affected_rows($conexao) == 1) {
     }
 }
 elseif (mysqli_affected_rows($conexao) == 0) {
-    $query = "INSERT INTO racap_acao (id, id_racap, status_acao, 
-        descricao_acao, responsavel_acao)
-	VALUES ('$sequencial', '$idRacap', '$selectStatusAcao',
-        '$descricaoAcao', '$selectResponsavel')";
-
+    $query = "INSERT INTO racap_acao (id, id_racap, status_acao, descricao_acao, responsavel_acao)
+	VALUES ('$sequencial', '$idRacap', '$selectStatusAcao','$descricaoAcao', '$selectResponsavel')";
     $sql = mysqli_query($conexao, $query);
 
     if ($sql) {
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = utf8_encode("Incluiu Ação da RACAP: " . $descricaoAcao);
+        $ocorrencia = "Incluiu Ação da RACAP: " . $descricaoAcao;
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
