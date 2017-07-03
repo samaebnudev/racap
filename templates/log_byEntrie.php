@@ -3,10 +3,10 @@ session_start ();
 date_default_timezone_set('Brazil/East');
 include "../conecta_banco.inc";
 
-//Recebe os par�metros.
+//Recebe os parâmetros.
 $byEntrieQuantidade = $_GET['entries'];
 
-//Define o t�tulo do PDF, a data atual e o contador de linhas da tabela.
+//Define o título do PDF, a data atual e o contador de linhas da tabela.
 $reportTitle = "<h3>Log do Sistema. Últimas ".$byEntrieQuantidade." Entradas</h3>";
 $dataAtual = date ("d/m/Y H:i:s");
 $dateString = "<div id='reportDate'>".$dataAtual."</div>";

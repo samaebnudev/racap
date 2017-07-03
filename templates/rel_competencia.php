@@ -3,42 +3,42 @@ session_start ();
 date_default_timezone_set('Brazil/East');
 include "../conecta_banco.inc";
 
-//Recebe os parâmetros.
+//Recebe os parÃ¢metros.
 $comp = $_GET['comp'];
 
-//Pega a competência em aberto que vai no título.
+//Pega a competÃªncia em aberto que vai no tÃ­tulo.
 $query = "SELECT mesCompetencia FROM glosa_competencia WHERE id = '$comp'";
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc ($sql);
 $mesCompetencia = date ('m/Y',strtotime($row['mesCompetencia']));;
 
-//Define o título do PDF, a data atual e o contador de linhas da tabela.
-$reportTitle = "<h3>Glosas por Competência - ".$mesCompetencia."</h3>";
+//Define o tÃ­tulo do PDF, a data atual e o contador de linhas da tabela.
+$reportTitle = "<h3>Glosas por CompetÃªncia - ".$mesCompetencia."</h3>";
 $dataAtual = date ("d/m/Y H:i:s");
 $dateString = "<div id='reportDate'>".$dataAtual."</div>";
 
-/*Contador de linhas é iniciado com valor 2.
-Assim, ele conta o cabeçalho e a linha inicial da tabela.
+/*Contador de linhas Ã© iniciado com valor 2.
+Assim, ele conta o cabeÃ§alho e a linha inicial da tabela.
 Quando o contador chega a 25, ele pode ser reiniciado com valor 2
-dependendo da situação.*/
+dependendo da situaÃ§Ã£o.*/
 $lineCount = 2;
 
 //Define o CSS a ser usado para definir os estilos do PDF.
 $css = "<link rel='stylesheet' type='text/css' href='css/report.css' />";
 
-//Define o cabeçalho com título e data inclusos.
+//Define o cabeï¿½alho com tÃ­tulo e data inclusos.
 $pageHeader = "<page>
 <page_header>
 <div id='logo'><img src='img/logo_samae.png' /></div>
 <div id='samaeHeader'>
-<p><h4>SAMAE - Serviço Autônomo Municipal de Água e Esgoto</h4>
+<p><h4>SAMAE - ServiÃ§o AutÃ´nomo Municipal de ï¿½gua e Esgoto</h4>
 Rua Bahia 1530, CEP - 89031-001, Salto, Blumenau - SC.".$reportTitle.$dateString."</p></div>
 </page_header><br /><br /><div id='report'>";
 
-//Define o rodapé da página.
-$pageFooter = "</div><page_footer><div id='samaeFooter'>Página [[page_cu]] de [[page_nb]]</div></page_footer></page>";
+//Define o rodapï¿½ da pï¿½gina.
+$pageFooter = "</div><page_footer><div id='samaeFooter'>Pï¿½gina [[page_cu]] de [[page_nb]]</div></page_footer></page>";
 
-//Query para popular as tabelas do relatório.
+//Query para popular as tabelas do relatï¿½rio.
 $query = "SELECT nomeUsuario, descRes, dataInicio, dataFim, duracao, qtd_ocorrencias, numTicket, procedente
 FROM glosa_glosa, glosa_tipo_glosa, glosa_usuario WHERE glosa_glosa.usuario = glosa_usuario.id 
 AND competencia = $comp AND glosa_glosa.tipoGlosa = glosa_tipo_glosa.id ORDER BY dataInicio";
@@ -46,7 +46,7 @@ AND competencia = $comp AND glosa_glosa.tipoGlosa = glosa_tipo_glosa.id ORDER BY
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc ($sql);
 
-//Escreve o relatório colocando os resultados encontrados em uma tabela.
+//Escreve o relatï¿½rio colocando os resultados encontrados em uma tabela.
 echo $css;
 echo $pageHeader;
 
@@ -54,10 +54,10 @@ if (mysqli_affected_rows($conexao) > 0){
 		//Conta quantos resultados foram encontrados.
 		$rowsAffected = mysqli_affected_rows ($conexao);
 		
-		//Começa a escrever a tabela no documento.
+		//Comeï¿½a a escrever a tabela no documento.
 		echo "<table>
 		<tr>
-		<th>Usuário</th><th>Tipo de Glosa</th><th>Data Inicial</th><th>Data Final</th><th>Duração</th><th>Qtd. Ocorrências</th><th>Ticket</th><th>Procede (S/N)</th>
+		<th>Usuï¿½rio</th><th>Tipo de Glosa</th><th>Data Inicial</th><th>Data Final</th><th>Duraï¿½ï¿½o</th><th>Qtd. Ocorrï¿½ncias</th><th>Ticket</th><th>Procede (S/N)</th>
 		</tr>";
 		$dataInicio = date ('d/m/Y H:i',strtotime($row['dataInicio']));
 		
@@ -90,19 +90,19 @@ if (mysqli_affected_rows($conexao) > 0){
 			<td>".$row['qtd_ocorrencias']."</td><td>".$row['numTicket']."</td><td>".$row['procedente']."</td>
 		</tr>";
 		
-		//Conta o número de linhas da tabela.
+		//Conta o nï¿½mero de linhas da tabela.
 		$lineCount += 1;
 		
-		/*Se o contador de linhas chegar a 25 e o número de resultados
-		encontrados for maior que 24, então ocorre uma quebra de página
-		e o contador de linhas é reiniciado.*/
+		/*Se o contador de linhas chegar a 25 e o nï¿½mero de resultados
+		encontrados for maior que 24, entï¿½o ocorre uma quebra de pï¿½gina
+		e o contador de linhas ï¿½ reiniciado.*/
 		if ($lineCount == 25 && $rowsAffected > 24){
 			echo "</table>";
 			echo $pageFooter;
 			echo $pageHeader;
 			echo "<table>
 				<tr>
-				<th>Usuário</th><th>Tipo de Glosa</th><th>Data Inicial</th><th>Data Final</th><th>Duração</th><th>Qtd. Ocorrências</th><th>Ticket</th><th>Procede (S/N)</th>
+				<th>Usuï¿½rio</th><th>Tipo de Glosa</th><th>Data Inicial</th><th>Data Final</th><th>Duraï¿½ï¿½o</th><th>Qtd. Ocorrï¿½ncias</th><th>Ticket</th><th>Procede (S/N)</th>
 				</tr>";
 			$lineCount = 2;
 		}
@@ -112,10 +112,10 @@ if (mysqli_affected_rows($conexao) > 0){
 	echo "</table>";
 } 
 
-//Caso não haja resultados a serem exibidos no relatório.
+//Caso nï¿½o haja resultados a serem exibidos no relatï¿½rio.
 elseif (mysqli_affected_rows($conexao) == 0){
-	echo "<p><h4>Não há Glosas cadastradas na competência atual.</h4></p>";
+	echo "<p><h4>Nï¿½o hï¿½ Glosas cadastradas na competï¿½ncia atual.</h4></p>";
 }	
-//Fim do relatório.
+//Fim do relatï¿½rio.
 echo $pageFooter;	
 ?>

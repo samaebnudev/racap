@@ -30,7 +30,8 @@ if (isset($_POST['sequencial'])) {
 
 $idRacap = $_POST ['idRacap'];
 $racapPrazo = $_POST ['racapPrazo'];
-$dataFechamento = $_POST ['dataFechamento'];
+//$dataFechamento = $_POST ['dataFechamento'];
+$dataFechamento = date ('Y-m-d H:i:s');
 $racapEficiencia = $_POST['racapEficiencia'];
 $observacaoRACAP = $_POST['observacaoRACAP'];
 

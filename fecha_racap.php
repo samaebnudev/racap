@@ -102,7 +102,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 </label>
 
                 <?php
-                $dataFechamento = date("Y-m-d H:i:s");
+                $dataFechamento = date("Y-m-d 23:59:59");
                 echo "<input type='hidden' name='dataFechamento' id='dataFechamento' value='$dataFechamento'";
                 ?>
 

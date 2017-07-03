@@ -49,15 +49,16 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
         <button class="accordion">Relatório Geral de RACAP's</button>
         <div class="panel">
-            <form>
+            <form method="POST" action="gera_relatorio.php">
+                <input type="hidden" name="tipoRel" value="racapGeral"/>
                 <label for="statusRacap">Status: Aberta</label>
-                <input type="radio" name="statusRacap" value="" required/>
+                <input type="radio" name="statusRacap" value="1" required/>
 
                 <label for="statusRacap">Fechada </label>
-                <input type="radio" name="statusRacap" value=""/>
+                <input type="radio" name="statusRacap" value="2"/>
 
                 <label for="statusRacap">Todas </label>
-                <input type="radio" name="statusRacap" value=""/>
+                <input type="radio" name="statusRacap" value="3"/>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -75,8 +76,14 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
         <button class="accordion">RACAP's Vencidas</button>
         <div class="panel">
-            <form>
-                <input type="hidden" name="dataAtual" id="dataAtual" value="dataAtual colocar PHP Aqui"/>
+            <form method="POST" action="gera_relatorio.php">
+                <input type="hidden" name="tipoRel" value="racapVencida"/>
+                
+                <?php
+                    $dataVencimento = date("Y-m-d 23:59:59");
+                    echo "<input type='hidden' name='dataVencimento' id='dataVencimento' value='$dataVencimento'/>";
+                ?>
+                
                 <input type="submit" value="Gerar Relatório"/>
             </form>
             <br/>
@@ -84,7 +91,8 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
         <button class="accordion">RACAP's a Vencer</button>
         <div class="panel">
-            <form>
+            <form method="POST" action="gera_relatorio.php">
+                <input type="hidden" name="tipoRel" value="racapAVencer"/>
                 <label for="periodoRacapInicio">Período De:</label>
                 <input type='date' name='periodoRacapInicio' id='periodoRacapInicio' required/>
 
