@@ -20,6 +20,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <link rel="stylesheet" href="css/accordion.css">
         <link rel="stylesheet" href="css/form.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/relatorio.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -49,16 +50,19 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
         <button class="accordion">Relatório Geral de RACAP's</button>
         <div class="panel">
-            <form method="POST" action="gera_relatorio.php">
+            <form method="POST" action="gera_relatorio.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapGeral"/>
-                <label for="statusRacap">Status: Aberta</label>
+                <label for="statusRacap">Status: Pendente</label>
                 <input type="radio" name="statusRacap" value="1" required/>
 
                 <label for="statusRacap">Fechada </label>
                 <input type="radio" name="statusRacap" value="2"/>
-
-                <label for="statusRacap">Todas </label>
+                
+                <label for="statusRacap">Cancelada </label>
                 <input type="radio" name="statusRacap" value="3"/>
+                
+                <label for="statusRacap">Todas </label>
+                <input type="radio" name="statusRacap" value="4"/>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 

@@ -20,7 +20,7 @@ switch ($tipoRelatorio) {
 
         $dataAtual = date('d-m-Y H-i-s');
         $fileName = "Sistema de RACAP's - Listagem - " . $dataAtual . ".pdf";
-        $url = "http://localhost/racap/templates/racapGeral.php?statusRacap=" . $dataVencimento . "&dataIni=" . $periodoRacapInicio . "&dataFim=" . $periodoRacapFim;
+        $url = "http://localhost/racap/templates/racapGeral.php?statusRacap=" . $statusRacap . "&dataIni=" . $periodoRacapInicio . "&dataFim=" . $periodoRacapFim;
         break;
     case "racapVencida":
         $dataVencimento = $_POST['dataVencimento'];
