@@ -77,10 +77,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             </form>
             <br/>
         </div>
-
+        <hr>
         <button class="accordion">RACAP's Vencidas</button>
         <div class="panel">
-            <form method="POST" action="gera_relatorio.php">
+            <form method="POST" action="gera_relatorio.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapVencida"/>
                 
                 <?php
@@ -92,17 +92,21 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             </form>
             <br/>
         </div>
-
+        <hr>
         <button class="accordion">RACAP's a Vencer</button>
         <div class="panel">
-            <form method="POST" action="gera_relatorio.php">
+            <form method="POST" action="gera_relatorio.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapAVencer"/>
-                <label for="periodoRacapInicio">Período De:</label>
-                <input type='date' name='periodoRacapInicio' id='periodoRacapInicio' required/>
-
-                <label for="periodoRacapFim"> &nbsp; Até:</label>
-                <input type='date' name='periodoRacapFim' id='periodoRacapFim' required/>
-
+                <?php
+                    $dataAtual = date("Y-m-d 23:59:59");
+                    $dataAtualMin = date('Y-m-d');
+                    echo "<input type='hidden' name='dataHoje' id='dataHoje' value='$dataAtual'/>";
+                    echo "<input type='hidden' name='dataHoje2' id='dataHoje2' value='$dataAtualMin'/>";
+                ?>
+                
+                <label for='dataFim' title='Data Limite sempre será igual ou maior que a Data Atual'> 
+                &nbsp; Data Limite:</label>
+                <input type='date' name="dataFim" id="dataFim" required/>
                 &nbsp;&nbsp;
                 <input type="submit" value="Gerar Relatório"/>
             </form>

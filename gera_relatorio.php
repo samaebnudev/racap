@@ -29,12 +29,11 @@ switch ($tipoRelatorio) {
         $url = "http://localhost/racap/templates/racapVencida.php?dataVenc=" . $dataVencimento;
         break;
     case "racapAVencer":
-        $periodoRacapInicio = $_POST['periodoRacapInicio'];
-        $periodoRacapFim = $_POST['periodoRacapFim'];
-
+        $periodoRacapInicio = $_POST['dataHoje'];
+        $dataLimite = $_POST['dataFim'];
         $dataAtual = date('d-m-Y H-i-s');
-        $fileName = "Sistema de RACAP's - Listagem - " . $dataAtual . ".pdf";
-        $url = "http://localhost/racap/templates/racapAVencer.php?dataIni=" . $periodoRacapInicio . "&dataFim=" . $periodoRacapFim;
+        $fileName = "Sistema de RACAP's - RACAP's a Vencer - " . $dataAtual . ".pdf";
+        $url = "http://localhost/racap/templates/racapAVencer.php?dataIni=".$periodoRacapInicio."&dataFim=".$dataLimite;
         break;
 }
 

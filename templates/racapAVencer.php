@@ -10,25 +10,20 @@ session_start();
 date_default_timezone_set('Brazil/East');
 include "../conecta_banco.inc";
 
-$statusRacap = $_GET['statusRacap'];
 $dateBuffer = $_GET['dataIni'];
 $dataIni = date('Y-m-d 00:00:00', strtotime($dateBuffer));
-$dataIniRep = date('d/m/Y', strtotime($dateBuffer));
 
-$dateBuffer = $_GET['dataFim'];
-$dataFim = date('Y-m-d 23:59:59', strtotime($dateBuffer));
+$dateBuffer2 = $_GET['dataFim'];
+$dataFim = date('Y-m-d 23:59:59', strtotime($dateBuffer2));
 $dataFimRep = date('d/m/Y', strtotime($dateBuffer));
 
 //Define o título do PDF, a data atual e o contador de linhas da tabela.
-$reportTitle = "<h3>Relação de RACAP's de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
+$reportTitle = "<h3>Relação de RACAP's a Vencer até ".$dataFimRep."</h3>";
 $dataAtual = date("d/m/Y H:i:s");
 $dateString = "<div id='reportDate'>" . $dataAtual . "</div>";
 
 //Query para popular as tabelas do relatório.
-switch ($statusRacap) {
-    case "1":
-        $reportTitle = "<h3>Relação de RACAP's Pendentes de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
-        $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap, 
+$query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap, 
 racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
 
 FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
@@ -36,50 +31,8 @@ FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
 WHERE racap_tipo_racap.id = racap_racap.tipo_racap
 AND racap_setor.id = racap_racap.setor_racap
 AND racap_status_racap.id = racap_racap.status_racap
-AND status_racap = '$statusRacap'
-AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
-        break;
-        
-    case "2":
-        $reportTitle = "<h3>Relação de RACAP's Fechadas de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
-        $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap, 
-racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
+AND prazo_racap BETWEEN '$dataIni' AND '$dataFim' ORDER BY racap_racap.id";
 
-FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-AND racap_setor.id = racap_racap.setor_racap
-AND racap_status_racap.id = racap_racap.status_racap
-AND status_racap = '$statusRacap'
-AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
-        break;
-        
-    case "3":
-        $reportTitle = "<h3>Relação de RACAP's Canceladas de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
-        $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap, 
-racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
-
-FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-AND racap_setor.id = racap_racap.setor_racap
-AND racap_status_racap.id = racap_racap.status_racap
-AND status_racap = '$statusRacap'
-AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
-        break;
-    
-    case "4":
-        $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap, 
-racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
-
-FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-AND racap_setor.id = racap_racap.setor_racap
-AND racap_status_racap.id = racap_racap.status_racap
-AND data_racap BETWEEN '$dataIni' AND '$dataFim' ORDER BY racap_racap.id";
-        break;
-}
 
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);
@@ -170,7 +123,7 @@ if (mysqli_affected_rows($conexao) > 0) {
 
 //Caso não haja resultados a serem exibidos no relatório.
 elseif (mysqli_affected_rows($conexao) == 0) {
-    echo utf8_decode("<p><h4>Não há RACAP's no Sistema com os parâmetros pesquisados.</h4></p>");
+    echo utf8_decode("<p><h4>Não há RACAP's no Sistema vencendo hoje ou até a data selecionada.</h4></p>");
 }
 //Fim do relatório.
 echo utf8_decode($pageFooter);

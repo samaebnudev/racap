@@ -11,6 +11,9 @@ $(document).ready(function ( ) {
         $('#periodoRacapFim').attr({'min':minDate});
     });
     
+    var dataLimite = $('#dataHoje2').val();
+    $('#dataLimite').attr({'min':dataLimite});
+    
 });
 
 
