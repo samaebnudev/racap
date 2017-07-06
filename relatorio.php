@@ -98,15 +98,13 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <form method="POST" action="gera_relatorio.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapAVencer"/>
                 <?php
-                    $dataAtual = date("Y-m-d 23:59:59");
-                    $dataAtualMin = date('Y-m-d');
+                    $dataAtual = date("Y-m-d");
                     echo "<input type='hidden' name='dataHoje' id='dataHoje' value='$dataAtual'/>";
-                    echo "<input type='hidden' name='dataHoje2' id='dataHoje2' value='$dataAtualMin'/>";
                 ?>
                 
-                <label for='dataFim' title='Data Limite sempre será igual ou maior que a Data Atual'> 
+                <label for="dataLimite" title='Data Limite sempre será igual ou maior que a Data Atual'> 
                 &nbsp; Data Limite:</label>
-                <input type='date' name="dataFim" id="dataFim" required/>
+                <input type='date' name="dataLimite" id="dataLimite" required/>
                 &nbsp;&nbsp;
                 <input type="submit" value="Gerar Relatório"/>
             </form>

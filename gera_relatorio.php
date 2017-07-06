@@ -30,10 +30,10 @@ switch ($tipoRelatorio) {
         break;
     case "racapAVencer":
         $periodoRacapInicio = $_POST['dataHoje'];
-        $dataLimite = $_POST['dataFim'];
+        $dataLimite = $_POST['dataLimite'];
         $dataAtual = date('d-m-Y H-i-s');
         $fileName = "Sistema de RACAP's - RACAP's a Vencer - " . $dataAtual . ".pdf";
-        $url = "http://localhost/racap/templates/racapAVencer.php?dataIni=".$periodoRacapInicio."&dataFim=".$dataLimite;
+        $url = "http://localhost/racap/templates/racapAVencer.php?dataHoje=".$periodoRacapInicio."&dataLimite=".$dataLimite;
         break;
 }
 

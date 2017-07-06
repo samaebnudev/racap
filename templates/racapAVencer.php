@@ -6,16 +6,16 @@
  * and open the template in the editor.
  */
 
-session_start();
+//session_start();
 date_default_timezone_set('Brazil/East');
 include "../conecta_banco.inc";
 
-$dateBuffer = $_GET['dataIni'];
+$dateBuffer = $_GET['dataHoje'];
 $dataIni = date('Y-m-d 00:00:00', strtotime($dateBuffer));
 
-$dateBuffer2 = $_GET['dataFim'];
+$dateBuffer2 = $_GET['dataLimite'];
 $dataFim = date('Y-m-d 23:59:59', strtotime($dateBuffer2));
-$dataFimRep = date('d/m/Y', strtotime($dateBuffer));
+$dataFimRep = date('d/m/Y', strtotime($dateBuffer2));
 
 //Define o título do PDF, a data atual e o contador de linhas da tabela.
 $reportTitle = "<h3>Relação de RACAP's a Vencer até ".$dataFimRep."</h3>";
