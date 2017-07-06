@@ -5,7 +5,7 @@ $(document).ready(function ( ) {
         var sequencial = $('#selectbuscaBanco');
 
         $.ajax({
-            url: 'busca_busca_status_acao.php',
+            url: 'busca_status_acao.php',
             dataType: "json",
             type: 'POST',
             data: sequencial,

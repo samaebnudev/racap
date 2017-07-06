@@ -2,8 +2,8 @@
 session_start();
 include "conecta_banco.inc";
 
-if ($_SESSION['nomeUsuario']==''){
-header("Location:login.php");
+if ($_SESSION['nomeUsuario'] == '') {
+    header("Location:login.php");
 }
 
 if (isset($_SESSION['id'])) {
@@ -57,7 +57,7 @@ if (isset($_SESSION['id'])) {
         </div>
         <br/>
 
-        <form method="POST" id="buscaBanco">
+        <form method="POST" id="buscaBanco" style="text-align: center;">
             <label for="selectbuscaBanco">Buscar: </label>
             <select id="selectbuscaBanco" name="selectbuscaBanco">
                 <option></option>
@@ -78,31 +78,24 @@ if (isset($_SESSION['id'])) {
         <hr>
 
         <form method="POST" id="cadPerfilUsuario" action="perfil_usuario_manage.php">
-            <?php
-            /* if ($_SESSION['tipoPrivilegio'] == 2){
-              echo "<fieldset disabled>";
-              } else { */
-            echo "<fieldset>";
-            //}*/
-            ?>
-            <input type="hidden" name="operacao" value="inclui"/>
+            <fieldset>
 
-            <label for="sequencial">ID:</label>
-            <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
+                <label for="sequencial">ID:</label>
+                <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <label for="descricao">Perfil: </label>
-            <input type="text" name="descricao" id="descricao" required/>
-            <br/><br/>
+                <label for="descricao">Perfil: </label>
+                <input type="text" name="descricao" id="descricao" required/>
+                <br/><br/>
 
-            <p align="center">
-                <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar Perfil de Usuário"/>
-                &nbsp;&nbsp;
-                <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
-            </p>
-        </fieldset>
-    </form>
+                <p align="center">
+                    <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar Perfil de Usuário"/>
+                    &nbsp;&nbsp;
+                    <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
+                </p>
+            </fieldset>
+        </form>
 
-</body>
+    </body>
 </html>

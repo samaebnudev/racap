@@ -20,7 +20,6 @@ if (isset($_SESSION['id'])) {
         header("Location:index.php");
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +59,7 @@ if (isset($_SESSION['id'])) {
         </div>
         <br/>
 
-        <form method="POST" id="buscaBanco">
+        <form method="POST" id="buscaBanco" style="text-align: center;">
             <label for="selectbuscaBanco">Buscar: </label>
             <select id="selectbuscaBanco" name="selectbuscaBanco">
                 <option></option>
@@ -81,28 +80,21 @@ if (isset($_SESSION['id'])) {
         <hr>
 
         <form method="POST" id="cadStatusAcao" action="status_acao_manage.php">
-            <?php
-            /* if ($_SESSION['tipoPrivilegio'] == 2){
-              echo "<fieldset disabled>";
-              } else { */
-            echo "<fieldset>";
-            //}*/
-            ?>
-            <input type="hidden" name="operacao" value="incluiTipoUsuario"/>
-            <label for="sequencial">ID:</label>
+            <fieldset>
+                <label for="sequencial">ID:</label>
 
-            <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <label for="descricao">Status da Ação: </label>
-            <input type="text" name="descricao" id="descricao" required/><br/><br/>
+                <input type="number" step="1" min="0" name="sequencial" id="sequencial" readonly />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="descricao">Status da Ação: </label>
+                <input type="text" name="descricao" id="descricao" required/><br/><br/>
 
-            <p align="center">
-                <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar Status da Ação"/>
-                &nbsp;&nbsp;
-                <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
-            </p>
-        </fieldset>
-    </form>
+                <p align="center">
+                    <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar Status da Ação"/>
+                    &nbsp;&nbsp;
+                    <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
+                </p>
+            </fieldset>
+        </form>
 
-</body>
+    </body>
 </html>
