@@ -58,9 +58,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 $row = mysqli_fetch_assoc($sql);
 
                 if (mysqli_affected_rows($conexao) > 0) {
-                    echo "<option value=" . $row['id'] . ">" . $row['observacao_racap'] . "</option>";
+                    echo "<option value=" . $row['id'] . "> RACAP ".$row['id_racap']." - ". $row['observacao_racap'] . "</option>";
                     while ($row = mysqli_fetch_array($sql)) {
-                        echo "<option value=" . $row['id'] . ">" . $row['observacao_racap'] . "</option>";
+                        echo "<option value=" . $row['id'] . "> RACAP ".$row['id_racap']." - " . $row['observacao_racap'] . "</option>";
                     }
                 }
                 ?>

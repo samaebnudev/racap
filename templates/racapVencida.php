@@ -36,6 +36,7 @@ FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
 WHERE racap_tipo_racap.id = racap_racap.tipo_racap
 AND racap_setor.id = racap_racap.setor_racap
 AND racap_status_racap.id = racap_racap.status_racap
+AND status_racap = '1'
 AND prazo_racap < '$dataVenc' ORDER BY racap_racap.id";
 
 
