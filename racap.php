@@ -78,7 +78,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     <label for="sequencial">ID:</label>
                     <input type="number" step="1" name="sequencial" id="sequencial" readonly />
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <label for="statusRacap">Status da RACAP: </label>
                     <select id="statusRacap" name="statusRacap" required>
@@ -136,7 +136,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     </select>
 
                     <br/><br/>
-                    <label for="motivoDescricao">Motivo da RACAP (Descrição): </label>
+                    <label for="motivoDescricao">Motivo da RACAP: </label>
                     <input type="text" maxlength="50" id="motivoDescricao" name="motivoDescricao" required/>
 
                     &nbsp;&nbsp;
