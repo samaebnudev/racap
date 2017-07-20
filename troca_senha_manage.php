@@ -17,7 +17,7 @@ $newPassword2 = $_POST['novaSenha2'];
 $id = $_SESSION['id'];
 $nomeUsuario = $_SESSION ['nomeUsuario'];
 
-$query = "SELECT senha FROM glosa_usuario WHERE id = '$id'";
+$query = "SELECT senha FROM racap_usuario WHERE id = '$id'";
 $sql = mysqli_query($conexao,$query);
 $row = mysqli_fetch_assoc($sql);
 
@@ -25,7 +25,7 @@ if (password_verify ($password , $row['senha'])){
 	
 	if ($newPassword == $newPassword2){
 		$passwordHash = password_hash ($newPassword, PASSWORD_DEFAULT);
-		$query = "UPDATE glosa_usuario SET senha='$passwordHash' WHERE id = '$id'";
+		$query = "UPDATE racap_usuario SET senha='$passwordHash' WHERE id = '$id'";
 		$sql = mysqli_query($conexao,$query);
 		
 		if ($sql){
@@ -33,7 +33,7 @@ if (password_verify ($password , $row['senha'])){
 				$dataRegistro = date ("Y-m-d H:i:s");
 				$ocorrencia = "Troca de senha do usuário";
 				$ip = get_client_ip_env();
-				$query = "INSERT INTO glosa_log (id, dataRegistro, ocorrencia, usuario, ip) 
+				$query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 				VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
 				$sql = mysqli_query ($conexao, $query);
 				
