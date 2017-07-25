@@ -57,10 +57,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
                 <label for="statusRacap">Fechada </label>
                 <input type="radio" name="statusRacap" value="2"/>
-                
+
                 <label for="statusRacap">Cancelada </label>
                 <input type="radio" name="statusRacap" value="3"/>
-                
+
                 <label for="statusRacap">Todas </label>
                 <input type="radio" name="statusRacap" value="4"/>
 
@@ -82,12 +82,12 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <div class="panel">
             <form method="POST" action="gera_relatorio.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapVencida"/>
-                
+
                 <?php
-                    $dataVencimento = date("Y-m-d 23:59:59");
-                    echo "<input type='hidden' name='dataVencimento' id='dataVencimento' value='$dataVencimento'/>";
+                $dataVencimento = date("Y-m-d 23:59:59");
+                echo "<input type='hidden' name='dataVencimento' id='dataVencimento' value='$dataVencimento'/>";
                 ?>
-                
+
                 <input type="submit" value="Gerar Relatório"/>
             </form>
             <br/>
@@ -98,14 +98,39 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <form method="POST" action="gera_relatorio.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapAVencer"/>
                 <?php
-                    $dataAtual = date("Y-m-d");
-                    echo "<input type='hidden' name='dataHoje' id='dataHoje' value='$dataAtual'/>";
+                $dataAtual = date("Y-m-d");
+                echo "<input type='hidden' name='dataHoje' id='dataHoje' value='$dataAtual'/>";
                 ?>
-                
+
                 <label for="dataLimite" title='Data Limite sempre será igual ou maior que a Data Atual'> 
-                &nbsp; Data Limite:</label>
+                    &nbsp; Data Limite:</label>
                 <input type='date' name="dataLimite" id="dataLimite" required/>
                 &nbsp;&nbsp;
+                <input type="submit" value="Gerar Relatório"/>
+            </form>
+            <br/>
+        </div>
+        <hr>
+        <button class="accordion">Capa de RACAP</button>
+        <div class="panel">
+            <form method="POST" action="gera_relatorio.php" target="_blank">
+                <input type="hidden" name="tipoRel" value="racap"/>
+                <label for="idRacap">Selecione a RACAP: </label>
+                <select id="idRacap" name="idRacap">
+                    <option></option>
+                    <?php
+                    $query = "SELECT * FROM racap_racap";
+                    $sql = mysqli_query($conexao, $query);
+                    $row = mysqli_fetch_assoc($sql);
+
+                    if (mysqli_affected_rows($conexao) > 0) {
+                        echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
+                        while ($row = mysqli_fetch_array($sql)) {
+                            echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
                 <input type="submit" value="Gerar Relatório"/>
             </form>
             <br/>

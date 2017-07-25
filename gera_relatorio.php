@@ -35,13 +35,22 @@ switch ($tipoRelatorio) {
         $fileName = "Sistema de RACAP's - RACAP's a Vencer - " . $dataAtual . ".pdf";
         $url = "http://localhost/racap/templates/racapAVencer.php?dataHoje=".$periodoRacapInicio."&dataLimite=".$dataLimite;
         break;
+    case "racap":
+        $idRacap = $_POST['idRacap'];
+        $dataAtual = date('d-m-Y H-i-s');
+        $fileName = "Detalhes da RACAP - ".$idRacap." - " . $dataAtual . ".pdf";
+        $url = "http://localhost/racap/templates/racapCapa.php?sequencial=".$idRacap;
+        break;
 }
 
 $template = file_get_contents($url);
 
 try {
-    $html2pdf = new HTML2PDF('L', 'A4', 'pt', true, 'UTF-8', 2);
-
+    if ($tipoRelatorio != "racap"){
+		$html2pdf = new HTML2PDF('L', 'A4', 'pt', true, 'UTF-8', 2);
+	} else {
+		$html2pdf = new HTML2PDF('P', 'A4', 'pt', true, 'UTF-8', 2);
+	}
 
     $html2pdf->writeHTML(utf8_encode($template));
     ob_end_clean();
