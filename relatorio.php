@@ -116,7 +116,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <form method="POST" action="gera_relatorio.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racap"/>
                 <label for="idRacap">Selecione a RACAP: </label>
-                <select id="idRacap" name="idRacap">
+                <select id="idRacap" name="idRacap" required>
                     <option></option>
                     <?php
                     $query = "SELECT * FROM racap_racap";

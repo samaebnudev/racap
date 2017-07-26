@@ -54,29 +54,33 @@ echo $css;
 echo $pageHeader;
 
 if (mysqli_affected_rows($conexao)== 1){
-    $numero = "Nº: ".$row['id'];
-    $dataRacap = date ('d/m/Y H:i',strtotime($row['data_racap']));
+    $numero = $row['id'];
+    $dataRacap = date ('d/m/Y',strtotime($row['data_racap']));
     $motivoRacap = $row['motivo_racap'];
     $historicoRACAP = $row['historico_racap'];
     $prazoRacap = date ('d/m/Y', strtotime($row['prazo_racap']));
     $setorRacap = $row['setor'];
-    $tipoRacap = "Tipo da RACAP: ".$row['tipo'];
+    $tipoRacap = $row['tipo'];
     $motivoAbertura = $row['motivoAbertura'];
     $causaRacap = $row['causa'];
     
-    $divNumeroRacap = "<div id='numeroRacap'>".$numero."</div>";
-    $divDataAbertura = "<div id='dataAbertura'>Aberta em: ".$dataRacap."</div>";
-    $divMotivoAbertura = "<div id='motivoAbertura'>Motivo da Abertura: ".$motivoAbertura."</div>";
-    $divMotivoRacap = "<div id='motivoDescricao'>Descrição :".$motivoRacap."</div>";
-    $divSetor = "<div id='setorRacap'>Setor: ".$setorRacap."</div>";
-    $divPrazoRacap = "<div id='prazoRacap'>Prazo: ".$prazoRacap."</div>";
-    $divCausaRacap = "<div id='causaRacap'>Causa: ".$causaRacap."</div>";
+    echo "<table class='reportTable'><tr>";
+    echo utf8_decode("<td class='reportTableHeader'>Nº da RACAP:</td><td class='reportTableInfo'>".$numero."</td>");
+    echo "<td class='reportTableHeader'>Data de Abertura:</td><td class='reportTableInfo'>".$dataRacap."</td>";
+    echo utf8_decode("<td class='reportTableHeader'>Motivo da Abertura:</td><td class='reportTableInfo'>".$motivoAbertura."</td>");
+    echo "</tr>";
+    echo "<tr>";
+    echo utf8_decode("<td class='reportTableHeader'>Descrição:</td><td class='reportTableInfo' colspan='5'>".$motivoRacap."</td>");
+    echo "</tr>";
+    echo "<tr>";
+    echo utf8_decode("<td class='reportTableHeader'>Setor:</td><td class='reportTableInfo'>".$setorRacap."</td>");
+    echo utf8_decode("<td class='reportTableHeader'>Prazo:</td><td class='reportTableInfo'>".$prazoRacap."</td>");
+    echo utf8_decode("<td class='reportTableHeader'>Causa:</td><td class='reportTableInfo'>".$causaRacap."</td>");
+    echo "</tr>";
+    echo "</table>";
     
-    echo utf8_decode($divNumeroRacap.$divDataAbertura.$divMotivoAbertura);
-    echo utf8_decode($divMotivoRacap);
-    echo utf8_decode($divSetor.$divPrazoRacap.$divCausaRacap);
 }else{
- echo utf8_decode("RACAP não encontrada.");   
+ echo utf8_decode("RACAP não encontrada.");
 }
 
 echo $pageFooter;

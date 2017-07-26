@@ -1,16 +1,19 @@
+pageheader{
+    position: absolute;
+}
+
 #logo
 {
     width: 10%;
     float: left;
-    position: absolute;
 }
 
 #samaeHeader{
     width : 75%;
     float: left;
     font-family: arial;
-    margin-top: -15px;
-    margin: auto;
+    margin-left: 90px;
+    position: absolute;
 }
 
 #samaeFooter{
@@ -42,65 +45,12 @@
 }
 
 #report {
-    margin-top: 120px;
+    margin-top: 110px;
     margin-left: 20px;
 }
 
-#report table{
-    /*margin-left: 20px;*/
-}
-
-#numeroRacap {
-    width: 10%;
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-}
-
-#dataAbertura {
-    width: 30%;
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-}
-
-#motivoAbertura {
-    width: 35%;
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-}
-
-#motivoDescricao {
-    width: 75%;
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-}
-
-#setorRacap {
-    width: 25%;
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-}
-
-#prazoRacap {
-    width: 25%;
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-}
-
-#causaRacap {
-    width: 25%;
-    border-style: solid;
-    border-width: 1px;
-    float: left;
-}
-
 #reportTitle{
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     text-align: center;
     width: 100%;
@@ -108,23 +58,26 @@
     margin-top: 50%;
 }
 
-table, td {
-    font-size: 15px;
-    padding-top:10px;
-    padding-bottom:10px;
-    padding-right: 10px;
+.reportTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
 }
 
-th{
-    font-family: arial;
+.reportTable td{
+    border: 1.5px black;
+    padding: 2.5px;
+}
+
+.reportTable .reportTableHeader {
     font-weight: bold;
-    text-align : left;
-    padding-top:10px;
-    padding-bottom:10px;
+    font-size: 14px;
+    text-align: center;
+    background-color: #80ffff;
+    width: 12%;
 }
 
-
-td{
-    font-family: arial;
-    text-align : left;
+.reportTable .reportTableInfo {
+    font-size: 14px;
+    text-align: center;
 }
