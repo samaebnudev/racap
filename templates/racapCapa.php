@@ -84,9 +84,11 @@ if (mysqli_affected_rows($conexao) == 1) {
     echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP:</td>");
     echo "</tr>";
     echo "<tr>";
-    echo utf8_decode("<td class='reportTableInfo' colspan='8'>" . $historicoRACAP . "</td>");
+    //$historicoRACAP = str_replace("\n","<br/>",$historicoRACAP);
+    echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
+            . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>");
     echo "</tr>";
-    echo "</table>";
+    //echo "</table>";
 
     $query = "SELECT racap_acao.id, racap_status_acao.descricao AS 'status', 
 descricao_acao, racap_usuario.nomeServidor AS 'responsavel' 
@@ -104,22 +106,20 @@ AND responsavel_acao = racap_usuario.id";
         $descricaoAcao = $row['descricao_acao'];
         $responsavelAcao = $row['responsavel'];
         
-        echo "<br/><br/>";
-        echo "<table class='reportTable2'><tr>";
-        echo utf8_decode("<td class ='reportTableHeader2' colspan='4'>Descrição das Ações</td>");
+        echo "<tr>";
+        echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
         echo "</tr><tr>";
-        echo utf8_decode("<th class ='reportTableHeader2'>ID da Ação</th>");
-        echo utf8_decode("<th class ='reportTableHeader2'>Status</th>");
-        echo utf8_decode("<th class ='reportTableHeader2'>Descrição</th>");
-        echo utf8_decode("<th class ='reportTableHeader2'>Responsável</th>");
+        echo utf8_decode("<td class='reportTableHeader' colspan='2'>ID da Ação</td>");
+        echo utf8_decode("<td class='reportTableHeader' colspan='2'>Status</td>");
+        echo utf8_decode("<td class='reportTableHeader' colspan='2'>Descrição</td>");
+        echo utf8_decode("<td class='reportTableHeader' colspan='2'>Responsável</td>");
         echo "</tr>";
         echo "</table>";
     }elseif (mysqli_affected_rows($conexao) == 0) {
-        echo "<br/><br/>";
-        echo "<table class='reportTable2'><tr>";
-        echo utf8_decode("<td class ='reportTableHeader2'>Descrição das Ações</td>");
+        echo "<tr>";
+        echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
         echo "</tr><tr>";
-        echo utf8_decode("<td class ='reportTableInfo2'>Não existem Ações para esta RACAP.</td>");
+        echo utf8_decode("<td class='reportTableInfo' colspan='8'>Não existem Ações para esta RACAP.</td>");
         echo "</tr>";
         echo "</table>";
     }

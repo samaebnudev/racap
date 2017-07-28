@@ -46,7 +46,7 @@ pageheader{
 
 #report {
     margin-top: 110px;
-    margin-left: 20px;
+    margin-left: auto;
 }
 
 #reportTitle{
@@ -80,32 +80,6 @@ pageheader{
 }
 
 .reportTable .reportTableInfo {
-    font-size: 14px;
-    text-align: center;
-}
-
-.reportTable2 {
-    width: 100%;
-    border-collapse: collapse;
-    margin: auto;
-}
-
-.reportTable2 td{
-    border: 1.5px black;
-    padding: 2.5px;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.reportTable2 .reportTableHeader2 {
-    font-weight: bold;
-    font-size: 14px;
-    text-align: center;
-    background-color: #80bfff;
-    width: 12%;
-}
-
-.reportTable2 .reportTableInfo2 {
     font-size: 14px;
     text-align: center;
 }
