@@ -52,9 +52,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <select id="selectAcaoRacap" name="selectAcaoRacap">
                 <option></option>
                 <?php
-                $query = "SELECT racap_acao.id, descricao_acao FROM racap_acao, racap_racap 
+                /*$query = "SELECT racap_acao.id, descricao_acao FROM racap_acao, racap_racap 
                          WHERE racap_acao.id = racap_racap.id AND racap_racap.status_racap = '1'
-                         ORDER BY id_racap";
+                         ORDER BY id_racap";*/
+                $query = "SELECT * FROM racap_acao WHERE status_acao = '1'";
                 $sql = mysqli_query($conexao, $query);
                 $row = mysqli_fetch_assoc($sql);
 
@@ -69,7 +70,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </form>
         <hr>
 
-        <form method="POST" id="cadAcao" action="racap_acao_manage_2.php">
+        <form method="POST" id="racapAcaoRacap" action="racap_acao_manage_2.php">
             <fieldset>
                 <label for="sequencialAcao">ID:</label>
                 <input type="number" step="1" min="0" name="sequencialAcao" id="sequencialAcao" readonly />
@@ -129,7 +130,11 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     }
                     ?>
                 </select>
-
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                
+                <label for="prazo_acao">Prazo da Ação: </label>
+                <input type="datetime-local" id="prazo_acao" name="prazo_acao" readonly/>
                 <br/><br/>
 
                 <label for="descricaoAcao">Descrição da Ação: </label>

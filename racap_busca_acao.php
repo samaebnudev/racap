@@ -14,7 +14,8 @@ $userDados = array('success' => false,
     'status_acao' => "",
     'descricao_acao' => "",
     'responsavel_acao' => "",
-    'descricao_acao' => ""
+    'descricao_acao' => "",
+    'prazo' => ""
 );
 
 if (isset($_POST['selectAcaoRacap'])) {
@@ -32,6 +33,7 @@ if (isset($_POST['selectAcaoRacap'])) {
         $userDados ['descricao_acao'] = $row['descricao_acao'];
         $userDados ['responsavel_acao'] = $row['responsavel_acao'];
         $userDados ['descricao_acao'] = $row['descricao_acao'];
+        $userDados ['prazo'] = $row['prazo_acao'];
     }
 }
 

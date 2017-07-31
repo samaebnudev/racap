@@ -249,6 +249,11 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     }
                     ?>
                 </select>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                
+                <label for="prazo_acao">Prazo da Ação: </label>
+                <input type="datetime-local" id="prazo_acao" name="prazo_acao" readonly/>
 
                 <br/><br/>
 

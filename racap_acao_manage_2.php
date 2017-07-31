@@ -21,8 +21,10 @@ include "getIP.php";
  * and open the template in the editor.
  */
 
-if (isset($_POST['sequencialAcao'])) {
-    $sequencial = $_POST ['sequencialAcao'];
+$bufferSequencial = $_POST['sequencialAcao'];
+
+if ($bufferSequencial != NULL) {
+    $sequencial = $bufferSequencial;
 } else {
     $sequencial = "0";
 }
@@ -32,13 +34,21 @@ $selectStatusAcao = $_POST['selectStatusAcao'];
 $selectResponsavel = $_POST['selectResponsavel'];
 $descricaoAcao = $_POST['descricaoAcao'];
 
+if (isset($_POST['prazo_acao'])) {
+    $dateBuffer = explode("T", $_POST['prazo_acao']);
+    $prazoAcao = implode(" ", $dateBuffer);
+    $prazoAcao = date('Y-m-d H:i:00', strtotime($prazoAcao));
+} else {
+    $prazoAcao = NULL;
+}
+
 $query = "SELECT * FROM racap_acao WHERE id = '$sequencial'";
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
     $query = "UPDATE racap_acao SET id_racap='$idRacap', status_acao = '$selectStatusAcao',
-             descricao_acao = '$descricaoAcao', responsavel_acao = '$selectResponsavel' WHERE id = '$sequencial'";
+             descricao_acao = '$descricaoAcao', responsavel_acao = '$selectResponsavel', prazo_acao = '$prazoAcao' WHERE id = '$sequencial'";
     $sql = mysqli_query($conexao, $query);
     
     if ($sql) {
@@ -62,11 +72,8 @@ if (mysqli_affected_rows($conexao) == 1) {
     }
 }
 elseif (mysqli_affected_rows($conexao) == 0) {
-    $query = "INSERT INTO racap_acao (id, id_racap, status_acao, 
-        descricao_acao, responsavel_acao)
-	VALUES ('$sequencial', '$idRacap', '$selectStatusAcao',
-        '$descricaoAcao', '$selectResponsavel')";
-
+    $query = "INSERT INTO racap_acao (id, id_racap, status_acao, descricao_acao, responsavel_acao, prazo_acao)
+	VALUES ('$sequencial', '$idRacap', '$selectStatusAcao','$descricaoAcao', '$selectResponsavel', '$prazoAcao')";
     $sql = mysqli_query($conexao, $query);
 
     if ($sql) {
