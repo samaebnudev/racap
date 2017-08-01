@@ -114,6 +114,14 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <label>
                     Não <input type="radio" name="racapEficiencia" id="racapEficienciaNao" value="N"/>
                 </label>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="statusRacapPos">Status após Fechamento: </label>
+                <select name="statusRacapPos" id="statusRacapPos" required>
+                    <option></option>
+                    <option value="2" selected="selected">Fechada</option>
+                    <option value="3">Cancelada</option>
+                </select>
 
                 <br/><br/>
                 <label for="observacaoRACAP">Observações: </label>

@@ -2,7 +2,19 @@ $(document).ready(function ( ) {
     
     $('#selectAcaoRacap').prop("disabled", true);
     $("#racapAcaoRacap :input").prop("disabled", true);
-
+    
+    $('#cadRACAP').submit(function () {
+        $('#statusRacap').prop('disabled', false);
+    });
+    
+    /*$('#cadRACAP').change(function () {
+        var checkDisable = $('#statusRacap').prop('disabled');
+        console.log(checkDisable);
+        if (!checkDisable){
+            $('#statusRacap').prop('disabled', true);
+        }
+    });*/
+    
     $('#buscaBanco').on('change', function () {
 
         var sequencial = $('#selectbuscaBanco');
@@ -25,6 +37,7 @@ $(document).ready(function ( ) {
                         $('#selectAcaoRacap').prop("disabled", false);
                         $("#cadRACAP :input").prop("disabled", false);
                         $("#racapAcaoRacap :input").prop("disabled", false);
+                        $('#statusRacap').prop('disabled', true);
                     }
                     
                     $('#idRacap').val(data.id);
@@ -50,6 +63,7 @@ $(document).ready(function ( ) {
                     $("#cadRACAP :input").prop("disabled", false);
                     $('#selectAcaoRacap').prop("disabled", true);
                     $("#racapAcaoRacap :input").prop("disabled", true);
+                    $('#statusRacap').prop('disabled', true);
 
                 }
             }

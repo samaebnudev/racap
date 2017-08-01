@@ -74,6 +74,8 @@ $(document).ready(function ( ) {
                     }
 
                     $('#observacaoRACAP').val(data.observacaoRACAP);
+                    $('#statusRacapPos').val(data.statusPos);
+                    
                 } else {
                     $('#cadFechaRacap').each(function () {
                         this.reset();

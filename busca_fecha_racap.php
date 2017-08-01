@@ -14,7 +14,8 @@ $userDados = array ('success' => false,
 'prazoRacap' => "",
 'dataFechamento' => "",
 'eficaciaRacap' => "",
-'observacaoRACAP' => ""
+'observacaoRACAP' => "",
+'statusPos' => ""
 );
 
 if (isset($_POST['selectbuscaBanco'])){
@@ -32,6 +33,7 @@ if (isset($_POST['selectbuscaBanco'])){
                 $userDados ['dataFechamento'] = (string) $row['data_fechamento'];
                 $userDados ['eficaciaRacap'] = (string) $row['eficacia_racap'];
                 $userDados ['observacaoRACAP'] = (string) $row['observacao_racap'];
+                $userDados ['statusPos'] = (string) $row['status_racap_pos'];
 	}
 }
 

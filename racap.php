@@ -81,7 +81,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <label for="statusRacap">Status da RACAP: </label>
-                    <select id="statusRacap" name="statusRacap" required>
+                    <select id="statusRacap" name="statusRacap" required disabled>
                         <option></option>
                         <?php
                         $query = "SELECT * FROM racap_status_racap";
@@ -89,7 +89,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                         $row = mysqli_fetch_assoc($sql);
 
                         if (mysqli_affected_rows($conexao) > 0) {
-                            echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
+                            echo "<option value=" . $row['id'] . " selected='selected'>" . $row['descricao'] . "</option>";
                             while ($row = mysqli_fetch_array($sql)) {
                                 echo "<option value=" . $row['id'] . ">" . $row['descricao'] . "</option>";
                             }
