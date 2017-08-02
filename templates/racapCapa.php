@@ -11,6 +11,7 @@ date_default_timezone_set('Brazil/East');
 include "../conecta_banco.inc";
 
 $sequencial = $_GET['sequencial'];
+//$sequencial = 113;
 
 $reportTitle = "<p id='reportTitle'>Registro de Ações Corretivas, Preventivas e Melhorias</p>";
 $dataAtual = date("d/m/Y H:i:s");
@@ -105,17 +106,38 @@ AND responsavel_acao = racap_usuario.id";
         $statusAcao = $row['status'];
         $descricaoAcao = $row['descricao_acao'];
         $responsavelAcao = $row['responsavel'];
-        
+
         echo "<tr>";
         echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
         echo "</tr><tr>";
-        echo utf8_decode("<td class='reportTableHeader' colspan='2'>ID da Ação</td>");
-        echo utf8_decode("<td class='reportTableHeader' colspan='2'>Status</td>");
-        echo utf8_decode("<td class='reportTableHeader' colspan='2'>Descrição</td>");
-        echo utf8_decode("<td class='reportTableHeader' colspan='2'>Responsável</td>");
+        echo utf8_decode("<td class='reportTableHeader'  style='width: 2%;'>ID da Ação</td>");
+        echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Status</td>");
+        echo utf8_decode("<td class='reportTableHeader' colspan='3' style='width: 6%;'>Descrição</td>");
+        echo utf8_decode("<td class='reportTableHeader' colspan='3'>Responsável</td>");
         echo "</tr>";
+        echo "<tr>";
+        echo utf8_decode("<td class='reportTableInfo' style='width: 2%;'>" . $idAcao . "</td>");
+        echo utf8_decode("<td class='reportTableInfo' style='width: 2%;'>" . $statusAcao . "</td>");
+        echo utf8_decode("<td class='reportTableInfo' style='width: 6%; word-break: break-all; word-wrap: break-word; font-size: 12.5px;' colspan='3'>" . $descricaoAcao . "</td>");
+        echo utf8_decode("<td class='reportTableInfo' colspan='3'>" . nl2br($responsavelAcao) . "</td>");
+        echo "</tr>";
+
+        while ($row = mysqli_fetch_array($sql)) {
+            $idAcao = $row['id'];
+            $statusAcao = $row['status'];
+            $descricaoAcao = $row['descricao_acao'];
+            $responsavelAcao = $row['responsavel'];
+            
+            echo "<tr>";
+            echo utf8_decode("<td class='reportTableInfo' style='width: 2%;'>" . $idAcao . "</td>");
+            echo utf8_decode("<td class='reportTableInfo' style='width: 2%;'>" . $statusAcao . "</td>");
+            echo utf8_decode("<td class='reportTableInfo' style='width: 6%; word-break: break-all; word-wrap: break-word; font-size: 12.5px;' colspan='3'>" . $descricaoAcao . "</td>");
+            echo utf8_decode("<td class='reportTableInfo' colspan='3'>" . nl2br($responsavelAcao) . "</td>");
+            echo "</tr>";
+        }
+
         echo "</table>";
-    }elseif (mysqli_affected_rows($conexao) == 0) {
+    } elseif (mysqli_affected_rows($conexao) == 0) {
         echo "<tr>";
         echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
         echo "</tr><tr>";

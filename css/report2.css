@@ -64,7 +64,7 @@ pageheader{
     margin: auto;
 }
 
-.reportTable td{
+.reportTable td, th{
     border: 1.5px black;
     padding: 2.5px;
     vertical-align: middle;
