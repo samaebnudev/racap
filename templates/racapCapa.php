@@ -67,7 +67,7 @@ if (mysqli_affected_rows($conexao) == 1) {
     $status = $row['status'];
 
     echo "<table class='reportTable'><tr>";
-    echo utf8_decode("<td class='reportTableHeader'>Nº da RACAP:</td><td class='reportTableInfo'>" . $numero . "</td>");
+    echo utf8_decode("<td class='reportTableHeader'>RACAP:</td><td class='reportTableInfo'>" . $numero . "</td>");
     echo "<td class='reportTableHeader'>Data de Abertura:</td><td class='reportTableInfo'>" . $dataRacap . "</td>";
     echo utf8_decode("<td class='reportTableHeader'>Tipo da RACAP:</td><td class='reportTableInfo'>" . $tipoRacap . "</td>");
     echo utf8_decode("<td class='reportTableHeader'>Motivo da Abertura:</td><td class='reportTableInfo'>" . $motivoAbertura . "</td>");
@@ -110,7 +110,7 @@ AND responsavel_acao = racap_usuario.id";
         echo "<tr>";
         echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
         echo "</tr><tr>";
-        echo utf8_decode("<td class='reportTableHeader'  style='width: 2%;'>ID da Ação</td>");
+        echo utf8_decode("<td class='reportTableHeader'  style='width: 2%;'>Nº</td>");
         echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Status</td>");
         echo utf8_decode("<td class='reportTableHeader' colspan='3' style='width: 6%;'>Descrição</td>");
         echo utf8_decode("<td class='reportTableHeader' colspan='3'>Responsável</td>");
@@ -132,7 +132,7 @@ AND responsavel_acao = racap_usuario.id";
             echo utf8_decode("<td class='reportTableInfo' style='width: 2%;'>" . $idAcao . "</td>");
             echo utf8_decode("<td class='reportTableInfo' style='width: 2%;'>" . $statusAcao . "</td>");
             echo utf8_decode("<td class='reportTableInfo' style='width: 6%; word-break: break-all; word-wrap: break-word; font-size: 12.5px;' colspan='3'>" . $descricaoAcao . "</td>");
-            echo utf8_decode("<td class='reportTableInfo' colspan='3'>" . nl2br($responsavelAcao) . "</td>");
+            echo utf8_decode("<td class='reportTableInfo' colspan='3'>" . $responsavelAcao . "</td>");
             echo "</tr>";
         }
 
