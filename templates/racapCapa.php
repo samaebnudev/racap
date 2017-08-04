@@ -17,11 +17,11 @@ $reportTitle = "<p id='reportTitle'>Registro de Ações Corretivas, Preventivas 
 $dataAtual = date("d/m/Y H:i:s");
 $dateString = "<div id='reportDate'>" . $dataAtual . "</div>";
 
-/* Contador de linhas é iniciado com valor 2.
+/* Contador de linhas é iniciado com valor 9.
   Assim, ele conta o cabeçalho e a linha inicial da tabela.
-  Quando o contador chega a 25, ele pode ser reiniciado com valor 2
+  Quando o contador chega a 48, ele pode ser reiniciado com valor 9
   dependendo da situação. */
-//$lineCount = 2;
+$lineCount = 9;
 //Define o CSS a ser usado para definir os estilos do PDF.
 $css = "<link rel='stylesheet' type='text/css' href='css/report2.css' />";
 
@@ -55,15 +55,18 @@ echo $css;
 echo $pageHeader;
 
 if (mysqli_affected_rows($conexao) == 1) {
-    $numero = $row['id']; //ok
-    $dataRacap = date('d/m/Y', strtotime($row['data_racap'])); //ok
-    $motivoRacap = $row['motivo_racap']; //ok
+    $numero = $row['id'];
+    $dataRacap = date('d/m/Y', strtotime($row['data_racap']));
+    $motivoRacap = $row['motivo_racap'];
     $historicoRACAP = $row['historico_racap'];
-    $prazoRacap = date('d/m/Y', strtotime($row['prazo_racap'])); //ok
-    $setorRacap = $row['setor']; //ok
+    
+    $contaQuebraLinhasHistorico = substr_count($historicoRACAP, "\n");
+    
+    $prazoRacap = date('d/m/Y', strtotime($row['prazo_racap']));
+    $setorRacap = $row['setor'];
     $tipoRacap = $row['tipo'];
-    $motivoAbertura = $row['motivoAbertura']; //ok
-    $causaRacap = $row['causa']; //ok
+    $motivoAbertura = $row['motivoAbertura'];
+    $causaRacap = $row['causa'];
     $status = $row['status'];
 
     echo "<table class='reportTable'><tr>";
@@ -85,11 +88,20 @@ if (mysqli_affected_rows($conexao) == 1) {
     echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP:</td>");
     echo "</tr>";
     echo "<tr>";
-    //$historicoRACAP = str_replace("\n","<br/>",$historicoRACAP);
+    
+    /*Encapsular campo do Histórico e imprimir de acordo com o tamanho
+     * Usar Explode e Implode respectivamente para separar e juntar strings
+     * quando for necessário.
+     * 
+     * O campo Histórico poderá ser separado em duas páginas quando necessário.
+     * Uma vez impresso o Histórico deve-se colocar as Ações da RACAP.
+     */
+    
     echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
             . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>");
     echo "</tr>";
-    //echo "</table>";
+    
+    $lineCount = $lineCount + $contaQuebraLinhasHistorico;
 
     $query = "SELECT racap_acao.id, racap_status_acao.descricao AS 'status', 
 descricao_acao, racap_usuario.nomeServidor AS 'responsavel' 
