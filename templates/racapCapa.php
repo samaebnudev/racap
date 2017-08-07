@@ -59,9 +59,9 @@ if (mysqli_affected_rows($conexao) == 1) {
     $dataRacap = date('d/m/Y', strtotime($row['data_racap']));
     $motivoRacap = $row['motivo_racap'];
     $historicoRACAP = $row['historico_racap'];
-    
+
     $contaQuebraLinhasHistorico = substr_count($historicoRACAP, "\n");
-    
+
     $prazoRacap = date('d/m/Y', strtotime($row['prazo_racap']));
     $setorRacap = $row['setor'];
     $tipoRacap = $row['tipo'];
@@ -85,23 +85,65 @@ if (mysqli_affected_rows($conexao) == 1) {
     echo utf8_decode("<td class='reportTableHeader'>Causa:</td><td class='reportTableInfo'>" . $causaRacap . "</td>");
     echo "</tr>";
     echo "<tr>";
-    echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP:</td>");
-    echo "</tr>";
-    echo "<tr>";
-    
-    /*Encapsular campo do Histórico e imprimir de acordo com o tamanho
+
+    /* Encapsular campo do Histórico e imprimir de acordo com o tamanho
      * Usar Explode e Implode respectivamente para separar e juntar strings
      * quando for necessário.
      * 
      * O campo Histórico poderá ser separado em duas páginas quando necessário.
      * Uma vez impresso o Histórico deve-se colocar as Ações da RACAP.
      */
-    
-    echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
-            . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>");
-    echo "</tr>";
-    
-    $lineCount = $lineCount + $contaQuebraLinhasHistorico;
+
+    //$lineCount = $lineCount + $contaQuebraLinhasHistorico;
+    $lineBuffer = $lineCount + $contaQuebraLinhasHistorico;
+
+    switch ($lineBuffer) {
+        case $lineBuffer < 48:
+            echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP:</td>");
+            echo "</tr>";
+            echo "<tr>";
+            echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
+                    . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>");
+            echo "</tr>";
+            $lineCount = $lineCount + $contaQuebraLinhasHistorico;
+            break;
+
+        case $lineBuffer == 48:
+            echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP:</td>");
+            echo "</tr>";
+            echo "<tr>";
+            echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
+                    . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>");
+            echo "</tr>";
+            echo "</table>";
+
+            echo $pageFooter;
+            echo $pageHeader;
+
+            echo "<table class='reportTable'>";
+            $lineCount = 0;
+
+            break;
+
+        case $lineBuffer > 48:
+
+            $historicoRacapArray = explode("\n", $historicoRACAP);
+            $historicoRacapTamanho = sizeof($historicoRacapArray);
+            
+            /*Arrumar este trecho de código.*/
+            echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP:</td>");
+            echo "</tr>";
+            echo "<tr>";
+            echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
+                    . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>");
+
+            while ($lineCount < 48) {
+                
+            }
+
+            break;
+    }
+
 
     $query = "SELECT racap_acao.id, racap_status_acao.descricao AS 'status', 
 descricao_acao, racap_usuario.nomeServidor AS 'responsavel' 
@@ -139,7 +181,7 @@ AND responsavel_acao = racap_usuario.id";
             $statusAcao = $row['status'];
             $descricaoAcao = $row['descricao_acao'];
             $responsavelAcao = $row['responsavel'];
-            
+
             echo "<tr>";
             echo utf8_decode("<td class='reportTableInfo' style='width: 2%;'>" . $idAcao . "</td>");
             echo utf8_decode("<td class='reportTableInfo' style='width: 2%;'>" . $statusAcao . "</td>");
