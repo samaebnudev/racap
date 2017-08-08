@@ -127,18 +127,41 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         case $lineBuffer > 48:
 
+            /* Separa a String do campo Histórico por Linhas em um array e
+              grava o tamanho do array em uma variável */
             $historicoRacapArray = explode("\n", $historicoRACAP);
             $historicoRacapTamanho = sizeof($historicoRacapArray);
-            
-            /*Arrumar este trecho de código.*/
+
+            /* Arrumar este trecho de código. */
             echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP:</td>");
             echo "</tr>";
+            $lineCount += 1;
             echo "<tr>";
+            /* echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
+              . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>"); */
             echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
-                    . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>");
+                    . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>");
+            
+            $arrayIndex = 0;
+            $pageBreak = false;
+            
+            while ($lineCount < 48 && $pageBreak == false) {
+                echo $historicoRacapArray[$arrayIndex];
+                echo "<br/>";
+                $arrayIndex += 1;
+                $lineCount += 1;
 
-            while ($lineCount < 48) {
-                
+                if ($lineCount == 48) {
+                    echo "</td></tr></table>";
+
+                    echo $pageFooter;
+                    echo $pageHeader;
+                    echo "<table class='reportTable'>";
+                    echo "<tr>";
+                    echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP (cont.):</td>");
+                    echo "</tr>";
+                    $pageBreak = true;
+                }
             }
 
             break;
