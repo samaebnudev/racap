@@ -94,7 +94,6 @@ if (mysqli_affected_rows($conexao) == 1) {
      * Uma vez impresso o Histórico deve-se colocar as Ações da RACAP.
      */
 
-    //$lineCount = $lineCount + $contaQuebraLinhasHistorico;
     $lineBuffer = $lineCount + $contaQuebraLinhasHistorico;
 
     switch ($lineBuffer) {
@@ -121,7 +120,7 @@ if (mysqli_affected_rows($conexao) == 1) {
             echo $pageHeader;
 
             echo "<table class='reportTable'>";
-            $lineCount = 0;
+            $lineCount = 1;
 
             break;
 
@@ -137,30 +136,45 @@ if (mysqli_affected_rows($conexao) == 1) {
             echo "</tr>";
             $lineCount += 1;
             echo "<tr>";
-            /* echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
-              . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>" . nl2br($historicoRACAP) . "</td>"); */
             echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
                     . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>");
-            
+
             $arrayIndex = 0;
-            $pageBreak = false;
-            
-            while ($lineCount < 48 && $pageBreak == false) {
-                echo $historicoRacapArray[$arrayIndex];
+            $fimHistorico = false;
+
+            while ($fimHistorico == false) {
+                echo utf8_decode($historicoRacapArray[$arrayIndex]);
                 echo "<br/>";
                 $arrayIndex += 1;
                 $lineCount += 1;
 
-                if ($lineCount == 48) {
-                    echo "</td></tr></table>";
+                if ($arrayIndex > $contaQuebraLinhasHistorico) {
+                    $fimHistorico = true;
+                    echo "</td></tr>";
 
+                    if ($lineCount == 48) {
+                        echo "</table>";
+                        echo $pageFooter;
+                        echo $pageHeader;
+                        echo "<table class='reportTable'>";
+                        $lineCount = 1;
+                    }
+                }
+
+                if ($lineCount == 48 && $fimHistorico == false) {
+                    echo "</td></tr></table>";
                     echo $pageFooter;
                     echo $pageHeader;
                     echo "<table class='reportTable'>";
                     echo "<tr>";
                     echo utf8_decode("<td class='reportTableHeader' colspan='8'>Histórico da RACAP (cont.):</td>");
                     echo "</tr>";
-                    $pageBreak = true;
+
+                    $lineCount = 1;
+
+                    echo "<tr>";
+                    echo utf8_decode("<td class='reportTableInfo' colspan='8' style='word-break: break-all; "
+                            . "text-align: left; word-wrap: break-word; font-size: 12.5px;'>");
                 }
             }
 
@@ -179,6 +193,15 @@ AND responsavel_acao = racap_usuario.id";
     $row = mysqli_fetch_assoc($sql);
 
     if (mysqli_affected_rows($conexao) > 0) {
+
+        if ($lineCount + 6 == 48) {
+            echo "</table>";
+            echo $pageFooter;
+            echo $pageHeader;
+            echo "<table class='reportTable'>";
+            $lineCount = 1;
+        }
+
         $idAcao = $row['id'];
         $statusAcao = $row['status'];
         $descricaoAcao = $row['descricao_acao'];
@@ -199,6 +222,25 @@ AND responsavel_acao = racap_usuario.id";
         echo utf8_decode("<td class='reportTableInfo' colspan='3'>" . nl2br($responsavelAcao) . "</td>");
         echo "</tr>";
 
+        $lineCount += 6;
+
+        if ($lineCount == 48) {
+            echo "</table>";
+            echo $pageFooter;
+            echo $pageHeader;
+            echo "<table class='reportTable'>";
+            $lineCount = 5;
+
+            echo "<tr>";
+            echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
+            echo "</tr><tr>";
+            echo utf8_decode("<td class='reportTableHeader'  style='width: 2%;'>Nº</td>");
+            echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Status</td>");
+            echo utf8_decode("<td class='reportTableHeader' colspan='3' style='width: 6%;'>Descrição</td>");
+            echo utf8_decode("<td class='reportTableHeader' colspan='3'>Responsável</td>");
+            echo "</tr>";
+        }
+
         while ($row = mysqli_fetch_array($sql)) {
             $idAcao = $row['id'];
             $statusAcao = $row['status'];
@@ -211,6 +253,25 @@ AND responsavel_acao = racap_usuario.id";
             echo utf8_decode("<td class='reportTableInfo' style='width: 6%; word-break: break-all; word-wrap: break-word; font-size: 12.5px;' colspan='3'>" . $descricaoAcao . "</td>");
             echo utf8_decode("<td class='reportTableInfo' colspan='3'>" . $responsavelAcao . "</td>");
             echo "</tr>";
+
+            $lineCount += 1;
+
+            if ($lineCount == 48) {
+                echo "</table>";
+                echo $pageFooter;
+                echo $pageHeader;
+                echo "<table class='reportTable'>";
+                $lineCount = 5;
+
+                echo "<tr>";
+                echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
+                echo "</tr><tr>";
+                echo utf8_decode("<td class='reportTableHeader'  style='width: 2%;'>Nº</td>");
+                echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Status</td>");
+                echo utf8_decode("<td class='reportTableHeader' colspan='3' style='width: 6%;'>Descrição</td>");
+                echo utf8_decode("<td class='reportTableHeader' colspan='3'>Responsável</td>");
+                echo "</tr>";
+            }
         }
 
         echo "</table>";
