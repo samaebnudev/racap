@@ -10,8 +10,8 @@ session_start();
 date_default_timezone_set('Brazil/East');
 include "../conecta_banco.inc";
 
-$sequencial = $_GET['sequencial'];
-//$sequencial = 113;
+//$sequencial = $_GET['sequencial'];
+$sequencial = 113;
 
 $reportTitle = "<p id='reportTitle'>Registro de Ações Corretivas, Preventivas e Melhorias</p>";
 $dataAtual = date("d/m/Y H:i:s");
@@ -32,7 +32,7 @@ $pageHeader = "<page>
 <div id='samaeHeader'>
 <p><h4>SAMAE - Serviço Autônomo Municipal de Água e Esgoto</h4>
 Rua Bahia 1530, CEP - 89031-001, Salto, Blumenau - SC.<br/><br/>" . $reportTitle . $dateString . "</p></div>
-</page_header><br /><br /><div id='report'>";
+</page_header><br /><br /><div class='report'>";
 $pageHeader = utf8_decode($pageHeader);
 
 //Define o rodapé da página.
@@ -210,7 +210,7 @@ AND responsavel_acao = racap_usuario.id";
         echo "<tr>";
         echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
         echo "</tr><tr>";
-        echo utf8_decode("<td class='reportTableHeader'  style='width: 2%;'>Nº</td>");
+        echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Nº</td>");
         echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Status</td>");
         echo utf8_decode("<td class='reportTableHeader' colspan='3' style='width: 6%;'>Descrição</td>");
         echo utf8_decode("<td class='reportTableHeader' colspan='3'>Responsável</td>");
@@ -234,7 +234,7 @@ AND responsavel_acao = racap_usuario.id";
             echo "<tr>";
             echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
             echo "</tr><tr>";
-            echo utf8_decode("<td class='reportTableHeader'  style='width: 2%;'>Nº</td>");
+            echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Nº</td>");
             echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Status</td>");
             echo utf8_decode("<td class='reportTableHeader' colspan='3' style='width: 6%;'>Descrição</td>");
             echo utf8_decode("<td class='reportTableHeader' colspan='3'>Responsável</td>");
@@ -266,7 +266,7 @@ AND responsavel_acao = racap_usuario.id";
                 echo "<tr>";
                 echo utf8_decode("<td class='reportTableHeader' colspan='8'>Ações da RACAP</td>");
                 echo "</tr><tr>";
-                echo utf8_decode("<td class='reportTableHeader'  style='width: 2%;'>Nº</td>");
+                echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Nº</td>");
                 echo utf8_decode("<td class='reportTableHeader' style='width: 2%;'>Status</td>");
                 echo utf8_decode("<td class='reportTableHeader' colspan='3' style='width: 6%;'>Descrição</td>");
                 echo utf8_decode("<td class='reportTableHeader' colspan='3'>Responsável</td>");
