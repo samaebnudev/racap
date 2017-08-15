@@ -86,7 +86,7 @@ if (mysqli_affected_rows($conexao) == 1) {
     echo "</tr>";
     echo "</table>";
     echo "<br/>";
-    /*Fechar a primeira tabela aqui. Começar tabelas separadas com Histórico e Ações*/
+    /* Fechar a primeira tabela aqui. Começar tabelas separadas com Histórico e Ações */
     echo "<table class='reportTable'><tr>";
 
     /* Encapsular campo do Histórico e imprimir de acordo com o tamanho
@@ -161,7 +161,7 @@ if (mysqli_affected_rows($conexao) == 1) {
                         echo $pageHeader;
                         echo "<table class='reportTable'>";
                         $lineCount = 1;
-                    } elseif ($lineCount < 66){
+                    } elseif ($lineCount < 66) {
                         echo "</table>";
                     }
                 }
@@ -211,6 +211,9 @@ ORDER BY racap_acao.id";
             echo "<table class='reportTable'>";
         }
 
+        $fimAcao = false;
+        $qtdAcoes = mysqli_affected_rows($conexao);
+        $contaAcoes = 0;
         $idAcao = $row['id'];
         $statusAcao = $row['status'];
         $descricaoAcao = $row['descricao_acao'];
@@ -231,9 +234,14 @@ ORDER BY racap_acao.id";
         echo utf8_decode("<td class='reportTableInfo' style='width: 35%;'>" . nl2br($responsavelAcao) . "</td>");
         echo "</tr>";
 
+        $contaAcoes += 1;
         $lineCount += 5;
 
-        if ($lineCount == 45) {
+        if ($contaAcoes == $qtdAcoes) {
+            $fimAcao = true;
+        }
+
+        if ($lineCount == 45 && $fimAcao == false) {
             echo "</table>";
             echo $pageFooter;
             echo $pageHeader;
@@ -264,8 +272,13 @@ ORDER BY racap_acao.id";
             echo "</tr>";
 
             $lineCount += 1;
+            $contaAcoes += 1;
 
-            if ($lineCount == 45) {
+            if ($contaAcoes == $qtdAcoes) {
+                $fimAcao = true;
+            }
+
+            if ($lineCount == 45 && $fimAcao == false) {
                 echo "</table>";
                 echo $pageFooter;
                 echo $pageHeader;
