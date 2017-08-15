@@ -10,8 +10,8 @@ session_start();
 date_default_timezone_set('Brazil/East');
 include "../conecta_banco.inc";
 
-//$sequencial = $_GET['sequencial'];
-$sequencial = 113;
+$sequencial = $_GET['sequencial'];
+//$sequencial = 113;
 
 $reportTitle = "<p id='reportTitle'>Registro de Ações Corretivas, Preventivas e Melhorias</p>";
 $dataAtual = date("d/m/Y H:i:s");
@@ -19,7 +19,7 @@ $dateString = "<div id='reportDate'>" . $dataAtual . "</div>";
 
 /* Contador de linhas é iniciado com valor 9.
   Assim, ele conta o cabeçalho e a linha inicial da tabela.
-  Quando o contador chega a 48, ele pode ser reiniciado com valor 9
+  Quando o contador chega a 45, ele pode ser reiniciado com valor 9
   dependendo da situação. */
 $lineCount = 9;
 //Define o CSS a ser usado para definir os estilos do PDF.
@@ -192,7 +192,8 @@ descricao_acao, racap_usuario.nomeServidor AS 'responsavel'
 FROM racap_acao, racap_usuario, racap_status_acao
 WHERE id_racap = '$sequencial'
 AND status_acao = racap_status_acao.id
-AND responsavel_acao = racap_usuario.id";
+AND responsavel_acao = racap_usuario.id
+ORDER BY racap_acao.id";
 
     $sql = mysqli_query($conexao, $query);
     $row = mysqli_fetch_assoc($sql);
@@ -230,9 +231,9 @@ AND responsavel_acao = racap_usuario.id";
         echo utf8_decode("<td class='reportTableInfo' style='width: 35%;'>" . nl2br($responsavelAcao) . "</td>");
         echo "</tr>";
 
-        $lineCount += 6;
+        $lineCount += 5;
 
-        if ($lineCount == 48) {
+        if ($lineCount == 45) {
             echo "</table>";
             echo $pageFooter;
             echo $pageHeader;
@@ -264,7 +265,7 @@ AND responsavel_acao = racap_usuario.id";
 
             $lineCount += 1;
 
-            if ($lineCount == 48) {
+            if ($lineCount == 45) {
                 echo "</table>";
                 echo $pageFooter;
                 echo $pageHeader;
