@@ -1,0 +1,37 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16/08/2017, 15:35:30
+    Author     : Paulo R. Arais - 19674
+*/
+
+.reportTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+    color: black;
+}
+
+.reportTable td, th{
+    border: 0.5px black;
+    padding: 2.5px;
+    border-style: solid;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.reportTable .reportTableHeader {
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    background-color: #80ffff;
+    width: 12%;
+}
+
+.reportTable .reportTableInfo {
+    font-size: 14px;
+    text-align: center;
+}

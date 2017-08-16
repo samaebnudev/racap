@@ -16,6 +16,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/accordion.css">
+        <link rel="stylesheet" href="css/indexTable.css">
         <script type="text/javascript" 
                 src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
         </script>
@@ -111,10 +112,30 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 </a>
             </p>
        </div>";
+        
+        $dataAtual = date("d/m/Y H:i:s");
+
+        //Query para popular as tabelas do relatório.
+        $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap, 
+racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
+
+FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
+
+WHERE racap_tipo_racap.id = racap_racap.tipo_racap
+AND racap_setor.id = racap_racap.setor_racap
+AND racap_status_racap.id = racap_racap.status_racap
+AND prazo_racap BETWEEN '$dataIni' AND '$dataFim' ORDER BY racap_racap.id";
+
+        $divTableVencimento = "<table class='reportTable'>"
+                . "<tr><td class='reportTableHeader'>RACAP</td><td class='reportTableHeader'>Vencimento</td></tr>"
+                . "<tr><td class='reportTableInfo'>1</td><td class='reportTableInfo'>05/05/15</td></tr>"
+                . "</table>";
 
         if ($privilegio == "1") {
             echo $divPanel2;
             echo $divPanel3;
+            echo "<br/>";
+            echo $divTableVencimento;
         }
         ?>
 
