@@ -16,7 +16,7 @@ if (isset($_POST['idRacap'])){
 
 		$userDados ['success'] = true;
                 $userDados ['prazo'] = date('Y-m-d H:i', strtotime($row['prazo_racap']));
-		$userDados ['prazo'] = (string) $row ['prazo_racap'];
+		$userDados ['prazo'] = (string) $userDados ['prazo'];
 	}
 }
 

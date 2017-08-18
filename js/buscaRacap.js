@@ -50,6 +50,7 @@ $(document).ready(function ( ) {
                     if (data.prazoRacap) {
                         var dateBuffer = data.prazoRacap.replace(" ", "T");
                         $('#prazoRacap').val(dateBuffer);
+                        $('#prazo_acao').val(dateBuffer);
                     }
 
                     $('#historicoRACAP').val(data.historicoRACAP);
@@ -57,6 +58,10 @@ $(document).ready(function ( ) {
 
                 } else {
                     $('#cadRACAP').each(function () {
+                        this.reset();
+                    });
+                    
+                    $('#racapAcaoRacap').each(function () {
                         this.reset();
                     });
                     

@@ -96,6 +96,10 @@ if (mysqli_affected_rows($conexao) == 1) {
         $sql = mysqli_query($conexao, $query);
 
         $racapMensagem = "RACAP alterada com sucesso.";
+        
+        $query = "UPDATE racap_acao SET prazo_acao = '$prazoRacap' WHERE id_racap = '$sequencial'";
+        $sql = mysqli_query($conexao, $query);
+        
     } else {
         $racapMensagem = "Falha na alteração. RACAP não pôde ser alterada.";
     }
