@@ -134,6 +134,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             WHERE racap_tipo_racap.id = racap_racap.tipo_racap
             AND racap_setor.id = racap_racap.setor_racap
             AND racap_status_racap.id = racap_racap.status_racap
+            AND racap_status_racap.id = '1'
             AND prazo_racap BETWEEN '$dataAtual' AND '$dataFutura' ORDER BY racap_racap.id";
 
             $sql = mysqli_query($conexao, $query);
@@ -192,7 +193,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
             //Caso não haja resultados a serem exibidos no relatório.
             elseif (mysqli_affected_rows($conexao) == 0) {
-                echo "<div class='noResult'><h4>Não há RACAP's no Sistema vencendo hoje ou nos próximos 7 dias. Data Atausl: '$dataAtual' Data Futura: '$dataFutura'</h4></div>";
+                echo "<div class='noResult'><h4>Não há RACAP's no Sistema vencendo hoje ou nos próximos 7 dias.</h4></div>";
             }
         }
         ?>
