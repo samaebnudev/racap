@@ -163,12 +163,12 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 $status = $row['status'];
                 $prazoRacap = date('d/m/Y H:i:s', strtotime($row['prazo_racap']));
 
-                echo utf8_decode("<tr>
+                echo "<tr>
 		<td class='reportTableInfo'>" . $id . "</td><td class='reportTableInfo'>" .
-                        $dataAbertura . "</td><td class='reportTableInfo'>" . $tipo . "</td>
+                $dataAbertura . "</td><td class='reportTableInfo'>" . $tipo . "</td>
                 <td class='reportTableInfo'>" . $motivo . "</td><td class='reportTableInfo'>" . $setor . "</td>
                 <td class='reportTableInfo'>" . $status . "</td><td class='reportTableInfo'>" . $prazoRacap . "</td>
-		</tr>");
+		</tr>";
 
                 while ($row = mysqli_fetch_array($sql)) {
 
@@ -180,12 +180,12 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     $status = $row['status'];
                     $prazoRacap = date('d/m/Y H:i:s', strtotime($row['prazo_racap']));
 
-                    echo utf8_decode("<tr>
+                    echo "<tr>
                     <td class='reportTableInfo'>" . $id . "</td><td class='reportTableInfo'>" .
-                            $dataAbertura . "</td><td class='reportTableInfo'>" . $tipo . "</td>
+                    $dataAbertura . "</td><td class='reportTableInfo'>" . $tipo . "</td>
                     <td class='reportTableInfo'>" . $motivo . "</td><td class='reportTableInfo'>" . $setor . "</td>
                     <td class='reportTableInfo'>" . $status . "</td><td class='reportTableInfo'>" . $prazoRacap . "</td>
-                    </tr>");
+                    </tr>";
                 }
                 //Fim da tabela.
                 echo "</table>";
@@ -194,6 +194,79 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             //Caso não haja resultados a serem exibidos no relatório.
             elseif (mysqli_affected_rows($conexao) == 0) {
                 echo "<div class='noResult'><h4>Não há RACAP's no Sistema vencendo hoje ou nos próximos 7 dias.</h4></div>";
+            }
+            
+            echo "<br/><br/>";
+
+            //Query para popular as tabelas do relatório.
+            $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap, 
+            racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
+
+            FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
+
+            WHERE racap_tipo_racap.id = racap_racap.tipo_racap
+            AND racap_setor.id = racap_racap.setor_racap
+            AND racap_status_racap.id = racap_racap.status_racap
+            AND status_racap = '1'
+            AND prazo_racap < '$dataAtual' ORDER BY racap_racap.id";
+
+            $sql = mysqli_query($conexao, $query);
+            $row = mysqli_fetch_assoc($sql);
+
+            if (mysqli_affected_rows($conexao) > 0) {
+                //Conta quantos resultados foram encontrados.
+                $rowsAffected = mysqli_affected_rows($conexao);
+
+                //Começa a escrever a tabela no documento.
+                echo "<table class='reportTable'>
+                <tr>
+                <td class='reportTableHeader' colspan='7'>RACAP's Vencidas ainda Pendentes</td>
+                </tr>
+		<tr>
+		<th class='reportTableHeader'>RACAP</th><th class='reportTableHeader'>Aberta Em</th>
+                <th class='reportTableHeader'>Tipo</th><th class='reportTableHeader'>Motivo</th>
+                <th class='reportTableHeader'>Setor</th><th class='reportTableHeader'>Status</th>
+                <th class='reportTableHeader'>Prazo</th></tr>";
+
+                $id = $row['id'];
+                $dataAbertura = date('d/m/Y H:i:s', strtotime($row['data_racap']));
+                $tipo = $row['tipo'];
+                $motivo = $row['motivo_racap'];
+                $setor = $row['nomeSetor'];
+                $status = $row['status'];
+                $prazoRacap = date('d/m/Y H:i:s', strtotime($row['prazo_racap']));
+
+                echo "<tr>
+		<td class='reportTableInfo'>" . $id . "</td><td class='reportTableInfo'>" .
+                $dataAbertura . "</td><td class='reportTableInfo'>" . $tipo . "</td>
+                <td class='reportTableInfo'>" . $motivo . "</td><td class='reportTableInfo'>" . $setor . "</td>
+                <td class='reportTableInfo'>" . $status . "</td><td class='reportTableInfo'>" . $prazoRacap . "</td>
+		</tr>";
+
+                while ($row = mysqli_fetch_array($sql)) {
+
+                    $id = $row['id'];
+                    $dataAbertura = date('d/m/Y H:i:s', strtotime($row['data_racap']));
+                    $tipo = $row['tipo'];
+                    $motivo = $row['motivo_racap'];
+                    $setor = $row['nomeSetor'];
+                    $status = $row['status'];
+                    $prazoRacap = date('d/m/Y H:i:s', strtotime($row['prazo_racap']));
+
+                    echo "<tr>
+                    <td class='reportTableInfo'>" . $id . "</td><td class='reportTableInfo'>" .
+                    $dataAbertura . "</td><td class='reportTableInfo'>" . $tipo . "</td>
+                    <td class='reportTableInfo'>" . $motivo . "</td><td class='reportTableInfo'>" . $setor . "</td>
+                    <td class='reportTableInfo'>" . $status . "</td><td class='reportTableInfo'>" . $prazoRacap . "</td>
+                    </tr>";
+                }
+                //Fim da tabela.
+                echo "</table>";
+            }
+
+            //Caso não haja resultados a serem exibidos no relatório.
+            elseif (mysqli_affected_rows($conexao) == 0) {
+                echo "<div class='noResult'><h4>Não há RACAP's Vencidas que estejam Pendentes.</h4></div>";
             }
         }
         ?>

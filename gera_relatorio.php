@@ -52,9 +52,11 @@ try {
 		$html2pdf = new HTML2PDF('P', 'A4', 'pt', true, 'UTF-8', 2);
 	}
 
-    $html2pdf->writeHTML(utf8_encode($template));
-    ob_end_clean();
-    $html2pdf->Output($fileName, 'I');
-} catch (HTML2PDF_exception $e) {
+        $html2pdf->writeHTML(utf8_encode($template));
+        ob_end_clean();
+        $html2pdf->Output($fileName, 'I');
+} 
+
+catch (HTML2PDF_exception $e) {
     echo $e;
 }
