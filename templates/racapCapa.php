@@ -207,6 +207,7 @@ ORDER BY racap_acao.id";
             echo "<table class='reportTable'>";
             $lineCount = 1;
         } else {
+            echo "</table>";
             echo "<br/>";
             echo "<table class='reportTable'>";
         }
@@ -298,8 +299,20 @@ ORDER BY racap_acao.id";
 
         echo "</table>";
     } elseif (mysqli_affected_rows($conexao) == 0) {
+        
+        /*if ($lineCount + 6 == 66) {
+            echo "</table>";
+            echo $pageFooter;
+            echo $pageHeader;
+            echo "<table class='reportTable'>";
+            $lineCount = 1;
+        } else {
+            echo "<br/>";
+            echo "<table class='reportTable'>";
+        }*/
+        
         echo "<tr>";
-        echo utf8_decode("<td class='reportTableHeader' colspan='4'>Ações da RACAP</td>");
+        echo utf8_decode("<td class='reportTableHeader'>Ações da RACAP</td>");
         echo "</tr><tr>";
         echo utf8_decode("<td class='reportTableInfo' >Não existem Ações para esta RACAP.</td>");
         echo "</tr>";
