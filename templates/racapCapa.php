@@ -300,16 +300,18 @@ ORDER BY racap_acao.id";
         echo "</table>";
     } elseif (mysqli_affected_rows($conexao) == 0) {
         
-        /*if ($lineCount + 6 == 66) {
+        if ($lineCount + 6 == 66) {
             echo "</table>";
             echo $pageFooter;
             echo $pageHeader;
             echo "<table class='reportTable'>";
             $lineCount = 1;
         } else {
+            echo "</table>";
             echo "<br/>";
             echo "<table class='reportTable'>";
-        }*/
+            $lineCount += 2;
+        }
         
         echo "<tr>";
         echo utf8_decode("<td class='reportTableHeader'>Ações da RACAP</td>");
