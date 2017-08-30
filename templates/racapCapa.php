@@ -314,7 +314,7 @@ ORDER BY racap_acao.id";
         }
         
         echo "<tr>";
-        echo utf8_decode("<td class='reportTableHeader'>Ações da RACAP</td>");
+        echo utf8_decode("<td class='reportTableHeader' style='width: 97%;'>Ações da RACAP</td>");
         echo "</tr><tr>";
         echo utf8_decode("<td class='reportTableInfo' >Não existem Ações para esta RACAP.</td>");
         echo "</tr>";
