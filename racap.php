@@ -137,7 +137,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
                     <br/><br/>
                     <label for="motivoDescricao">Motivo da RACAP: </label>
-                    <input type="text" maxlength="50" id="motivoDescricao" name="motivoDescricao" required/>
+                    <input type="text" maxlength="500" id="motivoDescricao" name="motivoDescricao" required/>
 
                     &nbsp;&nbsp;
                     <label for="setorRacap">Setor: </label>
