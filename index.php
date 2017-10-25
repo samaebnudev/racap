@@ -48,14 +48,14 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <a href="racap.php">
                     <input type="button" value="Abrir RACAP"/>
                 </a>
-                &nbsp;&nbsp;
+                <!--&nbsp;&nbsp;
                 <a href="fecha_racap.php">
                     <input type="button" value="Fechar RACAP" />
                 </a>
                 &nbsp;&nbsp;
                 <a href="acao_racap.php">
                     <input type="button" value="Ações da RACAP" />
-                </a>
+                </a>-->
                 &nbsp;&nbsp;
                 <a href="relatorio.php">
                     <input type="button" value="Relatórios de RACAP's" />
