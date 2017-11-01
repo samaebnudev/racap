@@ -1,9 +1,14 @@
 <?php
 include "conecta_banco.inc";
 
-$userDados = array ('success' => false,
+/*$userDados = array ('success' => false,
 'id'=>"",
 'codSetor' => "",
+'nomeSetor' => ""
+);*/
+
+$userDados = array ('success' => false,
+'id'=>"",
 'nomeSetor' => ""
 );
 
@@ -18,7 +23,7 @@ if (isset($_POST['selectbuscaBanco'])){
 
 		$userDados ['success'] = true;
 		$userDados ['id'] = (string) $row ['id'];
-		$userDados ['codSetor'] = (string) $row ['codSetor'];
+		//$userDados ['codSetor'] = (string) $row ['codSetor'];
                 $userDados ['nomeSetor'] = (string) $row ['nomeSetor'];
 	}
 }

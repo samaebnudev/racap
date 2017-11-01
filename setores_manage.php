@@ -21,7 +21,7 @@ if (isset($_POST['sequencial'])) {
     $sequencial = "0";
 }
 
-$codSetor = $_POST['codSetor'];
+//$codSetor = $_POST['codSetor'];
 $nomeSetor = $_POST['nomeSetor'];
 
 $query = "SELECT * FROM racap_setor WHERE id = '$sequencial'";
@@ -30,7 +30,8 @@ $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
     
-    $query = "UPDATE racap_setor SET codSetor='$codSetor', nomeSetor = '$nomeSetor' WHERE id = '$sequencial'";
+    //$query = "UPDATE racap_setor SET codSetor='$codSetor', nomeSetor = '$nomeSetor' WHERE id = '$sequencial'";
+    $query = "UPDATE racap_setor SET nomeSetor = '$nomeSetor' WHERE id = '$sequencial'";
     $sql = mysqli_query($conexao, $query);
 
     if ($sql) {
@@ -54,8 +55,11 @@ if (mysqli_affected_rows($conexao) == 1) {
         echo $urlBack;
     }
 }  elseif (mysqli_affected_rows($conexao) == 0) {
-    $query = "INSERT INTO racap_setor (id, codSetor, nomeSetor)
-		VALUES ('$sequencial', '$codSetor', '$nomeSetor')";
+    /*$query = "INSERT INTO racap_setor (id, codSetor, nomeSetor)
+		VALUES ('$sequencial', '$codSetor', '$nomeSetor')";*/
+    
+    $query = "INSERT INTO racap_setor (id, nomeSetor)
+		VALUES ('$sequencial' , '$nomeSetor')";
 
     $sql = mysqli_query($conexao, $query);
 

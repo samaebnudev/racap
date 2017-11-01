@@ -12,7 +12,7 @@ $(document).ready(function ( ) {
             success: function (data) {
                 if (data.success == true) {
                     $('#sequencial').val(data.id);
-                    $('#codSetor').val(data.codSetor);
+                    //$('#codSetor').val(data.codSetor);
                     $('#nomeSetor').val(data.nomeSetor);
 
                 } else {

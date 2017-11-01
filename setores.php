@@ -79,7 +79,7 @@ if (isset($_SESSION['id'])) {
         </form>
         <hr>
 
-        <form method="POST" id="cadTipoUsuario" action="setores_manage.php">
+        <form method="POST" id="cadTipoUsuario">
             <?php
             if ($_SESSION['tipoPrivilegio'] == 2) {
                 echo "<fieldset disabled>";
@@ -93,16 +93,13 @@ if (isset($_SESSION['id'])) {
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-            <label for="codSetor">Código do Setor: </label>
-            <input type="number" name="codSetor" id="codSetor" style="width: 15%;" required/>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
             <label for="nomeSetor">Nome do Setor: </label>
             <input type="text" name="nomeSetor" id="nomeSetor" required/><br/><br/>
 
             <p align="center">
-                <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar Setor"/>
+                <button type="submit" formaction="setores_manage.php" class="btn" title="Incluir ou Salvar Setor">Gravar</button>
+                &nbsp;&nbsp;
+                <button type="submit" formaction="excluiSetor.php">Excluir</button>
                 &nbsp;&nbsp;
                 <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
             </p>
