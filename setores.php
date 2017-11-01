@@ -26,7 +26,7 @@ if (isset($_SESSION['id'])) {
 <html >
     <head>
         <meta charset="UTF-8">
-        <title>Controle de RACAP's - Setores</title>
+        <title>Controle de RACAP's - Seções</title>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/form.css">
@@ -38,7 +38,7 @@ if (isset($_SESSION['id'])) {
 
     <body>
         <div class="topbar">
-            <h2 align="center">Controle de RACAP - Setores</h2>
+            <h2 align="center">Controle de RACAP - Seções</h2>
             <div  class="open">
                 <span class="cls"></span>
                 <span>

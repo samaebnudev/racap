@@ -104,7 +104,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 </a>
                 &nbsp;&nbsp;
                 <a href='setores.php'>
-                    <input type='button' value='Setores' />
+                    <input type='button' value='Seções' />
                 </a>
                 &nbsp;&nbsp;
                 <a href='log.php'>

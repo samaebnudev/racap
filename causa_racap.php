@@ -79,7 +79,7 @@ if (isset($_SESSION['id'])) {
 </form>
 <hr>
 
-<form method="POST" id="cadCausaRacap" action="causa_racap_manage.php">
+<form method="POST" id="cadCausaRacap">
     <?php
      if ($_SESSION['tipoPrivilegio'] == 2) {
       echo "<fieldset disabled>";
@@ -96,7 +96,9 @@ if (isset($_SESSION['id'])) {
     <input type="text" name="descricao" id="descricao" required/><br/><br/>
 
     <p align="center">
-        <input type="submit" class="btn" value="Gravar" title="Incluir Causa de RACAP"/>
+        <button type="submit" formaction="causa_racap_manage.php" class="btn" title="Incluir Causa de RACAP">Gravar</button>
+        &nbsp;&nbsp;
+        <button type="submit" formaction="exclui_causa_racap.php" class="btn" title="Excluir Causa de RACAP">Excluir</button>
         &nbsp;&nbsp;
         <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
     </p>
