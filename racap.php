@@ -312,7 +312,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                         </tbody>
                     </table>
                     
-                    <input type="hidden" name="numRACAPFormAnexo" id="numRACAPFormAnexo"/>
+                    <input type="hidden" name="numRACAPFormAnexo" id="numRACAPFormAnexo" required/>
                     
                     <br/><br/>
                     <p align="center">
@@ -353,7 +353,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                         </p>
 
                         <p align="center">
-                            <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
+                            <input type="submit" class="btn" value="Gravar" title="Fechar RACAP"/>
                             &nbsp;&nbsp;
                             <input type="reset" class="btn" value="Limpar" id="limpaForm" name="limpaForm" title="Limpa os dados do Formulário"/>
                         </p>
