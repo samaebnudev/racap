@@ -25,37 +25,47 @@ include 'racap_anexo.php';
 
 //$nome_final = $_FILES['anexoRacap']['name'];
 //echo $nome_final."<br/>";
-$sequencial = $_POST['numRACAPFormAnexo'];
-$pasta = "uploads/";
-$anexoMensagem = anexaArquivo();
-$anexoMensagemCount = count($anexoMensagem);
 
-if ($anexoMensagemCount == 2) {
-    $nome_final = $anexoMensagem [1];
-}
+if ($_FILES['anexoRacap']) {
+    $sequencial = $_POST['numRACAPFormAnexo'];
+    $pasta = "uploads/";
+    $anexoMensagem = anexaArquivo();
+    $anexoMensagemCount = count($anexoMensagem);
 
-
-if ($anexoMensagem [0] == "Upload efetuado com sucesso!") {
-
-    $url = $pasta . $nome_final;
-
-    $query = "INSERT INTO racap_anexo (id, id_racap, nome_arquivo, url)
-                            VALUES ('0','$sequencial','$nome_final','$url')";
-    $sql = mysqli_query($conexao, $query);
-
-    if ($sql) {
-        $login = $_SESSION ['nomeUsuario'];
-        $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = "Incluiu Anexo na RACAP " . $sequencial . " " . $motivoDescricao;
-        $ip = get_client_ip_env();
-        $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
-                            VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
-        $sql = mysqli_query($conexao, $query);
+    if ($anexoMensagemCount == 2) {
+        $nome_final = $anexoMensagem [1];
     }
+
+
+    if ($anexoMensagem [0] == "Upload efetuado com sucesso!") {
+
+        $url = $pasta . $nome_final;
+
+        $query = "INSERT INTO racap_anexo (id, id_racap, nome_arquivo, url)
+                            VALUES ('0','$sequencial','$nome_final','$url')";
+        $sql = mysqli_query($conexao, $query);
+
+        if ($sql) {
+
+            $query = "SELECT motivo_descricao FROM racap_racap WHERE id = '$sequencial'";
+            $sql = mysqli_query($conexao, $query);
+            $row = mysqli_fetch_assoc($sql);
+            $motivoDescricao = $row['motivo_descricao'];
+            
+            $login = $_SESSION ['nomeUsuario'];
+            $dataRegistro = date("Y-m-d H:i:s");
+            $ocorrencia = "Incluiu Anexo na RACAP " . $sequencial . " " . $motivoDescricao;
+            $ip = get_client_ip_env();
+            $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+                            VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
+            $sql = mysqli_query($conexao, $query);
+        }
+    }
+
+    $alertMessage = $anexoMensagem [0];
 }
 
 
-$alertMessage = $anexoMensagem [0];
 
 echo '<script type="text/javascript">alert("' . $alertMessage . '");</script>';
 

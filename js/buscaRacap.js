@@ -2,6 +2,7 @@ $(document).ready(function ( ) {
     
     $('#selectAcaoRacap').prop("disabled", true);
     $("#racapAcaoRacap :input").prop("disabled", true);
+    $("#tabelaAnexos :input").prop("disabled",true);
     
     $('#cadRACAP').submit(function () {
         $('#statusRacap').prop('disabled', false);
@@ -29,18 +30,22 @@ $(document).ready(function ( ) {
                     $('#sequencial').val(data.id);
                     $('#statusRacap').val(data.statusRacap);
 
-                    if (data.statusRacap != '1') {
+                    if (data.statusRacap > '2') {
                         $("#cadRACAP :input").prop("disabled", true);
                         $('#selectAcaoRacap').prop("disabled", false);
                         $("#racapAcaoRacap :input").prop("disabled", true);
+                        $("#tabelaAnexos :input").prop("disabled",true);
                     } else {
                         $('#selectAcaoRacap').prop("disabled", false);
                         $("#cadRACAP :input").prop("disabled", false);
                         $("#racapAcaoRacap :input").prop("disabled", false);
+                        $("#tabelaAnexos :input").prop("disabled",false);
                         $('#statusRacap').prop('disabled', true);
                     }
                     
                     $('#idRacap').val(data.id);
+                    //Coloca o sequencial da RACAP no Form de anexos.
+                    $('#numRACAPFormAnexo').val(data.id);
                     $('#tipoRacap').val(data.tipoRacap);
                     $('#motivoAbertura').val(data.motivoAbertura);
                     $('#motivoDescricao').val(data.motivoDescricao);
@@ -65,8 +70,13 @@ $(document).ready(function ( ) {
                         this.reset();
                     });
                     
+                    $("#tabelaAnexos").each(function (){
+                        this.reset();
+                    });
+                    
                     $("#cadRACAP :input").prop("disabled", false);
                     $('#selectAcaoRacap').prop("disabled", true);
+                    $("#tabelaAnexos :input").prop("disabled",true);
                     $("#racapAcaoRacap :input").prop("disabled", true);
                     $('#statusRacap').prop('disabled', true);
 

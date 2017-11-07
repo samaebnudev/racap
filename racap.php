@@ -301,9 +301,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </div>
         <hr>
         <div id="anexosRacap">
-            <form id="tabelaAnexos" method="POST">
-                <button type="button" class='accordion' id="thing">Anexos da RACAP:</button>
-                <div class='panel'>
+            <button type="button" class='accordion' id="thing">Anexos da RACAP:</button>
+            <div class='panel'>
+                <form id="tabelaAnexos" method="POST" enctype="multipart/form-data">
+
                     <table>
                         <thead>
                             <tr><th>Seleciona</th><th>Arquivo</th><th>Baixar</th></tr>
@@ -311,9 +312,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                         <tbody id="listaAnexos">
                         </tbody>
                     </table>
-                    
-                    <input type="hidden" name="numRACAPFormAnexo" id="numRACAPFormAnexo" required/>
-                    
+
+                    <input type="hidden" name="numRACAPFormAnexo" id="numRACAPFormAnexo"/>
+
                     <br/><br/>
                     <p align="center">
                         <label for="anexoRacap" title="Anexar Arquivos na RACAP se houver.">Anexar Arquivo:</label>
@@ -323,8 +324,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
                     </p>
-                </div>
-            </form>
+                </form>
+            </div>
+
         </div>
         <hr>
         <div id="fechaRacap">
@@ -337,7 +339,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                         $dataFechamento = date("Y-m-d 23:59:59");
                         echo "<input type='hidden' name='dataFechamento' id='dataFechamento' value='$dataFechamento'";
                         ?>
-                        
+
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <label for="statusRacapPos">Status após Fechamento: </label>
                         <select name="statusRacapPos" id="statusRacapPos" required>
