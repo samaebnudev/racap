@@ -14,7 +14,7 @@ date_default_timezone_set('Brazil/East');
 header("Content-type: text/html; charset=utf-8");
 include "conecta_banco.inc";
 include "getIP.php";
-include 'racap_anexo.php';
+//include 'racap_anexo.php';
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -129,7 +129,7 @@ if (mysqli_affected_rows($conexao) == 1) {
     }
 }
 
-if ($_FILES['anexoRacap'] && ($racapMensagem == "RACAP incluída com sucesso." 
+/*if ($_FILES['anexoRacap'] && ($racapMensagem == "RACAP incluída com sucesso." 
     || $racapMensagem == "RACAP alterada com sucesso.")) {
     //$nome_final = $_FILES['anexoRacap']['name'];
     //echo $nome_final."<br/>";
@@ -186,9 +186,10 @@ if ($anexoMensagem [0] == "Upload efetuado com sucesso!"){
             $sql = mysqli_query($conexao, $query);
         }
     }
-}
+}*/
 
-$alertMessage = $racapMensagem."\\n".$anexoMensagem [0];
+//$alertMessage = $racapMensagem."\\n".$anexoMensagem [0];
+$alertMessage = $racapMensagem;
 
 echo '<script type="text/javascript">alert("'.$alertMessage.'");</script>';
 
