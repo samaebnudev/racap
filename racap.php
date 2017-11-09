@@ -25,6 +25,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <script type="text/javascript" src="js/buscaRacapAnexo.js"></script>
         <script type="text/javascript" src="js/geraSelectAcao.js"></script>
         <script type="text/javascript" src="js/racapBuscaAcao.js"></script>
+        <script type="text/javascript" src="js/multiple-select.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -171,7 +172,6 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     <label for="selectResponsavel">Responsável: </label>
                     <select multiple="multiple" id="selectResponsavel[]" name="selectResponsavel[]" 
                             class="responsavel" required>
-                        <option selected="selected"></option>
                         <?php
                         $query = "SELECT id, nomeServidor FROM racap_usuario ORDER BY nomeServidor";
                         $sql = mysqli_query($conexao, $query);
@@ -378,7 +378,6 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             }
         </script>
         
-        <script type="text/javascript" src="js/multiple-select.js"></script>
         <script>
             $('.responsavel').multipleSelect();
         </script>
