@@ -68,6 +68,31 @@ if (mysqli_affected_rows($conexao) == 1) {
 		VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
         $sql = mysqli_query($conexao, $query);
 
+        //Procedimento de Atualização de Status das RACAP's
+        $dataParametro = date("Y-m-d 00:00:00");
+        $query = "SELECT * FROM racap_parametros";
+        $sql = mysqli_query($conexao, $query);
+        $row = mysqli_fetch_array($sql);
+        $dataParametroBanco = date("Y-m-d H:i:s", strtotime($row['data_verificacao']));
+
+        //Se a última verificação de Atualização de RACAP's foi no dia anterior,
+        //verifica se tem RACAP's vencidas com Status Aberta a fim de colocá-las
+        //como Pendente.
+        if ($dataParametro > $dataParametroBanco) {
+            $query = "UPDATE racap_racap SET status_racap= '2' WHERE prazo_racap < '$dataParametro' AND status_racap = '1'";
+            $sql = mysqli_query($conexao, $query);
+
+            if ($sql) {
+                $ocorrencia = "Atualização Automática de Status da RACAP.";
+                $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+		VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
+                $sql = mysqli_query($conexao, $query);
+            }
+           
+            $query = "UPDATE racap_parametros SET data_verificacao = '$dataParametro' WHERE id='1'";
+            $sql = mysqli_query($conexao, $query);
+        }
+
         mysqli_close($conexao);
         header("Location:index.php");
     } elseif (password_verify($password, $row['senha']) and $row['flgAtivo'] == "N") {
@@ -82,10 +107,8 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         echo "<script> alert ('ESTE USUÁRIO FOI DESATIVADO PELO ADMINISTRADOR DO SISTEMA.');</script>";
         mysqli_close($conexao);
-       echo "<script>voltar ();</script>";
-    } 
-    
-    elseif (!password_verify($password, $row['senha'])) {
+        echo "<script>voltar ();</script>";
+    } elseif (!password_verify($password, $row['senha'])) {
 
         $dataRegistro = date("Y-m-d H:i:s");
         $ocorrencia = "Tentativa de login. Senha Incorreta.";
@@ -97,11 +120,9 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         echo "<script> alert ('SENHA INCORRETA.');</script>";
         mysqli_close($conexao);
-       echo "<script>voltar ();</script>";
+        echo "<script>voltar ();</script>";
     }
-} 
-
-else {
+} else {
     $dataRegistro = date("Y-m-d H:i:s");
     $ocorrencia = "Tentativa de login. Usuário e/ou senha incorreto(s).";
     $ip = get_client_ip_env();
@@ -112,6 +133,6 @@ else {
 
     echo "<script> alert ('USUÁRIO E/OU SENHA INCORRETOS.');</script>";
     mysqli_close($conexao);
-   echo "<script>voltar ();</script>";
+    echo "<script>voltar ();</script>";
 }
 ?>

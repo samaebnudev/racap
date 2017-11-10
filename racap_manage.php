@@ -166,6 +166,9 @@ if ($racapMensagem == "RACAP incluída com sucesso." || $racapMensagem == "RACAP
 
         $controleArray = FALSE;
 
+        //Compara os Arrays de Responsáveis por RACAP para fazer os devidos INSERTS e DELETES
+        //
+        //Compara Responsáveis pela RACAP no Banco com o Select do Form
         for ($i = 0; $i < count($result); $i++) {
             for ($j = 0; $j < count($selectResponsavel); $j++) {
                 if ($result[$i] == $selectResponsavel[$j]) {
@@ -179,9 +182,37 @@ if ($racapMensagem == "RACAP incluída com sucesso." || $racapMensagem == "RACAP
                 $controleArray = FALSE;
             }
         }
-        
+
         $controleArray = FALSE;
 
+        for ($i = 0; $i < count($elementosDiferentesResult); $i++) {
+            $query = "DELETE FROM racap_responsavel_racap "
+                    . "WHERE id_racap = '$sequencial' "
+                    . "AND id_responsavel = '$elementosDiferentesResult[$i]'";
+            $sql = mysqli_query($conexao, $query);
+
+            if ($sql) {
+                
+                $query = "SELECT nomeServidor FROM racap_usuario WHERE id='$elementosDiferentesResult[$i]]'";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_array($sql);
+                $nomeUsuario = $row['nomeServidor'];
+                
+                $login = $_SESSION ['nomeUsuario'];
+                $dataRegistro = date("Y-m-d H:i:s");
+                $ocorrencia = "Removeu Responsável por RACAP: " . $sequencial." - " . $nomeUsuario;
+                $ip = get_client_ip_env();
+                $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
+                $sql = mysqli_query($conexao, $query);
+
+                //$racapMensagem = "RACAP incluída com sucesso.";
+            } else {
+                //$racapMensagem = "Falha na inclusão. RACAP não pôde ser inserida.";
+            }
+        }
+
+        //Compara Responsáveis pela RACAP do Form com o Banco
         for ($i = 0; $i < count($selectResponsavel); $i++) {
             for ($j = 0; $j < count($result); $j++) {
                 if ($selectResponsavel[$i] == $result[$j]) {
@@ -193,6 +224,31 @@ if ($racapMensagem == "RACAP incluída com sucesso." || $racapMensagem == "RACAP
                 $elementosDiferentesForm [$i] = $selectResponsavel[$i];
             } elseif ($controleArray == TRUE) {
                 $controleArray = FALSE;
+            }
+        }
+        
+        for ($i = 0;$i < count($elementosDiferentesForm);$i++){
+            
+            $query = "INSERT INTO racap_responsavel_racap (id, id_racap, id_responsavel) "
+                    . "VALUES ('0', '$sequencial', '$elementosDiferentesForm[$i]]')";
+            $sql = mysqli_query($conexao, $query);
+            
+            if ($sql) {
+                
+                $query = "SELECT nomeServidor FROM racap_usuario WHERE id='$elementosDiferentesForm[$i]]'";
+                $sql = mysqli_query($conexao, $query);
+                $row = mysqli_fetch_array($sql);
+                $nomeUsuario = $row['nomeServidor'];
+                
+                $login = $_SESSION ['nomeUsuario'];
+                $dataRegistro = date("Y-m-d H:i:s");
+                $ocorrencia = "Inseriu Responsável por RACAP: " . $sequencial." - " . $nomeUsuario;
+                $ip = get_client_ip_env();
+                $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
+                $sql = mysqli_query($conexao, $query);
+
+                //$racapMensagem = "RACAP incluída com sucesso.";
             }
         }
     }

@@ -152,7 +152,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 		<tr>
 		<th class='reportTableHeader'>RACAP</th><th class='reportTableHeader'>Aberta Em</th>
                 <th class='reportTableHeader'>Tipo</th><th class='reportTableHeader'>Motivo</th>
-                <th class='reportTableHeader'>Setor</th><th class='reportTableHeader'>Status</th>
+                <th class='reportTableHeader'>Seção</th><th class='reportTableHeader'>Status</th>
                 <th class='reportTableHeader'>Prazo</th></tr>";
 
                 $id = $row['id'];
@@ -207,8 +207,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             WHERE racap_tipo_racap.id = racap_racap.tipo_racap
             AND racap_setor.id = racap_racap.setor_racap
             AND racap_status_racap.id = racap_racap.status_racap
-            AND status_racap = '1'
-            AND prazo_racap < '$dataAtual' ORDER BY racap_racap.id";
+            AND status_racap = '2' ORDER BY racap_racap.id";
 
             $sql = mysqli_query($conexao, $query);
             $row = mysqli_fetch_assoc($sql);
@@ -225,7 +224,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 		<tr>
 		<th class='reportTableHeader'>RACAP</th><th class='reportTableHeader'>Aberta Em</th>
                 <th class='reportTableHeader'>Tipo</th><th class='reportTableHeader'>Motivo</th>
-                <th class='reportTableHeader'>Setor</th><th class='reportTableHeader'>Status</th>
+                <th class='reportTableHeader'>Seção</th><th class='reportTableHeader'>Status</th>
                 <th class='reportTableHeader'>Prazo</th></tr>";
 
                 $id = $row['id'];

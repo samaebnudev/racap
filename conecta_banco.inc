@@ -2,7 +2,7 @@
   define("DB_SERVER", "localhost");
   define("DB_USERNAME", "parais");
   define("DB_PASSWORD", "pra290388");
-  define("DB_DATABASE", "samaenet");
+  define("DB_DATABASE", "racap");
   $conexao = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE) or print (mysqli_error($conexao));
   
   mysqli_query($conexao,"SET NAMES 'utf8'");
