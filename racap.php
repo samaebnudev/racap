@@ -26,6 +26,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <script type="text/javascript" src="js/geraSelectAcao.js"></script>
         <script type="text/javascript" src="js/racapBuscaAcao.js"></script>
         <script type="text/javascript" src="js/multiple-select.js"></script>
+        <script type="text/javascript" src="js/buscaResponsavelRacap.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -170,20 +171,20 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     <br/><br/>
 
                     <label for="selectResponsavel">Responsável: </label>
-                    <select multiple="multiple" id="selectResponsavel[]" name="selectResponsavel[]" 
+                    <select multiple="multiple" id="selectResponsavel" name="selectResponsavel[]" 
                             class="responsavel" required>
-                        <?php
-                        $query = "SELECT id, nomeServidor FROM racap_usuario ORDER BY nomeServidor";
-                        $sql = mysqli_query($conexao, $query);
-                        $row = mysqli_fetch_assoc($sql);
+                                <?php
+                                $query = "SELECT id, nomeServidor FROM racap_usuario ORDER BY nomeServidor";
+                                $sql = mysqli_query($conexao, $query);
+                                $row = mysqli_fetch_assoc($sql);
 
-                        if (mysqli_affected_rows($conexao) > 0) {
-                            echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
-                            while ($row = mysqli_fetch_array($sql)) {
-                                echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
-                            }
-                        }
-                        ?>
+                                if (mysqli_affected_rows($conexao) > 0) {
+                                    echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                                    while ($row = mysqli_fetch_array($sql)) {
+                                        echo "<option value=" . $row['id'] . ">" . $row['nomeServidor'] . "</option>";
+                                    }
+                                }
+                                ?>
                     </select>
 
                     <label for="statusRacap">Status da RACAP: </label>
@@ -377,7 +378,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 };
             }
         </script>
-        
+
         <script>
             $('.responsavel').multipleSelect();
         </script>
