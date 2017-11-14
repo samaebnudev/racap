@@ -146,8 +146,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
                     &nbsp;&nbsp;
 
-                    <label for='dataAbertura'>Data de Abertura:</label>
-                    <input type='datetime-local' name='dataAbertura' id='dataAbertura' style="width:18%;"/>
+                    <label for='dataAbertura'
+                           title="Data de Abertura da RACAP é determinada automaticamente. Esse campo é SOMENTE LEITURA.">Data de Abertura:</label>
+                    <input type='datetime-local' name='dataAbertura' id='dataAbertura' style="width:18%;" readonly
+                           title="Data de Abertura da RACAP é determinada automaticamente. Esse campo é SOMENTE LEITURA."/>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -216,7 +218,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     <p align="center">
                         <input type="submit" class="btn" value="Gravar" title="Incluir ou Salvar RACAP"/>
                         &nbsp;&nbsp;
-                        <input type="reset" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
+                        <input type="reset" id="racapResetForm" class="btn" value="Limpar" title="Limpa os dados do Formulário"/>
                     </p>
                 </fieldset>
             </form>
@@ -379,9 +381,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             }
         </script>
 
-        <script>
+        <!--<script>
             $('.responsavel').multipleSelect();
-        </script>
+        </script>-->
 
     </body>
 </html>

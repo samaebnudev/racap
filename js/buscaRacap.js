@@ -57,6 +57,12 @@ $(document).ready(function ( ) {
                         $('#prazoRacap').val(dateBuffer);
                         $('#prazo_acao').val(dateBuffer);
                     }
+                    
+                    if (data.dataAbertura) {
+                        console.log(data.dataAbertura);
+                        dateBuffer = data.dataAbertura.replace(" ", "T");
+                        $('#dataAbertura').val(dateBuffer);
+                   }
 
                     $('#historicoRACAP').val(data.historicoRACAP);
 

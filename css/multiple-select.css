@@ -28,7 +28,8 @@
 }
 
 .ms-choice.disabled {
-    background-color: #f4f4f4;
+    /*background-color: #f4f4f4;*/
+    background-color: #dddddd;
     background-image: none;
     border: 1px solid #ddd;
     cursor: default;
