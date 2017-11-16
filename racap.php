@@ -55,7 +55,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
         <form method="POST" id="buscaBanco" style="text-align: center;">
             <label for="selectbuscaBanco">Buscar RACAP: </label>
-            <select id="selectbuscaBanco" name="selectbuscaBanco">
+            <select id="selectbuscaBanco" name="selectbuscaBanco" class="buscaRacap">
                 <option></option>
                 <?php
                 $query = "SELECT * FROM racap_racap";
@@ -381,9 +381,12 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             }
         </script>
 
-        <!--<script>
-            $('.responsavel').multipleSelect();
-        </script>-->
+        <script>
+            $('.buscaRacap').multipleSelect({
+                single: true,
+                filter: true
+            });
+        </script>
 
     </body>
 </html>

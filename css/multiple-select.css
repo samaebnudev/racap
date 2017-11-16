@@ -146,6 +146,7 @@
 
 .ms-drop ul > li {
     list-style: none;
+    text-align: left;
     display: list-item;
     background-image: none;
     position: static;

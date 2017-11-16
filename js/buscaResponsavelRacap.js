@@ -1,5 +1,5 @@
 $(document).ready(function ( ) {
-    var multiSelector = $('.responsavel').multipleSelect();
+    var multiSelector = $('.responsavel').multipleSelect({filter: true});
     
     $('#buscaBanco').on('change', function () {
 

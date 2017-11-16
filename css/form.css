@@ -47,3 +47,7 @@ input [type=month]{
 .formBuscaInner {
  display:inline-block;  
 }
+
+.buscaRacap {
+    text-align: left;
+}
