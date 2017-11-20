@@ -30,16 +30,35 @@ if ($bufferSequencial != NULL) {
 }
 
 $idRacap = $_POST['idRacap'];
+
+if (isset($_POST['numeroAcao'])){
+    $numeroAcao = $_POST['numeroAcao'];
+} else {
+    $numeroAcao = 0;
+}
+
 $selectStatusAcao = $_POST['selectStatusAcao'];
-$selectResponsavel = $_POST['selectResponsavel'];
+//$selectResponsavel = $_POST['selectResponsavel'];
+$tituloAcao = $_POST['tituloAcao'];
 $descricaoAcao = $_POST['descricaoAcao'];
 
-if (isset($_POST['prazo_acao'])) {
-    $dateBuffer = explode("T", $_POST['prazo_acao']);
-    $prazoAcao = implode(" ", $dateBuffer);
-    $prazoAcao = date('Y-m-d H:i:00', strtotime($prazoAcao));
+$acaoPrazo = $_POST['acaoPrazo'];
+$acaoEficiencia = $_POST['acaoEficiencia'];
+
+if (isset($_POST['dataAcao'])) {
+    $dateBuffer = explode("T", $_POST['dataAcao']);
+    $dataAcao = implode(" ", $dateBuffer);
+    $dataAcao = date('Y-m-d H:i:00', strtotime($dataAcao));
 } else {
-    $prazoAcao = NULL;
+    $dataAcao = NULL;
+}
+
+if (isset($_POST['dataEficiencia'])) {
+    $dateBuffer = explode("T", $_POST['dataEficiencia']);
+    $dataEficiencia = implode(" ", $dateBuffer);
+    $dataEficiencia = date('Y-m-d H:i:00', strtotime($dataAcao));
+} else {
+    $dataEficiencia = NULL;
 }
 
 $query = "SELECT * FROM racap_acao WHERE id = '$sequencial'";
@@ -48,7 +67,7 @@ $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
     $query = "UPDATE racap_acao SET id_racap='$idRacap', status_acao = '$selectStatusAcao',
-             descricao_acao = '$descricaoAcao', responsavel_acao = '$selectResponsavel', prazo_acao = '$prazoAcao' WHERE id = '$sequencial'";
+             descricao_acao = '$descricaoAcao', responsavel_acao = '$selectResponsavel', prazo_acao = '$dataAcao' WHERE id = '$sequencial'";
     $sql = mysqli_query($conexao, $query);
     
     if ($sql) {
@@ -73,7 +92,7 @@ if (mysqli_affected_rows($conexao) == 1) {
 }
 elseif (mysqli_affected_rows($conexao) == 0) {
     $query = "INSERT INTO racap_acao (id, id_racap, status_acao, descricao_acao, responsavel_acao, prazo_acao)
-	VALUES ('$sequencial', '$idRacap', '$selectStatusAcao','$descricaoAcao', '$selectResponsavel', '$prazoAcao')";
+	VALUES ('$sequencial', '$idRacap', '$selectStatusAcao','$descricaoAcao', '$selectResponsavel', '$dataAcao')";
     $sql = mysqli_query($conexao, $query);
 
     if ($sql) {

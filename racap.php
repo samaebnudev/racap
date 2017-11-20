@@ -244,7 +244,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 &nbsp;&nbsp;&nbsp;&nbsp;
 
                 <label for="tituloAcao">Título: </label>
-                <input type="text" name="tituloAcao" id="tituloAcao" maxlength="500" />
+                <input type="text" name="tituloAcao" id="tituloAcao" maxlength="500" required/>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -267,24 +267,24 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <label for="prazo_acao">Data de Execução: </label>
-                <input type="datetime-local" id="prazo_acao" name="prazo_acao"/>
+                <label for="dataAcao">Data de Execução: </label>
+                <input type="datetime-local" id="dataAcao" name="dataAcao"/>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <label for='racapPrazo'>RACAP no Prazo: Sim 
-                    <input type='radio' name='racapPrazo' id='racapPrazoSim' class="noClick" value='S'/>
+                <label for='acaoPrazo'>Ação no Prazo: Sim 
+                    <input type='radio' name='acaoPrazo' id='acaoPrazoSim' class="noClick" value='S'/>
                 </label>
                 <label>Não
-                    <input type='radio' name='racapPrazo' id='racapPrazoNao' class="noClick" value='N'/>
+                    <input type='radio' name='acaoPrazo' id='acaoPrazoNao' class="noClick" value='N'/>
                 </label>
 
                 <br/><br/>
 
-                <label for='racapPrazo'>Ação Eficaz: Sim 
-                    <input type='radio' name='racapEficiencia' id='racapEficienciaSim' class="noClick" value='S'/>
+                <label for='acaoEficiencia'>Ação Eficaz: Sim 
+                    <input type='radio' name='acaoEficiencia' id='acaoEficienciaSim' value='S'/>
                 </label>
                 <label>Não
-                    <input type='radio' name='racapEficiencia' id='racapEficienciaNao' class="noClick" value='N'/>
+                    <input type='radio' name='acaoEficiencia' id='acaoEficienciaNao' value='N'/>
                 </label>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -301,6 +301,8 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <br/>
                 <p align="center">
                     <input type="submit" value="Gravar Ação" id="racapAcaoSubmit"/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="Limpar" id="racapAcaoSubmit"/>
                 </p>
             </form>
         </div>
