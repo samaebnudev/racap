@@ -31,10 +31,20 @@ if ($bufferSequencial != NULL) {
 
 $idRacap = $_POST['idRacap'];
 
-if (isset($_POST['numeroAcao'])){
-    $numeroAcao = $_POST['numeroAcao'];
-} else {
-    $numeroAcao = 0;
+$buffer = $_POST['numeroAcao'];
+
+if ($buffer != NULL){
+    $numeroAcao = $buffer;
+} elseif ($buffer == NULL){
+    $query = "SELECT MAX(id_acao) as numeroAcao FROM racap_acao WHERE id_racap = '$idRacap'";
+    $sql = mysqli_query($conexao, $query);
+    $row = mysqli_fetch_assoc($sql);
+    
+    if (mysqli_affected_rows($conexao) == 1){
+        $numeroAcao = $row['numeroAcao'] + 1;
+    } else {
+      $numeroAcao = 1;  
+    }   
 }
 
 $selectStatusAcao = $_POST['selectStatusAcao'];
@@ -42,15 +52,23 @@ $selectStatusAcao = $_POST['selectStatusAcao'];
 $tituloAcao = $_POST['tituloAcao'];
 $descricaoAcao = $_POST['descricaoAcao'];
 
-$acaoPrazo = $_POST['acaoPrazo'];
-$acaoEficiencia = $_POST['acaoEficiencia'];
+if (isset($_POST['acaoPrazo'])){
+    $acaoPrazo = $_POST['acaoPrazo'];
+}else {
+    $acaoPrazo = "";
+}
 
+if (isset($_POST['acaoEficiencia'])){
+    $acaoEficiencia = $_POST['acaoEficiencia'];
+}else {
+    $acaoEficiencia = "";
+}
 if (isset($_POST['dataAcao'])) {
     $dateBuffer = explode("T", $_POST['dataAcao']);
     $dataAcao = implode(" ", $dateBuffer);
     $dataAcao = date('Y-m-d H:i:00', strtotime($dataAcao));
 } else {
-    $dataAcao = NULL;
+    $dataAcao = 'NULL';
 }
 
 if (isset($_POST['dataEficiencia'])) {
@@ -58,7 +76,7 @@ if (isset($_POST['dataEficiencia'])) {
     $dataEficiencia = implode(" ", $dateBuffer);
     $dataEficiencia = date('Y-m-d H:i:00', strtotime($dataAcao));
 } else {
-    $dataEficiencia = NULL;
+    $dataEficiencia = 'NULL';
 }
 
 $query = "SELECT * FROM racap_acao WHERE id = '$sequencial'";
@@ -66,8 +84,10 @@ $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
-    $query = "UPDATE racap_acao SET id_racap='$idRacap', status_acao = '$selectStatusAcao',
-             descricao_acao = '$descricaoAcao', responsavel_acao = '$selectResponsavel', prazo_acao = '$dataAcao' WHERE id = '$sequencial'";
+    $query = "UPDATE racap_acao SET id_racap = '$idRacap', id_acao = '$numeroAcao', status_acao = '$selectStatusAcao', titulo_acao = '$tituloAcao', descricao_acao = '$descricaoAcao', acao_no_prazo = '$acaoPrazo', data_acao = '$dataAcao', acao_eficaz = '$acaoEficiencia', data_eficacia = '$dataEficiencia' WHERE id = '$sequencial'";
+    
+    echo $query;
+    
     $sql = mysqli_query($conexao, $query);
     
     if ($sql) {
@@ -82,23 +102,27 @@ if (mysqli_affected_rows($conexao) == 1) {
         $message = "<script> alert ('Ação da RACAP alterada com sucesso.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        //echo $urlBack;
     } else {
         $message = "<script> alert ('Falha na alteração. Ação da RACAP não pôde ser alterada.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        //echo $urlBack;
     }
 }
 elseif (mysqli_affected_rows($conexao) == 0) {
-    $query = "INSERT INTO racap_acao (id, id_racap, status_acao, descricao_acao, responsavel_acao, prazo_acao)
-	VALUES ('$sequencial', '$idRacap', '$selectStatusAcao','$descricaoAcao', '$selectResponsavel', '$dataAcao')";
+    $query = "INSERT INTO racap_acao (id, id_racap, id_acao,
+        status_acao, titulo_acao, descricao_acao, acao_no_prazo, data_acao,
+        acao_eficaz, data_eficacia) VALUES ('0', '$idRacap', '$numeroAcao',
+        '$selectStatusAcao', '$tituloAcao', '$descricaoAcao', '$acaoPrazo',
+        '$dataAcao', '$acaoEficiencia', '$dataEficiencia')";
+    
     $sql = mysqli_query($conexao, $query);
 
     if ($sql) {
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = "Incluiu Ação da RACAP: " . $descricaoAcao;
+        $ocorrencia = "Incluiu Ação da RACAP: " . $tituloAcao;
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
@@ -107,11 +131,11 @@ elseif (mysqli_affected_rows($conexao) == 0) {
         $message = "<script> alert ('Ação da RACAP incluída com sucesso.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        //echo $urlBack;
     } else {
         $message = "<script> alert ('Falha na inclusão. Ação da RACAP não pôde ser inserida.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        //echo $urlBack;
     }
 }

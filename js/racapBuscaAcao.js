@@ -9,6 +9,7 @@ $(document).ready(function ( ) {
     $('#buscaAcaoRacap').on('change', function () {
         var sequencial = $('#selectAcaoRacap');
         console.log ("Chamou Busca Ação");
+        console.log(sequencial.val());
         $.ajax({
             url: 'racap_busca_acao.php',
             dataType: "json",
@@ -19,12 +20,47 @@ $(document).ready(function ( ) {
                     console.log ("Sucesso");
                     $('#sequencialAcao').val(data.id);
                     $('#idRacap').val(data.id_racap);
-                    $('#selectStatusAcao').val(data.status_acao);
-                    $('#selectResponsavel').val(data.responsavel_acao);
-                    $('#descricaoAcao').val(data.descricao_acao);
+                    $('#numeroAcao').val(data.numeroAcao);
+                    $('#tituloAcao').val(data.tituloAcao);
+                    $('#selectStatusAcao').val(data.selectStatusAcao);
                     
-                    var dateBuffer = data.prazo.replace(" ", "T");
-                    $('#prazo_acao').val(dateBuffer);
+                    if (data.dataAcao != null){
+                        var dateBuffer = data.dataAcao.replace(" ", "T");
+                        $('#dataAcao').val(dateBuffer);
+                    } else {
+                        $('#dataAcao').val("");
+                    }
+                    
+                    if (data.acaoPrazo == "S"){
+                        $('#acaoPrazoSim').prop("checked", true);
+                        $('#acaoPrazoNao').prop("checked", false);
+                    }else if (data.acaoPrazo == "N"){
+                        $('#acaoPrazoSim').prop("checked", false);
+                        $('#acaoPrazoNao').prop("checked", true);
+                    } else if (data.acaoPrazo == ""){
+                        $('#acaoPrazoSim').prop("checked", false);
+                        $('#acaoPrazoNao').prop("checked", false);
+                    }
+                    
+                    if (data.acaoEficiencia == "S"){
+                        $('#acaoEficienciaSim').prop("checked", true);
+                        $('#acaoEficienciaNao').prop("checked", false);
+                    }else if (data.acaoEficiencia == "N"){
+                        $('#acaoEficienciaSim').prop("checked", false);
+                        $('#acaoEficienciaNao').prop("checked", true);
+                    } else if (data.acaoEficiencia == ""){
+                        $('#acaoEficienciaSim').prop("checked", false);
+                        $('#acaoEficienciaNao').prop("checked", false);
+                    }
+                    
+                    if (data.dataEficiencia != null){
+                        dateBuffer = data.dataEficiencia.replace(" ", "T");
+                        $('#dataEficiencia').val(dateBuffer);
+                    } else {
+                        $('#dataEficiencia').val("");
+                    }
+                    
+                    $('#descricaoAcao').val(data.descricaoAcao);
                     
                 } else {
                     console.log ("Falha");
@@ -62,3 +98,16 @@ $(document).ready(function ( ) {
     });
 
 });
+
+/*Tipo Campo	Nome Campo          Passado para o PHP	Campos Banco	Tipo campo Banco
+hidden          sequencialAcao      OK                  id              int
+hidden          idRacap             OK                  id_racap	int
+number          numeroAcao          OK                  id_acao         int
+text            tituloAcao          OK                  status_acao	int
+select          selectStatusAcao    OK                  titulo_acao	varchar (500)
+datetime-local	dataAcao            OK                  descricao_acao	text
+radiobutton	acaoPrazo           OK                  acao_no_prazo	varchar (1)
+radiobutton	acaoEficiencia      OK                  data_acao	datetime
+datetime-local	dataEficiencia      OK                  acao_eficaz	varchar (1)
+textarea	descricaoAcao       OK                  data_eficacia	datetime
+*/
