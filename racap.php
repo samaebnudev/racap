@@ -55,7 +55,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
         <form method="POST" id="buscaBanco" style="text-align: center;">
             <label for="selectbuscaBanco">Buscar RACAP: </label>
-            <select id="selectbuscaBanco" name="selectbuscaBanco" class="buscaRacap">
+            <select id="selectbuscaBanco" name="selectbuscaBanco" class="selectSingleFilter">
                 <option></option>
                 <?php
                 $query = "SELECT * FROM racap_racap";
@@ -91,7 +91,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <label for="motivoAbertura">Motivo de Abertura: </label>
-                    <select id="motivoAbertura" name="motivoAbertura" required>
+                    <select id="motivoAbertura" name="motivoAbertura"  required>
                         <option></option>
                         <?php
                         $query = "SELECT * FROM racap_motivo_abertura";
@@ -109,7 +109,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
                     <br/><br/>
                     <label for="tipoRacap">Tipo da RACAP: </label>
-                    <select id="tipoRacap" name="tipoRacap" required>
+                    <select id="tipoRacap" name="tipoRacap"  required>
                         <option></option>
                         <?php
                         $query = "SELECT * FROM racap_tipo_racap";
@@ -128,7 +128,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <label for="causaRacap">Causa da RACAP: </label>
-                    <select id="causaRacap" name="causaRacap">
+                    <select id="causaRacap" name="causaRacap" >
                         <option></option>
                         <?php
                         $query = "SELECT * FROM racap_causa";
@@ -154,7 +154,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
                     <label for="setorRacap">Seção: </label>
-                    <select id="setorRacap" name="setorRacap" required>
+                    <select id="setorRacap" name="setorRacap"  required>
                         <option></option>
                         <?php
                         $query = "SELECT * FROM racap_setor";
@@ -190,8 +190,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     </select>
 
                     <label for="statusRacap">Status da RACAP: </label>
-                    <select id="statusRacap" name="statusRacap" required disabled>
-                        <option></option>
+                    <select id="statusRacap" name="statusRacap"  required disabled>
                         <?php
                         $query = "SELECT * FROM racap_status_racap";
                         $sql = mysqli_query($conexao, $query);
@@ -235,7 +234,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <hr>
             <form method="POST" action="racap_acao_manage.php" id="racapAcaoRacap">
 
-                <input type="hidden" name="sequencialAcao" id="sequencialAcao" readonly/>
+                <input type="hidden" name="sequencialAcao" id="sequencialAcao"/>
                 <input type="hidden" id="idRacap" name="idRacap" required/>
 
                 <label for="numeroAcao">Número da Ação: </label>
@@ -249,7 +248,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <label for="selectStatusAcao">Status da Ação: </label>
-                <select id="selectStatusAcao" name="selectStatusAcao" required>
+                <select id="selectStatusAcao" name="selectStatusAcao"  required>
                     <option></option>
                     <?php
                     $query = "SELECT * FROM racap_status_acao";
@@ -349,7 +348,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <label for="statusRacapPos">Status após Fechamento: </label>
-                        <select name="statusRacapPos" id="statusRacapPos" required>
+                        <select name="statusRacapPos" id="statusRacapPos"  required>
                             <option></option>
                             <option value="4">Encerrada</option>
                             <option value="5">Cancelada</option>
@@ -384,7 +383,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </script>
 
         <script>
-            $('.buscaRacap').multipleSelect({
+            $('.selectSingleFilter').multipleSelect({
                 single: true,
                 filter: true
             });

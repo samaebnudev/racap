@@ -12,7 +12,7 @@ $userDados = array ('success' => false);
 
 if (isset($_POST['idRacap'])){
 	$sequencial = $_POST['idRacap'];
-        $dataFechamento = $_POST['dataFechamento'];
+        $dataFechamento = $_POST['dataAcao'];
 
 	$query = "SELECT * FROM racap_racap WHERE id = '$sequencial'";
 	$sql = mysqli_query ($conexao, $query);

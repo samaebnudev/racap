@@ -62,6 +62,7 @@ $(document).ready(function ( ) {
                         console.log(data.dataAbertura);
                         dateBuffer = data.dataAbertura.replace(" ", "T");
                         $('#dataAbertura').val(dateBuffer);
+                        $('#dataAcao').prop('min',dateBuffer);
                    }
 
                     $('#historicoRACAP').val(data.historicoRACAP);
@@ -84,7 +85,10 @@ $(document).ready(function ( ) {
                     $('#selectAcaoRacap').prop("disabled", true);
                     $("#tabelaAnexos :input").prop("disabled",true);
                     $("#racapAcaoRacap :input").prop("disabled", true);
+                    $('#dataAcao').prop('min',"");
                     $('#statusRacap').prop('disabled', true);
+                    $('#sequencialAcao').val("");
+                    $('#idRacap').val("");
 
                 }
             }

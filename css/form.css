@@ -48,6 +48,6 @@ input [type=month]{
  display:inline-block;  
 }
 
-.buscaRacap {
+.selectSingleFilter {
     text-align: left;
 }

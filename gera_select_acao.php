@@ -22,26 +22,30 @@ if (isset($_POST['selectbuscaBanco'])) {
     $sequencial = $_POST['selectbuscaBanco'];
     //$sequencial = 1;
 
-    $query = "SELECT id, descricao_acao FROM racap_acao WHERE id_racap = '$sequencial'";
+    $query = "SELECT id, id_acao, titulo_acao FROM racap_acao WHERE id_racap = '$sequencial'";
     $sql = mysqli_query($conexao, $query);
     $row = mysqli_fetch_assoc($sql);
 
     if (mysqli_affected_rows($conexao) > 0) {
         $userDados ['success'] = true;
         $id = $row['id'];
-        $descricaoAcao = $row['descricao_acao'];
+        $idAcao = $row['id_acao'];
+        $tituloAcao = $row['titulo_acao'];
         
-        $buffer = $optionStart."'>".$optionEnd;
+        //$buffer = $optionStart."'>".$optionEnd;
         $userDados ['selectData'] = $userDados ['selectData'] . $buffer;
         
-        $buffer = $optionStart . $id . "'>" . $descricaoAcao . $optionEnd;
+        //$buffer = $optionStart . $id . "'>" . $tituloAcao . $optionEnd;
+        $buffer = $optionStart . $id . "'>" .$idAcao." - ". $tituloAcao . $optionEnd;
         $userDados ['selectData'] = $userDados ['selectData'] . $buffer;
 
         while ($row = mysqli_fetch_array($sql)) {
             $id = $row['id'];
-            $descricaoAcao = $row['descricao_acao'];
+            $idAcao = $row['id_acao'];
+            $tituloAcao = $row['titulo_acao'];
 
-            $buffer = $optionStart . $id . "'>" . $descricaoAcao . $optionEnd;
+            //$buffer = $optionStart . $id . "'>" . $tituloAcao . $optionEnd;
+            $buffer = $optionStart . $id . "'>" .$idAcao." - ". $tituloAcao . $optionEnd;
             $userDados ['selectData'] = $userDados ['selectData'] . $buffer;
         }
     }

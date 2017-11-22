@@ -43,38 +43,43 @@ if ($buffer != NULL){
     if (mysqli_affected_rows($conexao) == 1){
         $numeroAcao = $row['numeroAcao'] + 1;
     } else {
-      $numeroAcao = 1;  
+      $numeroAcao = 1;
     }   
 }
 
 $selectStatusAcao = $_POST['selectStatusAcao'];
-//$selectResponsavel = $_POST['selectResponsavel'];
 $tituloAcao = $_POST['tituloAcao'];
 $descricaoAcao = $_POST['descricaoAcao'];
 
-if (isset($_POST['acaoPrazo'])){
+if (isset($_POST['acaoPrazo'])) {
     $acaoPrazo = $_POST['acaoPrazo'];
 }else {
     $acaoPrazo = "";
 }
 
-if (isset($_POST['acaoEficiencia'])){
+
+if (isset($_POST['acaoEficiencia'])) {
     $acaoEficiencia = $_POST['acaoEficiencia'];
 }else {
     $acaoEficiencia = "";
 }
-if (isset($_POST['dataAcao'])) {
-    $dateBuffer = explode("T", $_POST['dataAcao']);
+
+$buffer = $_POST['dataAcao'];
+
+if ($buffer != NULL) {
+    $dateBuffer = explode("T", $buffer);
     $dataAcao = implode(" ", $dateBuffer);
     $dataAcao = date('Y-m-d H:i:00', strtotime($dataAcao));
 } else {
     $dataAcao = 'NULL';
 }
 
-if (isset($_POST['dataEficiencia'])) {
-    $dateBuffer = explode("T", $_POST['dataEficiencia']);
+$buffer = $_POST['dataEficiencia'];
+
+if ($buffer != NULL) {
+    $dateBuffer = explode("T", $buffer);
     $dataEficiencia = implode(" ", $dateBuffer);
-    $dataEficiencia = date('Y-m-d H:i:00', strtotime($dataAcao));
+    $dataEficiencia = date('Y-m-d H:i:00', strtotime($dataEficiencia));
 } else {
     $dataEficiencia = 'NULL';
 }
@@ -85,9 +90,6 @@ $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
     $query = "UPDATE racap_acao SET id_racap = '$idRacap', id_acao = '$numeroAcao', status_acao = '$selectStatusAcao', titulo_acao = '$tituloAcao', descricao_acao = '$descricaoAcao', acao_no_prazo = '$acaoPrazo', data_acao = '$dataAcao', acao_eficaz = '$acaoEficiencia', data_eficacia = '$dataEficiencia' WHERE id = '$sequencial'";
-    
-    echo $query;
-    
     $sql = mysqli_query($conexao, $query);
     
     if ($sql) {
@@ -102,12 +104,12 @@ if (mysqli_affected_rows($conexao) == 1) {
         $message = "<script> alert ('Ação da RACAP alterada com sucesso.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
-        //echo $urlBack;
+        echo $urlBack;
     } else {
         $message = "<script> alert ('Falha na alteração. Ação da RACAP não pôde ser alterada.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
-        //echo $urlBack;
+        echo $urlBack;
     }
 }
 elseif (mysqli_affected_rows($conexao) == 0) {
@@ -131,11 +133,11 @@ elseif (mysqli_affected_rows($conexao) == 0) {
         $message = "<script> alert ('Ação da RACAP incluída com sucesso.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
-        //echo $urlBack;
+        echo $urlBack;
     } else {
         $message = "<script> alert ('Falha na inclusão. Ação da RACAP não pôde ser inserida.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
-        //echo $urlBack;
+        echo $urlBack;
     }
 }
