@@ -12,8 +12,6 @@ $(document).ready(function ( ) {
 
     $('#buscaAcaoRacap').on('change', function () {
         var sequencial = $('#selectAcaoRacap');
-        console.log("Chamou Busca Ação");
-        console.log(sequencial.val());
         $.ajax({
             url: 'racap_busca_acao.php',
             dataType: "json",
@@ -21,7 +19,6 @@ $(document).ready(function ( ) {
             data: sequencial,
             success: function (data) {
                 if (data.success == true) {
-                    console.log("Sucesso");
                     
                     $('#racapAcaoRacap').each(function () {
                         this.reset();
@@ -72,7 +69,6 @@ $(document).ready(function ( ) {
                     $('#descricaoAcao').val(data.descricaoAcao);
 
                 } else {
-                    console.log("Falha");
                     $('#racapAcaoRacap').each(function () {
                         this.reset();
                     });
@@ -83,31 +79,7 @@ $(document).ready(function ( ) {
         return false;
     });
 
-    /*$('#idRacap').on('change', function () {
-     var sequencial = $('#idRacap');
-     
-     $.ajax({
-     url: 'busca_prazo_acao.php',
-     dataType: "json",
-     type: 'POST',
-     data: sequencial,
-     success: function (data) {
-     if (data.success == true) {
-     var dateBuffer = data.prazo.replace(" ", "T");
-     $('#prazo_acao').val(dateBuffer);
-     } else {
-     $('#prazo_acao').val("");
-     }
-     }
-     });
-     
-     return false;
-     
-     
-     });*/
-
     $('#dataAcao').change(function () {
-        console.log($('#dataAcao').val());
         
         if ($('#dataAcao').val() != "") {
             var sequencial = $('#racapAcaoRacap').serialize();

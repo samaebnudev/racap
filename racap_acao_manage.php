@@ -14,12 +14,15 @@ date_default_timezone_set('Brazil/East');
 header("Content-type: text/html; charset=utf-8");
 include "conecta_banco.inc";
 include "getIP.php";
+include 'checar_acao.php';
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+$urlBack = "<script>voltar ();</script>";
 
 $bufferSequencial = $_POST['sequencialAcao'];
 
@@ -71,7 +74,7 @@ if ($buffer != NULL) {
     $dataAcao = implode(" ", $dateBuffer);
     $dataAcao = date('Y-m-d H:i:00', strtotime($dataAcao));
 } else {
-    $dataAcao = 'NULL';
+    $dataAcao = NULL;
 }
 
 $buffer = $_POST['dataEficiencia'];
@@ -81,7 +84,7 @@ if ($buffer != NULL) {
     $dataEficiencia = implode(" ", $dateBuffer);
     $dataEficiencia = date('Y-m-d H:i:00', strtotime($dataEficiencia));
 } else {
-    $dataEficiencia = 'NULL';
+    $dataEficiencia = NULL;
 }
 
 $query = "SELECT * FROM racap_acao WHERE id = '$sequencial'";
@@ -101,15 +104,9 @@ if (mysqli_affected_rows($conexao) == 1) {
 		 VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
         $sql = mysqli_query($conexao, $query);
 
-        $message = "<script> alert ('Ação da RACAP alterada com sucesso.');</script>";
-        echo $message;
-        $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        $message = "Ação da RACAP alterada com sucesso.";
     } else {
-        $message = "<script> alert ('Falha na alteração. Ação da RACAP não pôde ser alterada.');</script>";
-        echo $message;
-        $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        $message = "Falha na alteração. Ação da RACAP não pôde ser alterada.";
     }
 }
 elseif (mysqli_affected_rows($conexao) == 0) {
@@ -130,14 +127,18 @@ elseif (mysqli_affected_rows($conexao) == 0) {
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
         $sql = mysqli_query($conexao, $query);
 
-        $message = "<script> alert ('Ação da RACAP incluída com sucesso.');</script>";
-        echo $message;
-        $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        $message = "Ação da RACAP incluída com sucesso.";
+        
     } else {
-        $message = "<script> alert ('Falha na inclusão. Ação da RACAP não pôde ser inserida.');</script>";
-        echo $message;
-        $urlBack = "<script>voltar ();</script>";
-        echo $urlBack;
+        $message = "Falha na inclusão. Ação da RACAP não pôde ser inserida.";
     }
 }
+
+if ($selectStatusAcao == "4" || $selectStatusAcao == "5"){
+    $checaAcao = checarStatus($conexao);
+    $message = $message."\\n".$checaAcao;
+}
+
+
+echo "<script> alert ('".$message."');</script>";
+echo $urlBack;

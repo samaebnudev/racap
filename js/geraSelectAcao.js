@@ -21,11 +21,8 @@ $(document).ready(function ( ) {
                     $("#selectAcaoRacap").append(data.selectData);
                     
                     if ($('#statusRacap').val()<='3'){
-                        $('#sequencialAcao').val("");
                         $("#selectAcaoRacap").trigger('change');
-                    }else if ($('#statusRacap').val()=='4' || $('#statusRacap').val()=='5'){
-                        $('#sequencialAcao').val("");
-                    }                
+                    }           
 
                 } else {
                     //$("#formAcaoFieldset").children().attr('disabled', 'true');
