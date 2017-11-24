@@ -4,7 +4,7 @@
     }
 
     function voltar() {
-        window.location.href = 'fecha_racap.php';
+        window.location.href = 'racap.php';
     }
 </script>
 
@@ -21,46 +21,30 @@ header("Content-type: text/html; charset=utf-8");
 include "conecta_banco.inc";
 include "getIP.php";
 
-if (isset($_POST['sequencial'])) {
-    $sequencial = $_POST ['sequencial'];
+$buffer = $_POST['idFechamento'];
+
+if ($buffer != NULL) {
+    $sequencial = $_POST ['idFechamento'];
 } else {
     $sequencial = "0";
 }
 
-$idRacap = $_POST ['idRacap'];
-$racapPrazo = $_POST ['racapPrazo'];
-//$dataFechamento = $_POST ['dataFechamento'];
+$idRacap = $_POST ['numRACAP'];
 $dataFechamento = date('Y-m-d H:i:s');
-$racapEficiencia = $_POST['racapEficiencia'];
 $observacaoRACAP = $_POST['observacaoRACAP'];
 $statusPos = $_POST['statusRacapPos'];
 
-if ($statusPos == "2") {
-    $query = "SELECT id, id_racap, status_acao FROM racap_acao WHERE id_racap = '$idRacap'";
+if ($statusPos == "4") {
+    $query = "SELECT * FROM racap_acao WHERE id_racap = '$idRacap' AND status_acao < 4";
     $sql = mysqli_query($conexao, $query);
     $row = mysqli_fetch_assoc($sql);
 
     if (mysqli_affected_rows($conexao) > 0) {
-
-        $statusAcao = $row['status_acao'];
-        if ($statusAcao == 1) {
-            $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES PENDENTES PARA ELA.\\nFECHE OU CANCELE AS AÇÕES PENDENTES ANTES DE FECHAR A RACAP');</script>";
-            echo $message;
-            $urlBack = "<script>voltar ();</script>";
-            echo $urlBack;
-            exit();
-        }
-
-        while ($row = mysqli_fetch_array($sql)) {
-            $statusAcao = $row['status_acao'];
-            if ($statusAcao == 1) {
-                $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES PENDENTES PARA ELA.\\nFECHE OU CANCELE AS AÇÕES PENDENTES ANTES DE FECHAR A RACAP');</script>";
-                echo $message;
-                $urlBack = "<script>voltar ();</script>";
-                echo $urlBack;
-                exit();
-            }
-        }
+        $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES PENDENTES PARA ELA.\\nFECHE OU CANCELE AS AÇÕES PENDENTES ANTES DE FECHAR A RACAP');</script>";
+        echo $message;
+        $urlBack = "<script>voltar ();</script>";
+        echo $urlBack;
+        exit();
     }
 }
 
@@ -72,7 +56,6 @@ $row = mysqli_fetch_assoc($sql);
 if (mysqli_affected_rows($conexao) == 1) {
 
     $query = "UPDATE racap_fecha_racap SET id_racap = '$idRacap', data_fechamento = '$dataFechamento',
-             prazo_racap = '$racapPrazo', eficacia_racap = '$racapEficiencia',
              observacao_racap = '$observacaoRACAP', status_racap_pos = '$statusPos'
              WHERE id = '$sequencial'";
 
@@ -108,7 +91,7 @@ if (mysqli_affected_rows($conexao) == 1) {
     $sql = mysqli_query($conexao, $query);
     $row = mysqli_fetch_assoc($sql);
 
-    if ($row['status_racap'] == 2 || $row['status_racap'] == 3) {
+    if ($row['status_racap'] == 4 || $row['status_racap'] == 5) {
         $message = "<script> alert ('A OPERAÇÃO ATUAL NÃO PODE SER CONCLUÍDA.\\nA RACAP JÁ FOI FECHADA OU CANCELADA ANTERIORMENTE.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
@@ -117,9 +100,8 @@ if (mysqli_affected_rows($conexao) == 1) {
     }
 
     $query = "INSERT INTO racap_fecha_racap (id, id_racap, data_fechamento, 
-        prazo_racap, eficacia_racap, observacao_racap, status_racap_pos)
-	VALUES ('$sequencial', '$idRacap', '$dataFechamento', '$racapPrazo',
-        '$racapEficiencia', '$observacaoRACAP', '$statusPos')";
+        observacao_racap, status_racap_pos) VALUES ('$sequencial', '$idRacap',
+        '$dataFechamento', '$observacaoRACAP', '$statusPos')";
 
     $sql = mysqli_query($conexao, $query);
 
@@ -129,23 +111,30 @@ if (mysqli_affected_rows($conexao) == 1) {
                 SET status_racap = '$statusPos' WHERE id = '$idRacap'";
         $sql = mysqli_query($conexao, $query);
 
-        if ($statusPos == 3) {
+        if ($statusPos == 5) {
             $query = "SELECT id, id_racap, status_acao FROM racap_acao WHERE id_racap = '$idRacap'";
             $sql = mysqli_query($conexao, $query);
             $row = mysqli_fetch_assoc($sql);
 
             if (mysqli_affected_rows($conexao) > 0) {
-                $query = "UPDATE racap_acao SET status_acao = '3' WHERE id_racap='$idRacap'";
+                $query = "UPDATE racap_acao SET status_acao = '5' WHERE id_racap='$idRacap'";
                 $sql = mysqli_query($conexao, $query);
-                $row = mysqli_fetch_assoc($sql);
+                //$row = mysqli_fetch_assoc($sql);
             }
         }
 
 
         $login = $_SESSION ['nomeUsuario'];
         $dataRegistro = date("Y-m-d H:i:s");
-        $ocorrencia = "Incluiu Fechamento da RACAP: " . $idRacap .
+        
+        if ($statusPos == 4){
+            $ocorrencia = "Encerramento da RACAP: " . $idRacap .
+                " - \n Descrição do Fechamento: " . $observacaoRACAP;  
+        } elseif ($statusPos == 5) {
+            $ocorrencia = "Cancelamento da RACAP: " . $idRacap .
                 " - \n Descrição do Fechamento: " . $observacaoRACAP;
+        }
+              
         $ip = get_client_ip_env();
         $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";

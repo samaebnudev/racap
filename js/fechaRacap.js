@@ -7,7 +7,7 @@
 
 $(document).ready(function ( ) {
 
-    $('.noClick').click(function () {
+    /*$('.noClick').click(function () {
         return false;
     });
 
@@ -38,7 +38,7 @@ $(document).ready(function ( ) {
         });
 
         return false;
-    });
+    });*/
 
     $('#buscaBanco').change(function () {
         var sequencial = $('#selectbuscaBanco');
@@ -50,28 +50,15 @@ $(document).ready(function ( ) {
             data: sequencial,
             success: function (data) {
                 if (data.success == true) {
-                    $('#sequencial').val(data.id);
-                    $('#idRacap').val(data.idRacap);
-                    $('#idRacap').prop('disabled', true);
-
-                    if (data.prazoRacap == "S") {
-                        $("#racapPrazoSim").prop("checked", true);
-                        $("#racapPrazoNao").prop("checked", false);
-                    } else if (data.prazoRacap == "N") {
-                        $("#racapPrazoNao").prop("checked", true);
-                        $("#racapPrazoSim").prop("checked", false);
+                    $('#idFechamento').val(data.id);
+                    $('#numRACAP').val(data.idRacap);
+                    
+                    if (data.dataFechamento) {
+                        dateBuffer = data.dataFechamento.replace(" ", "T");
+                        $('#dataFechamento').val(dateBuffer);
                     }
 
-                    $('#dataFechamento').val(data.dataFechamento);
-
-
-                    if (data.eficaciaRacap == "S") {
-                        $("#racapEficienciaSim").prop("checked", true);
-                        $("#racapEficienciaNao").prop("checked", false);
-                    } else if (data.eficaciaRacap == "N") {
-                        $("#racapEficienciaNao").prop("checked", true);
-                        $("#racapEficienciaSim").prop("checked", false);
-                    }
+                    //$('#dataFechamento').val(data.dataFechamento);
 
                     $('#observacaoRACAP').val(data.observacaoRACAP);
                     $('#statusRacapPos').val(data.statusPos);
@@ -80,9 +67,9 @@ $(document).ready(function ( ) {
                     $('#cadFechaRacap').each(function () {
                         this.reset();
                     });
-
-                    //$('#idRacap').prop('readonly', false);
-                    $('#idRacap').prop('disabled', false);
+                    
+                    //$('#numRACAP').val("");
+                    $('#idFechamento').val("");
                 }
             }
         });

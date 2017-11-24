@@ -29,6 +29,12 @@ $(document).ready(function ( ) {
                     $('#numeroAcao').val(data.numeroAcao);
                     $('#tituloAcao').val(data.tituloAcao);
                     $('#selectStatusAcao').val(data.selectStatusAcao);
+                    
+                    if ($('#selectStatusAcao').val() > 3){
+                        $("#racapAcaoSubmit").prop("disabled", true);
+                    } else {
+                        $("#racapAcaoSubmit").prop("disabled", false);
+                    }
 
                     if (data.dataAcao != null) {
                         var dateBuffer = data.dataAcao.replace(" ", "T");
@@ -78,6 +84,13 @@ $(document).ready(function ( ) {
 
         return false;
     });
+    
+    $('#selectAcaoRacap').click(function(){
+        var length = $('#selectAcaoRacap').children('option').length;
+        if (length == 1){
+            $("#selectAcaoRacap").trigger('change');
+        }
+    });
 
     $('#dataAcao').change(function () {
         
@@ -104,6 +117,13 @@ $(document).ready(function ( ) {
         }
 
         return false;
+    });
+    
+    $('#racapAcaoReset').click(function (){
+        if ($('#selectStatusAcao').val() > '3'){
+            $('#racapAcaoSubmit').prop('disabled',false);
+            $('#sequencialAcao').val("");
+        }
     });
 
 });

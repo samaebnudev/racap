@@ -11,9 +11,7 @@ include "conecta_banco.inc";
 $userDados = array ('success' => false,
 'id'=>"",
 'idRacap' => "",
-'prazoRacap' => "",
 'dataFechamento' => "",
-'eficaciaRacap' => "",
 'observacaoRACAP' => "",
 'statusPos' => ""
 );
@@ -21,7 +19,7 @@ $userDados = array ('success' => false,
 if (isset($_POST['selectbuscaBanco'])){
 	$sequencial = $_POST['selectbuscaBanco'];
 
-	$query = "SELECT * FROM racap_fecha_racap WHERE id = '$sequencial'";
+	$query = "SELECT * FROM racap_fecha_racap WHERE id_racap = '$sequencial'";
 	$sql = mysqli_query ($conexao, $query);
 	$row = mysqli_fetch_assoc($sql);
 
@@ -29,9 +27,7 @@ if (isset($_POST['selectbuscaBanco'])){
 		$userDados ['success'] = true;
 		$userDados ['id'] = (string) $row ['id'];
 		$userDados ['idRacap'] = (string) $row ['id_racap'];
-                $userDados ['prazoRacap'] = (string) $row['prazo_racap'];
                 $userDados ['dataFechamento'] = (string) $row['data_fechamento'];
-                $userDados ['eficaciaRacap'] = (string) $row['eficacia_racap'];
                 $userDados ['observacaoRACAP'] = (string) $row['observacao_racap'];
                 $userDados ['statusPos'] = (string) $row['status_racap_pos'];
 	}

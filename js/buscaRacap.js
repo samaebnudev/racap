@@ -2,6 +2,7 @@ $(document).ready(function ( ) {
 
     $('#selectAcaoRacap').prop("disabled", true);
     $("#racapAcaoRacap :input").prop("disabled", true);
+    $('#cadFechaRacap :input').prop("disabled",true);
     $("#tabelaAnexos :input").prop("disabled", true);
 
     $('#cadRACAP').submit(function () {
@@ -35,6 +36,7 @@ $(document).ready(function ( ) {
                         $('#selectAcaoRacap').prop("disabled", false);
                         $("#racapAcaoRacap :input").prop("disabled", true);
                         $("#tabelaAnexos :input").prop("disabled", true);
+                        $('#cadFechaRacap :input').prop("disabled",true);
                         $('#sequencialAcao').val("");
 
                         $('#racapAcaoRacap').each(function () {
@@ -46,6 +48,7 @@ $(document).ready(function ( ) {
                         $("#cadRACAP :input").prop("disabled", false);
                         $("#racapAcaoRacap :input").prop("disabled", false);
                         $("#tabelaAnexos :input").prop("disabled", false);
+                        $('#cadFechaRacap :input').prop("disabled",false);
                         $('#statusRacap').prop('disabled', true);
                         $('#sequencialAcao').val("");
 
@@ -57,6 +60,8 @@ $(document).ready(function ( ) {
                     $('#idRacap').val(data.id);
                     //Coloca o sequencial da RACAP no Form de anexos.
                     $('#numRACAPFormAnexo').val(data.id);
+                    //Coloca o sequencial da RACAP no Form de Fechamento.
+                    $('#numRACAP').val(data.id);
                     $('#tipoRacap').val(data.tipoRacap);
                     $('#motivoAbertura').val(data.motivoAbertura);
                     $('#motivoDescricao').val(data.motivoDescricao);
@@ -66,7 +71,7 @@ $(document).ready(function ( ) {
                     if (data.prazoRacap) {
                         var dateBuffer = data.prazoRacap.replace(" ", "T");
                         $('#prazoRacap').val(dateBuffer);
-                        $('#prazo_acao').val(dateBuffer);
+                        //$('#prazo_acao').val(dateBuffer);
                     }
 
                     if (data.dataAbertura) {
@@ -95,6 +100,7 @@ $(document).ready(function ( ) {
                     $('#selectAcaoRacap').prop("disabled", true);
                     $("#tabelaAnexos :input").prop("disabled", true);
                     $("#racapAcaoRacap :input").prop("disabled", true);
+                    $("#cadFechaRacap :input").prop("disabled", true);
                     $('#dataAcao').prop('min', "");
                     $('#statusRacap').prop('disabled', true);
                     $('#sequencialAcao').val("");

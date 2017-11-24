@@ -21,12 +21,13 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <link rel="stylesheet" href="css/accordion.css">
         <link rel="stylesheet" href="css/multiple-select.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/multiple-select.js"></script>
         <script type="text/javascript" src="js/buscaRacap.js"></script>
         <script type="text/javascript" src="js/buscaRacapAnexo.js"></script>
         <script type="text/javascript" src="js/geraSelectAcao.js"></script>
         <script type="text/javascript" src="js/racapBuscaAcao.js"></script>
-        <script type="text/javascript" src="js/multiple-select.js"></script>
         <script type="text/javascript" src="js/buscaResponsavelRacap.js"></script>
+        <script type="text/javascript" src="js/fechaRacap.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -301,7 +302,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <p align="center">
                     <input type="submit" value="Gravar Ação" id="racapAcaoSubmit"/>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="reset" value="Limpar" id="racapAcaoSubmit"/>
+                    <input type="reset" value="Limpar" id="racapAcaoReset"/>
                 </p>
             </form>
         </div>
@@ -340,11 +341,12 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <div class="panel">
                 <form method="POST" id="cadFechaRacap" action="fecha_racap_manage.php">
                     <fieldset>
+                        <input type="hidden" name="idFechamento" id="idFechamento"/>
+                        
                         <input type="hidden" name="numRACAP" id="numRACAP"/>
-                        <?php
-                        $dataFechamento = date("Y-m-d 23:59:59");
-                        echo "<input type='hidden' name='dataFechamento' id='dataFechamento' value='$dataFechamento'";
-                        ?>
+                        
+                        <label for="dataFechamento">Data do Fechamento: </label>
+                        <input type="datetime-local" name="dataFechamento" id="dataFechamento" readonly/>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <label for="statusRacapPos">Status após Fechamento: </label>
