@@ -84,13 +84,6 @@ $(document).ready(function ( ) {
 
         return false;
     });
-    
-    $('#selectAcaoRacap').click(function(){
-        var length = $('#selectAcaoRacap').children('option').length;
-        if (length == 1){
-            $("#selectAcaoRacap").trigger('change');
-        }
-    });
 
     $('#dataAcao').change(function () {
         

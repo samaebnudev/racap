@@ -20,11 +20,12 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <link rel="stylesheet" href="css/form.css">
         <link rel="stylesheet" href="css/accordion.css">
         <link rel="stylesheet" href="css/multiple-select.css">
+        <link rel="stylesheet" href="css/indexTable.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script type="text/javascript" src="js/multiple-select.js"></script>
         <script type="text/javascript" src="js/buscaRacap.js"></script>
         <script type="text/javascript" src="js/buscaRacapAnexo.js"></script>
-        <script type="text/javascript" src="js/geraSelectAcao.js"></script>
+        <script type="text/javascript" src="js/geraTabelaAcao.js"></script>
         <script type="text/javascript" src="js/racapBuscaAcao.js"></script>
         <script type="text/javascript" src="js/buscaResponsavelRacap.js"></script>
         <script type="text/javascript" src="js/fechaRacap.js"></script>
@@ -227,10 +228,11 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <button type="button" class='accordion' id="thing2">Ações da RACAP:</button>
         <div class='panel'>
             <form id="buscaAcaoRacap" method="POST" enctype="multipart/form-data" style="text-align: center;">
-                <label for="selectAcaoRacap">Buscar: </label>
-                <select id="selectAcaoRacap" name="selectAcaoRacap">
-                    <option>Buscar Ações...</option>
-                </select>
+                <input type="hidden" name="selectAcaoRacap" id="selectAcaoRacap" />
+                <table id="tabelaAcoes" class="reportTable">
+                    <tr><td class="reportTableHeader">Ações da RACAP</td></tr>
+                    <tr><td class='reportTableInfo'>Nenhuma Ação para ser mostrada aqui.</td></tr>
+                </table>
             </form>
             <hr>
             <form method="POST" action="racap_acao_manage.php" id="racapAcaoRacap">
@@ -312,9 +314,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
             <div class='panel'>
                 <form id="tabelaAnexos" method="POST" enctype="multipart/form-data">
 
-                    <table>
+                    <table class="reportTable">
                         <thead>
-                            <tr><th>Seleciona</th><th>Arquivo</th><th>Baixar</th></tr>
+                            <tr><th class="reportTableHeader">Seleciona</th><th class="reportTableHeader">Arquivo</th><th class="reportTableHeader">Baixar</th></tr>
                         </thead>
                         <tbody id="listaAnexos">
                         </tbody>

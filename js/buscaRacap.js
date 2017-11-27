@@ -1,6 +1,4 @@
 $(document).ready(function ( ) {
-
-    $('#selectAcaoRacap').prop("disabled", true);
     $("#racapAcaoRacap :input").prop("disabled", true);
     $('#cadFechaRacap :input').prop("disabled",true);
     $("#tabelaAnexos :input").prop("disabled", true);
@@ -33,7 +31,6 @@ $(document).ready(function ( ) {
 
                     if (data.statusRacap > '3') {
                         $("#cadRACAP :input").prop("disabled", true);
-                        $('#selectAcaoRacap').prop("disabled", false);
                         $("#racapAcaoRacap :input").prop("disabled", true);
                         $("#tabelaAnexos :input").prop("disabled", true);
                         $('#cadFechaRacap :input').prop("disabled",true);
@@ -44,7 +41,6 @@ $(document).ready(function ( ) {
                         });
 
                     } else {
-                        $('#selectAcaoRacap').prop("disabled", false);
                         $("#cadRACAP :input").prop("disabled", false);
                         $("#racapAcaoRacap :input").prop("disabled", false);
                         $("#tabelaAnexos :input").prop("disabled", false);
@@ -97,7 +93,6 @@ $(document).ready(function ( ) {
                     });
 
                     $("#cadRACAP :input").prop("disabled", false);
-                    $('#selectAcaoRacap').prop("disabled", true);
                     $("#tabelaAnexos :input").prop("disabled", true);
                     $("#racapAcaoRacap :input").prop("disabled", true);
                     $("#cadFechaRacap :input").prop("disabled", true);

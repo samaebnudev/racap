@@ -37,8 +37,8 @@ if (isset($_POST['selectbuscaBanco'])) {
           href='" . $url . "'>" . $tableButtonDown . "</a></td><td>" . $tableButtonDel . "</td>
           </tr>"; */
 
-        $tableBuffer = "<tr><td>".$tableCheckStart.$id.$tableCheckEnd."</td><td>"
-        .$nomeArquivo."</td><td><a target='_blank' href='".$url."'>".$tableButtonDown."</a></td></tr>";
+        $tableBuffer = "<tr><td class='reportTableInfo'>".$tableCheckStart.$id.$tableCheckEnd."</td><td class='reportTableInfo'>"
+        .$nomeArquivo."</td><td class='reportTableInfo'><a target='_blank' href='".$url."'>".$tableButtonDown."</a></td></tr>";
 
         $userDados['tableData'] = $userDados['tableData'] . $tableBuffer;
 
@@ -51,8 +51,8 @@ if (isset($_POST['selectbuscaBanco'])) {
               href='" . $url . "'>" . $tableButtonDown . "</a></td><td>" . $tableButtonDel . "</td>
               </tr>"; */
 
-            $tableBuffer = "<tr><td>".$tableCheckStart.$id.$tableCheckEnd2."</td><td>"
-            .$nomeArquivo."</td><td><a target='_blank' href='".$url."'>".$tableButtonDown."</a></td></tr>";
+            $tableBuffer = "<tr><td class='reportTableInfo'>".$tableCheckStart.$id.$tableCheckEnd2."</td><td class='reportTableInfo'>"
+            .$nomeArquivo."</td><td class='reportTableInfo'><a target='_blank' href='".$url."'>".$tableButtonDown."</a></td></tr>";
 
             $userDados['tableData'] = $userDados['tableData'] . $tableBuffer;
         }

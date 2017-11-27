@@ -5,28 +5,25 @@
  */
 
 $(document).ready(function ( ) {
-    
     $('#buscaBanco').on('change', function () {
         var sequencial = $('#selectbuscaBanco');
-        
+
         $.ajax({
-            url: 'gera_select_acao.php',
+            url: 'gera_tabela_acao.php',
             dataType: "json",
             type: 'POST',
             data: sequencial,
             success: function (data) {
                 if (data.success == true) {
-                   // $("#formAcaoFieldset").children().attr('disabled', '');
-                    $("#selectAcaoRacap").empty();
-                    $("#selectAcaoRacap").append(data.selectData);
-                    
-                    if ($('#statusRacap').val()<='3'){
-                        $("#selectAcaoRacap").trigger('change');
-                    }           
-
+                    // $("#formAcaoFieldset").children().attr('disabled', '');
+                    $("#tabelaAcoes").empty();
+                    $("#tabelaAcoes").append(data.tableData);
+                    $('#selectAcaoRacap').val("");
                 } else {
                     //$("#formAcaoFieldset").children().attr('disabled', 'true');
-                    $("#selectAcaoRacap").empty();
+                    $("#tabelaAcoes").empty();
+                    $("#tabelaAcoes").append(data.tableData);
+                    $('#selectAcaoRacap').val("");
                 }
             }
         });
@@ -35,5 +32,9 @@ $(document).ready(function ( ) {
     });
     
 });
+
+function selecionaAcao (){
+        $('#selectAcaoRacap').val($(':input[name=radioAcaoRacap]:checked').val());
+    }
 
 
