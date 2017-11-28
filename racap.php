@@ -327,9 +327,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     <br/><br/>
                     <p align="center">
                         <label for="anexoRacap" title="Anexar Arquivos na RACAP se houver.">Anexar Arquivo:</label>
-                        <input type="file" name="anexoRacap" id="anexoRacap"/>
+                        <input type="file" name="anexoRacap" id="anexoRacap" required/>
                         <br/><br/><br/>
-                        <input type="submit" value="Anexar Arquivo" formaction="inclui_anexo.php" />
+                        <input type="submit" value="Anexar Arquivo" id="incluiAnexoRacap" formaction="inclui_anexo.php" />
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="submit" value="Excluir Arquivo" formaction="exclui_anexo.php" />
                     </p>

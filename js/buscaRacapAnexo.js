@@ -39,6 +39,14 @@ $(document).ready(function ( ) {
     $("#thing2").click(function (e) {
         e.preventDefault();
     });
+    
+    $('#incluiAnexoRacap').click(function (){
+        $('.radioAnexo').removeAttr("required");
+    });
+    
+    $('#excluiAnexoRacap').click(function (){
+        $('#anexoRacap').removeAttr("required");
+    });
 
 });
 

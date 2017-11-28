@@ -15,7 +15,7 @@ $userDados = array('success' => false,
 $tableBuffer = "";
 $tableButtonDown = "<input type='button' value='Download'/>";
 $tableButtonDel = "<input type='button' value='Excluir Anexo'/>";
-$tableCheckStart = "<input type='radio' name='excluiAnexo' value='";
+$tableCheckStart = "<input type='radio' name='excluiAnexo' class='radioAnexo' value='";
 $tableCheckEnd = "' required/>";
 $tableCheckEnd2 = "' />";
 

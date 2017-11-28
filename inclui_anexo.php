@@ -47,10 +47,10 @@ if ($_FILES['anexoRacap']) {
 
         if ($sql) {
 
-            $query = "SELECT motivo_descricao FROM racap_racap WHERE id = '$sequencial'";
+            $query = "SELECT motivo_racap FROM racap_racap WHERE id = '$sequencial'";
             $sql = mysqli_query($conexao, $query);
             $row = mysqli_fetch_assoc($sql);
-            $motivoDescricao = $row['motivo_descricao'];
+            $motivoDescricao = $row['motivo_racap'];
             
             $login = $_SESSION ['nomeUsuario'];
             $dataRegistro = date("Y-m-d H:i:s");
