@@ -1,0 +1,70 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 29/11/2017, 13:47:26
+    Author     : 19674
+*/
+
+body{
+    width: 744px;
+    /*height: 1052px;*/
+}
+
+#logo
+{
+    width: 10%;
+    float: left;
+    position: absolute;
+}
+
+#samaeHeader{
+    width : 75%;
+    float: left;
+    /*font-family: arial;*/
+    margin-left: 15%;
+}
+
+#samaeHeader h3, h4, h5, p{
+    text-align:center;
+}
+
+#samaeHeader h3{
+    font-size: 20px;
+}
+
+#samaeHeader h4{
+    font-size: 18px;
+}
+
+#samaeHeader h5{
+    font-size: 16px;
+}
+
+#reportDate{
+    width: 10%;
+    margin-top: -5%;
+    margin-left: 40%;
+    float: right;
+    /*font-family: arial;*/
+    position: absolute;
+    text-align: right;
+}
+
+#reportTitle{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    /*width: 80%;*/
+    float: left;
+    margin-left: 7.5%;
+    /*margin-top: 2%;*/
+}
+
+#report table, p{
+    margin:auto;
+}
+
+
