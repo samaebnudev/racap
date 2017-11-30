@@ -5,15 +5,15 @@
  */
 
 $(document).ready(function ( ) {
-    
-    $('#periodoRacapInicio').change(function(){
+
+    $('#periodoRacapInicio').change(function () {
         var minDate = $('#periodoRacapInicio').val();
-        $('#periodoRacapFim').attr({'min':minDate});
+        $('#periodoRacapFim').attr({'min': minDate});
     });
-    
+
     var dataLimite = $('#dataHoje').val();
-    $('#dataLimite').attr({'min':dataLimite});
-    
+    $('#dataLimite').attr({'min': dataLimite});
+
 });
 
 

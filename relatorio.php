@@ -19,7 +19,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/accordion.css">
         <link rel="stylesheet" href="css/form.css">
+        <link rel="stylesheet" href="css/multiple-select.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/multiple-select.js"></script>
         <script type="text/javascript" src="js/relatorio.js"></script>
         <script src="js/index.js"></script>
     </head>
@@ -112,11 +114,11 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         </div>
         <hr>
         <button class="accordion">Capa de RACAP</button>
-        <div class="panel">
-            <form method="POST" action="gera_relatorio.php" target="_blank">
-                <input type="hidden" name="tipoRel" value="racap"/>
-                <label for="idRacap">Selecione a RACAP: </label>
-                <select id="idRacap" name="idRacap" required>
+        <div class="panel" style="height: 40%;">
+            <form method="POST" action="templates/racapCapa2.php" target="_blank">
+                <!--<input type="hidden" name="tipoRel" value="racap"/>-->
+                <label for="idRacap">RACAP:</label>
+                <select id="idRacap" name="idRacap" class="capaRacap" required>
                     <option></option>
                     <?php
                     $query = "SELECT * FROM racap_racap";
@@ -124,13 +126,14 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     $row = mysqli_fetch_assoc($sql);
 
                     if (mysqli_affected_rows($conexao) > 0) {
-                        echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
+                        echo "<option value=" . $row['id'] . ">" . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
                         while ($row = mysqli_fetch_array($sql)) {
-                            echo "<option value=" . $row['id'] . "> RACAP " . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
+                            echo "<option value=" . $row['id'] . ">" . $row['id'] . " - " . $row['motivo_racap'] . "</option>";
                         }
                     }
                     ?>
                 </select>
+                &nbsp;&nbsp;&nbsp;
                 <input type="submit" value="Gerar Relatório"/>
             </form>
             <br/>
@@ -146,6 +149,13 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                     this.nextElementSibling.classList.toggle("show");
                 }
             }
+        </script>
+
+        <script>
+            $('.capaRacap').multipleSelect({
+                single: true,
+                filter: true
+            });
         </script>
 
     </body>
