@@ -25,7 +25,7 @@ if (isset($_SESSION['id'])) {
 <html >
     <head>
         <meta charset="UTF-8">
-        <title>Controle de Glosas - Log do Sistema</title>
+        <title>Controle de RACAP's - Log do Sistema</title>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/form.css">

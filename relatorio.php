@@ -52,20 +52,25 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
         <button class="accordion">Relatório Geral de RACAP's</button>
         <div class="panel">
-            <form method="POST" action="gera_relatorio.php" target="_blank">
+            <form method="POST" action="templates/racapGeral2.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapGeral"/>
-                <label for="statusRacap">Status: Pendente</label>
+                <label for="statusRacap">Status: Aberta</label>
                 <input type="radio" name="statusRacap" value="1" required/>
-
-                <label for="statusRacap">Fechada </label>
+                &nbsp;&nbsp;
+                <label for="statusRacap">Pendente </label>
                 <input type="radio" name="statusRacap" value="2"/>
-
-                <label for="statusRacap">Cancelada </label>
+                &nbsp;&nbsp;
+                <label for="statusRacap">Análise </label>
                 <input type="radio" name="statusRacap" value="3"/>
-
-                <label for="statusRacap">Todas </label>
+                &nbsp;&nbsp;
+                <label for="statusRacap">Encerrada </label>
                 <input type="radio" name="statusRacap" value="4"/>
-
+                &nbsp;&nbsp;
+                <label for="statusRacap">Cancelada </label>
+                <input type="radio" name="statusRacap" value="5"/>
+                &nbsp;&nbsp;
+                <label for="statusRacap">Todas </label>
+                <input type="radio" name="statusRacap" value="6"/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <label for="periodoRacapInicio">Período De:</label>
@@ -82,7 +87,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <hr>
         <button class="accordion">RACAP's Vencidas</button>
         <div class="panel">
-            <form method="POST" action="gera_relatorio.php" target="_blank">
+            <form method="POST" action="templates/racapVencida2.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapVencida"/>
 
                 <?php
@@ -97,7 +102,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <hr>
         <button class="accordion">RACAP's a Vencer</button>
         <div class="panel">
-            <form method="POST" action="gera_relatorio.php" target="_blank">
+            <form method="POST" action="templates/racapAVencer2.php" target="_blank">
                 <input type="hidden" name="tipoRel" value="racapAVencer"/>
                 <?php
                 $dataAtual = date("Y-m-d");

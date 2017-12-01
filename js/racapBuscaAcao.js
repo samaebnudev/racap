@@ -112,6 +112,20 @@ $(document).ready(function ( ) {
         return false;
     });
     
+    $('#selectStatusAcao').change(function (){
+        if ($('#selectStatusAcao').val()=='4'){
+            $('#dataAcao').prop('required',true);
+            $('#acaoEficienciaSim').prop('required',true);
+            $('#dataEficiencia').prop('required',true);
+        } else if ($('#selectStatusAcao').val()=='3'){
+            $('#dataAcao').prop('required',true);
+        } else {
+            $('#dataAcao').prop('required',false);
+            $('#acaoEficienciaSim').prop('required',false);
+            $('#dataEficiencia').prop('required',false);
+        }
+    });
+    
     $('#racapAcaoReset').click(function (){
         if ($('#selectStatusAcao').val() > '3'){
             $('#racapAcaoSubmit').prop('disabled',false);
