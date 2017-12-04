@@ -29,7 +29,9 @@ if (isset($_SESSION['id'])) {
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/form.css">
+        <link rel="stylesheet" href="css/multiple-select.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/multiple-select.js"></script>
         <script src="js/index.js"></script>
         <script type="text/javascript" src="js/log.js"></script>
     </head>
@@ -64,7 +66,7 @@ if (isset($_SESSION['id'])) {
             <label><input type="radio" name="criterioLogCheck" onclick="mudaFormLog(4)"/> Por tentativas de Login.</label>&nbsp;&nbsp;
         </p><hr>
 
-        <form method="POST" action="log_manage.php" target="blank" id="logByDate" class="formLog">
+        <form method="POST" action="templates/log_byDate2.php" target="blank" id="logByDate" class="formLog">
 
             <input type="hidden" name="criterioLog" value="byDate"/>
             <label>De : <input type="date" name="byDateDataInicio" id="byDateDataInicio" onblur="restringebyDateDataFim()" required/></label>
@@ -78,7 +80,7 @@ if (isset($_SESSION['id'])) {
 
         </form>
 
-        <form method="POST" action="log_manage.php" target="blank" id="logByEntrie" class="formLog">
+        <form method="POST" action="templates/log_byEntrie2.php" target="blank" id="logByEntrie" class="formLog">
             <input type="hidden" name="criterioLog" value="byEntrie"/>
 
             <label>Última(s) <input type="number" step="1" min="1" name="byEntrieQuantidade" onkeypress="return SomenteNumero(event)" required/> entrada(s) do Log.</label>
@@ -90,12 +92,12 @@ if (isset($_SESSION['id'])) {
 
         </form>
 
-        <form method="POST" action="log_manage.php" target="blank" id="logByUser" class="formLog">
+        <form method="POST" action="templates/log_byUser2.php" target="blank" id="logByUser" class="formLog">
             <input type="hidden" name="criterioLog" value="byUser"/>
 
             <label for="byUserNomeUsuario">Usuário: </label>
 
-            <select name="byUserNomeUsuario" id="byUserNomeUsuario" required>
+            <select name="byUserNomeUsuario" id="byUserNomeUsuario"  class="usuario" required>
                 <option></option>
                 <?php
                 $query = "SELECT id, nomeServidor FROM racap_usuario";
@@ -138,7 +140,7 @@ if (isset($_SESSION['id'])) {
 
         </form>
 
-        <form method="POST" action="log_manage.php" target="blank" id="logByLoginAttempt" class="formLog">
+        <form method="POST" action="templates/log_byLogin2.php" target="blank" id="logByLoginAttempt" class="formLog">
             <input type="hidden" name="criterioLog" value="byLoginAttempt"/>
 
             <label><input type="radio" name="byLoginAttempt" value="byLoginAttemptEntrie" onclick="loginAttemptForm(0)" required/>
@@ -157,6 +159,13 @@ if (isset($_SESSION['id'])) {
                 <input type="submit" value="Gerar Relatório" class="btn" />
             </p>
         </form>
+
+        <script>
+            $('.usuario').multipleSelect({
+                single: true,
+                filter: true
+            });
+        </script>
 
     </body>
 </html>
