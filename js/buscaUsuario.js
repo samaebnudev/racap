@@ -32,5 +32,13 @@ $(document).ready(function ( ) {
         return false;
 
     });
+    
+    $('#flgAtivo').on('change', function(){
+        if ($('#flgAtivo').is(':checked')){
+            $('#senhaUsuario').prop('required',true);
+        }else {
+           $('#senhaUsuario').prop('required',false); 
+        }
+    });
 
 });

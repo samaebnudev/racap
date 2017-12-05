@@ -146,7 +146,7 @@ if (isset($_SESSION['id'])) {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <label for="senhaUsuario">Senha: </label>
-            <input type="password" name="senhaUsuario" id="senhaUsuario" maxlength="20" title="Senha do usuário do sistema. Máximo de 20 Caracteres." required/>
+            <input type="password" name="senhaUsuario" id="senhaUsuario" maxlength="20" title="Senha do usuário do sistema. Máximo de 20 Caracteres."/>
             <input type="button" value="Mostrar" onclick="mostraSenha()"/>
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
