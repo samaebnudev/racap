@@ -2,8 +2,8 @@
 session_start();
 include "conecta_banco.inc";
 
-if ($_SESSION['nomeUsuario']==''){
-header("Location:login.php");
+if ($_SESSION['nomeUsuario'] == '') {
+    header("Location:login.php");
 }
 
 if (isset($_SESSION['id'])) {
@@ -29,7 +29,9 @@ if (isset($_SESSION['id'])) {
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/form.css">
         <link rel="stylesheet" href="css/accordion.css">
+        <link rel="stylesheet" href="css/multiple-select.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/multiple-select.js"></script>
         <script src="js/index.js"></script>
         <script type="text/javascript" src="js/usuario.js"></script>
         <script src="js/buscaUsuario.js"></script>
@@ -59,10 +61,10 @@ if (isset($_SESSION['id'])) {
         <br/>
         <form method="POST" id="buscaBanco" style="text-align: center;">
             <label for="selectbuscaBanco">Buscar: </label>
-            <select id="selectbuscaBanco" name="selectbuscaBanco">
+            <select id="selectbuscaBanco" name="selectbuscaBanco" class="usuario">
                 <option></option>
                 <?php
-                $query = "SELECT * FROM racap_usuario";
+                $query = "SELECT id, nomeServidor FROM racap_usuario ORDER BY nomeServidor";
                 $sql = mysqli_query($conexao, $query);
                 $row = mysqli_fetch_assoc($sql);
 
@@ -119,7 +121,7 @@ if (isset($_SESSION['id'])) {
             </select>
 
             <br/><br/>
-            
+
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -159,6 +161,13 @@ if (isset($_SESSION['id'])) {
             </p>
         </fieldset>
     </form>
+
+    <script>
+        $('.usuario').multipleSelect({
+            single: true,
+            filter: true
+        });
+    </script>
 
 </body>
 </html>

@@ -100,7 +100,7 @@ if (isset($_SESSION['id'])) {
             <select name="byUserNomeUsuario" id="byUserNomeUsuario"  class="usuario" required>
                 <option></option>
                 <?php
-                $query = "SELECT id, nomeServidor FROM racap_usuario";
+                $query = "SELECT id, nomeServidor FROM racap_usuario ORDER BY nomeServidor";
                 $sql = mysqli_query($conexao, $query);
                 $row = mysqli_fetch_assoc($sql);
 
