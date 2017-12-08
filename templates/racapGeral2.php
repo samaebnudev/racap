@@ -23,7 +23,7 @@ $reportTitle = "<h3>Relação de RACAP's de " . $dataIniRep . " até " . $dataFi
 /* $dataAtual = date("d/m/Y H:i:s");
   $dateString = "<div id='reportDate'>" . $dataAtual . "</div>"; */
 
-switch ($statusRacap) {
+/*switch ($statusRacap) {
     case "1":
         $reportTitle = "<h3>Relação de RACAP's Abertas de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
         $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap, 
@@ -105,7 +105,7 @@ AND racap_setor.id = racap_racap.setor_racap
 AND racap_status_racap.id = racap_racap.status_racap
 AND data_racap BETWEEN '$dataIni' AND '$dataFim' ORDER BY racap_racap.id";
         break;
-}
+}*/
 
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);

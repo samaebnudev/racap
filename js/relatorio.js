@@ -13,7 +13,17 @@ $(document).ready(function ( ) {
 
     var dataLimite = $('#dataHoje').val();
     $('#dataLimite').attr({'min': dataLimite});
+    
+    $('#statusCheck').on('change',function () {
+        if ($('#statusCheck').is(':checked')){
+            $(':input[name=statusRacap]').prop('disabled',false);
+            $(':input[name=statusRacap]').prop('required',true);
+        }else {
+            $(':input[name=statusRacap]').prop('disabled',true);
+            $(':input[name=statusRacap]').prop('required',false);
+        }
+        
+        return false;
+    });
 
 });
-
-

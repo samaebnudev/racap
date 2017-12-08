@@ -53,34 +53,79 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <button class="accordion">Relatório Geral de RACAP's</button>
         <div class="panel">
             <form method="POST" action="templates/racapGeral2.php" target="_blank">
-                <input type="hidden" name="tipoRel" value="racapGeral"/>
-                <label for="statusRacap">Status: Aberta</label>
-                <input type="radio" name="statusRacap" value="1" required/>
+
+                <label for="checkStatus">Status:</label>
+                <input type="checkbox" name="statusCheck" id="statusCheck" value="S"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="statusRacap">Aberta</label>
+                <input type="radio" name="statusRacap" value="1" disabled/>
                 &nbsp;&nbsp;
                 <label for="statusRacap">Pendente </label>
-                <input type="radio" name="statusRacap" value="2"/>
+                <input type="radio" name="statusRacap" value="2" disabled/>
                 &nbsp;&nbsp;
                 <label for="statusRacap">Análise </label>
-                <input type="radio" name="statusRacap" value="3"/>
+                <input type="radio" name="statusRacap" value="3" disabled/>
                 &nbsp;&nbsp;
                 <label for="statusRacap">Encerrada </label>
-                <input type="radio" name="statusRacap" value="4"/>
+                <input type="radio" name="statusRacap" value="4" disabled/>
                 &nbsp;&nbsp;
                 <label for="statusRacap">Cancelada </label>
-                <input type="radio" name="statusRacap" value="5"/>
+                <input type="radio" name="statusRacap" value="5" disabled/>
                 &nbsp;&nbsp;
-                <label for="statusRacap">Todas </label>
+                <!--<label for="statusRacap">Todas </label>
                 <input type="radio" name="statusRacap" value="6"/>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                <label for="periodoRacapInicio">Período De:</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                <br/><br/><br/>
+                <label for="checkPeriodo">Data de Abertura:</label>
+                <input type="checkbox" name="checkPeriodo" id="checkPeriodo" value="S"/>
+                &nbsp;
+                <label for="periodoRacapInicio">De:</label>
                 <input type='date' name='periodoRacapInicio' id='periodoRacapInicio' required/>
 
                 <label for="periodoRacapFim"> &nbsp; Até:</label>
                 <input type='date' name='periodoRacapFim' id='periodoRacapFim' required/>
-
+                <br/><br/><br/>
+                <label for="motivoAberturaCheck">Motivo de Abertura: </label>
+                <input type="checkbox" name="motivoAberturaCheck" id="motivoAberturaCheck" value="S"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="statusRacap">Auditoria Interna</label>
+                <input type="radio" name="motivoRacap" value="1" required/>
                 &nbsp;&nbsp;
-                <input type="submit" value="Gerar Relatório"/>
+                <label for="statusRacap">Auditoria Externa </label>
+                <input type="radio" name="motivoRacap" value="2"/>
+                &nbsp;&nbsp;
+                <label for="statusRacap">Visita Técnica </label>
+                <input type="radio" name="motivoRacap" value="3"/>
+                &nbsp;&nbsp;
+                <label for="statusRacap">Solicitação da Seção </label>
+                <input type="radio" name="motivoRacap" value="4"/>
+                &nbsp;&nbsp;
+                <label for="statusRacap">Índice </label>
+                <input type="radio" name="motivoRacap" value="5"/>
+                &nbsp;&nbsp;
+                <br/><br/><br/>
+                <label for="motivoAberturaCheck">Seção: </label>
+                <input type="checkbox" name="secaoCheck" id="secaoCheck" value="S"/>
+                &nbsp;&nbsp;
+                <select id="setorRacap" name="setorRacap"  required>
+                    <option></option>
+                    <?php
+                    $query = "SELECT * FROM racap_setor";
+                    $sql = mysqli_query($conexao, $query);
+                    $row = mysqli_fetch_assoc($sql);
+
+                    if (mysqli_affected_rows($conexao) > 0) {
+                        echo "<option value=" . $row['id'] . ">" . $row['nomeSetor'] . "</option>";
+                        while ($row = mysqli_fetch_array($sql)) {
+                            echo "<option value=" . $row['id'] . ">" . $row['nomeSetor'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                <br/>
+                <p align="center">
+                    <input type="submit" value="Gerar Relatório"/>
+                </p>
             </form>
             <br/>
         </div>
@@ -88,13 +133,10 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <button class="accordion">RACAP's Vencidas</button>
         <div class="panel">
             <form method="POST" action="templates/racapVencida2.php" target="_blank">
-                <input type="hidden" name="tipoRel" value="racapVencida"/>
-
                 <?php
                 $dataVencimento = date("Y-m-d 23:59:59");
                 echo "<input type='hidden' name='dataVencimento' id='dataVencimento' value='$dataVencimento'/>";
                 ?>
-
                 <input type="submit" value="Gerar Relatório"/>
             </form>
             <br/>
@@ -103,7 +145,6 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <button class="accordion">RACAP's a Vencer</button>
         <div class="panel">
             <form method="POST" action="templates/racapAVencer2.php" target="_blank">
-                <input type="hidden" name="tipoRel" value="racapAVencer"/>
                 <?php
                 $dataAtual = date("Y-m-d");
                 echo "<input type='hidden' name='dataHoje' id='dataHoje' value='$dataAtual'/>";
@@ -121,7 +162,6 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <button class="accordion">Capa de RACAP</button>
         <div class="panel" style="height: 40%;">
             <form method="POST" action="templates/racapCapa2.php" target="_blank">
-                <!--<input type="hidden" name="tipoRel" value="racap"/>-->
                 <label for="idRacap">RACAP:</label>
                 <select id="idRacap" name="idRacap" class="capaRacap" required>
                     <option></option>
