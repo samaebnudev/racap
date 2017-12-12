@@ -80,34 +80,34 @@ $privilegio = $_SESSION['tipoPrivilegio'];
                 <input type="checkbox" name="checkPeriodo" id="checkPeriodo" value="S"/>
                 &nbsp;
                 <label for="periodoRacapInicio">De:</label>
-                <input type='date' name='periodoRacapInicio' id='periodoRacapInicio' required/>
+                <input type='date' name='periodoRacapInicio' id='periodoRacapInicio' disabled/>
 
                 <label for="periodoRacapFim"> &nbsp; Até:</label>
-                <input type='date' name='periodoRacapFim' id='periodoRacapFim' required/>
+                <input type='date' name='periodoRacapFim' id='periodoRacapFim' disabled/>
                 <br/><br/><br/>
                 <label for="motivoAberturaCheck">Motivo de Abertura: </label>
                 <input type="checkbox" name="motivoAberturaCheck" id="motivoAberturaCheck" value="S"/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label for="statusRacap">Auditoria Interna</label>
-                <input type="radio" name="motivoRacap" value="1" required/>
+                <label for="motivoRacap">Auditoria Interna</label>
+                <input type="radio" name="motivoRacap" value="1" disabled/>
                 &nbsp;&nbsp;
-                <label for="statusRacap">Auditoria Externa </label>
-                <input type="radio" name="motivoRacap" value="2"/>
+                <label for="motivoRacap">Auditoria Externa </label>
+                <input type="radio" name="motivoRacap" value="2" disabled/>
                 &nbsp;&nbsp;
-                <label for="statusRacap">Visita Técnica </label>
-                <input type="radio" name="motivoRacap" value="3"/>
+                <label for="motivoRacap">Visita Técnica </label>
+                <input type="radio" name="motivoRacap" value="3" disabled/>
                 &nbsp;&nbsp;
-                <label for="statusRacap">Solicitação da Seção </label>
-                <input type="radio" name="motivoRacap" value="4"/>
+                <label for="motivoRacap">Solicitação da Seção </label>
+                <input type="radio" name="motivoRacap" value="4" disabled/>
                 &nbsp;&nbsp;
-                <label for="statusRacap">Índice </label>
-                <input type="radio" name="motivoRacap" value="5"/>
+                <label for="motivoRacap">Índice </label>
+                <input type="radio" name="motivoRacap" value="5" disabled/>
                 &nbsp;&nbsp;
                 <br/><br/><br/>
                 <label for="motivoAberturaCheck">Seção: </label>
                 <input type="checkbox" name="secaoCheck" id="secaoCheck" value="S"/>
                 &nbsp;&nbsp;
-                <select id="setorRacap" name="setorRacap"  required>
+                <select id="setorRacap" name="setorRacap" disabled>
                     <option></option>
                     <?php
                     $query = "SELECT * FROM racap_setor";

@@ -25,5 +25,45 @@ $(document).ready(function ( ) {
         
         return false;
     });
+    
+    $('#checkPeriodo').on('change',function () {
+        if ($('#checkPeriodo').is(':checked')){
+            $('#periodoRacapInicio').prop('disabled',false);
+            $('#periodoRacapInicio').prop('required',true);
+            $('#periodoRacapFim').prop('disabled',false);
+            $('#periodoRacapFim').prop('required',true);
+        }else {
+            $('#periodoRacapInicio').prop('disabled',true);
+            $('#periodoRacapInicio').prop('required',false);
+            $('#periodoRacapFim').prop('disabled',true);
+            $('#periodoRacapFim').prop('required',false);
+        }
+        
+        return false;
+    });
+    
+    $('#motivoAberturaCheck').on('change',function () {
+        if ($('#motivoAberturaCheck').is(':checked')){
+            $(':input[name=motivoRacap]').prop('disabled',false);
+            $(':input[name=motivoRacap]').prop('required',true);
+        }else {
+            $(':input[name=motivoRacap]').prop('disabled',true);
+            $(':input[name=motivoRacap]').prop('required',false);
+        }
+        
+        return false;
+    });
+    
+    $('#secaoCheck').on('change',function () {
+        if ($('#secaoCheck').is(':checked')){
+            $('#setorRacap').prop('disabled',false);
+            $('#setorRacap').prop('required',true);
+        }else {
+            $('#setorRacap').prop('disabled',true);
+            $('#setorRacap').prop('required',false);
+        }
+        
+        return false;
+    });
 
 });
