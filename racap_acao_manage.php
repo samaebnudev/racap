@@ -134,7 +134,7 @@ elseif (mysqli_affected_rows($conexao) == 0) {
     }
 }
 
-if ($selectStatusAcao == "4" || $selectStatusAcao == "5"){
+if ($selectStatusAcao >= "3"){
     $checaAcao = checarStatus($conexao);
     $message = $message."\\n".$checaAcao;
 }

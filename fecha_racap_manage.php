@@ -41,8 +41,16 @@ if ($statusPos == "4") {
 
     if (mysqli_affected_rows($conexao) > 0) {
         $statusAcao = $row['status_acao'];
-        if ($statusAcao < 4) {
-            $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES PENDENTES PARA ELA.\\nFECHE OU CANCELE AS AÇÕES PENDENTES ANTES DE FECHAR A RACAP');</script>";
+        if ($statusAcao < 3) {
+            $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES PENDENTES PARA ELA.\\nENCERRE OU CANCELE AS AÇÕES PENDENTES ANTES DE ENCERRAR A RACAP');</script>";
+            echo $message;
+            $urlBack = "<script>voltar ();</script>";
+            echo $urlBack;
+            exit();
+        }
+
+        if ($statusAcao == 3) {
+            $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES EXECUTADAS QUE NÃO TIVERAM SUA EFICÁCIA VERIFICADA.\\nVERIFIQUE A EFICÁCIA DAS AÇÕES OU CANCELE AS MESMAS ANTES DE ENCERRAR A RACAP.');</script>";
             echo $message;
             $urlBack = "<script>voltar ();</script>";
             echo $urlBack;
@@ -52,8 +60,16 @@ if ($statusPos == "4") {
         while ($row = mysqli_fetch_array($sql)) {
 
             $statusAcao = $row['status_acao'];
-            if ($statusAcao < 4) {
-                $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES PENDENTES PARA ELA.\\nFECHE OU CANCELE AS AÇÕES PENDENTES ANTES DE FECHAR A RACAP');</script>";
+            if ($statusAcao < 3) {
+                $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES PENDENTES PARA ELA.\\n\\nENCERRE OU CANCELE AS AÇÕES PENDENTES ANTES DE ENCERRAR A RACAP');</script>";
+                echo $message;
+                $urlBack = "<script>voltar ();</script>";
+                echo $urlBack;
+                exit();
+            }
+
+            if ($statusAcao == 3) {
+                $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS EXISTEM AÇÕES EXECUTADAS QUE NÃO TIVERAM SUA EFICÁCIA VERIFICADA.\\n\\nVERIFIQUE A EFICÁCIA DAS AÇÕES OU CANCELE AS MESMAS ANTES DE ENCERRAR A RACAP.');</script>";
                 echo $message;
                 $urlBack = "<script>voltar ();</script>";
                 echo $urlBack;
@@ -61,7 +77,7 @@ if ($statusPos == "4") {
             }
         }
     } elseif (mysqli_affected_rows($conexao) == 0) {
-        $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS NENHUMA AÇÃO FOI TOMADA PARA ELA.\\nCADASTRE E/OU EXECUTE AÇÕES NECESSÁRIAS ANTES DE FECHAR A RACAP.');</script>";
+        $message = "<script> alert ('ESSA RACAP NÃO PODE SER FECHADA POIS NENHUMA AÇÃO FOI TOMADA PARA ELA.\\n\\nCADASTRE E/OU ENCERRE AÇÕES NECESSÁRIAS ANTES DE FECHAR A RACAP.');</script>";
         echo $message;
         $urlBack = "<script>voltar ();</script>";
         echo $urlBack;

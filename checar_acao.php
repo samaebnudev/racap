@@ -10,14 +10,14 @@
 function checarStatus ($conexao){
  $idRacap = $_POST['idRacap'];
  
- $query = "SELECT * FROM racap_acao WHERE status_acao <= 3 AND id_racap = '$idRacap'";
+ $query = "SELECT * FROM racap_acao WHERE status_acao < 3 AND id_racap = '$idRacap'";
  $sql = mysqli_query($conexao, $query);
  
  if (mysqli_affected_rows($conexao) == 0){
      $query = "UPDATE racap_racap SET status_racap = '3' WHERE id = '$idRacap'";
      $sql = mysqli_query($conexao, $query);
      
-     $message = "Todas as Ações Foram Encerradas ou Canceladas. Já é possível Fechar a RACAP.";
+     $message = "Todas as Ações Foram Executadas ou Canceladas. Já é possível Fechar a RACAP.";
  } else {
      $message = "Ainda existem Ações para serem Encerradas ou Canceladas.";
  }
