@@ -7,28 +7,49 @@
 
 session_start();
 date_default_timezone_set('Brazil/East');
+header("Content-type: text/html; charset=utf-8");
 include "../conecta_banco.inc";
 
-/* $statusRacap = $_POST['statusRacap'];
-  $dateBuffer = $_POST['periodoRacapInicio'];
-  $dataIni = date('Y-m-d 00:00:00', strtotime($dateBuffer));
-  $dataIniRep = date('d/m/Y', strtotime($dateBuffer));
-
-  $dateBuffer = $_POST['periodoRacapFim'];
-  $dataFim = date('Y-m-d 23:59:59', strtotime($dateBuffer));
-  $dataFimRep = date('d/m/Y', strtotime($dateBuffer)); */
-
 //Define o título do PDF, a data atual e o contador de linhas da tabela.
-//$reportTitle = "<h3>Relação de RACAP's de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
+$reportTitle = "<h3>Relação Geral de RACAP's</h3>";
 
-$statusCheck = $_POST['statusCheck'];
-$checkPeriodo = $_POST['checkPeriodo'];
-$motivoAberturaCheck = $_POST['motivoAberturaCheck'];
-$secaoCheck = $_POST['secaoCheck'];
+if (isset($_POST['statusCheck'])) {
+    $statusCheck = $_POST['statusCheck'];
+} else {
+    $statusCheck = "";
+}
+
+if (isset($_POST['checkPeriodo'])) {
+    $checkPeriodo = $_POST['checkPeriodo'];
+} else {
+    $checkPeriodo = "";
+}
+
+if (isset($_POST['motivoAberturaCheck'])){
+    $motivoAberturaCheck = $_POST['motivoAberturaCheck'];
+} else {
+    $motivoAberturaCheck = "";
+}
+
+if (isset($_POST['secaoCheck'])){
+    $secaoCheck = $_POST['secaoCheck'];
+} else {
+    $secaoCheck = "";
+}
+
+$query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap,
+  racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
+
+  FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
+
+  WHERE racap_tipo_racap.id = racap_racap.tipo_racap
+  AND racap_setor.id = racap_racap.setor_racap
+  AND racap_status_racap.id = racap_racap.status_racap";
 
 if ($statusCheck != "") {
     $statusRacap = $_POST['statusRacap'];
     $queryStatus = " AND status_racap = '$statusRacap'";
+    $query = $query . $queryStatus;
 } else {
     $queryStatus = "";
 }
@@ -40,6 +61,7 @@ if ($checkPeriodo != "") {
     $dateBuffer = $_POST['periodoRacapFim'];
     $dataFim = date('Y-m-d 23:59:59', strtotime($dateBuffer));
     $queryPeriodo = " AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
+    $query = $query . $queryPeriodo;
 } else {
     $queryPeriodo = "";
 }
@@ -47,96 +69,20 @@ if ($checkPeriodo != "") {
 if ($motivoAberturaCheck != "") {
     $motivoRacap = $_POST['motivoRacap'];
     $queryMotivo = " AND motivo_abertura_racap_id = '$motivoRacap'";
+    $query = $query . $queryMotivo;
 } else {
     $queryMotivo = "";
 }
 
-/* $dataAtual = date("d/m/Y H:i:s");
-  $dateString = "<div id='reportDate'>" . $dataAtual . "</div>"; */
+if ($secaoCheck != "") {
+    $setorRacap = $_POST['setorRacap'];
+    $querySecao = " AND setor_racap = '$setorRacap'";
+    $query = $query . $querySecao;
+} else {
+    $querySecao = "";
+}
 
-/* switch ($statusRacap) {
-  case "1":
-  $reportTitle = "<h3>Relação de RACAP's Abertas de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
-  $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap,
-  racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
-
-  FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-  WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-  AND racap_setor.id = racap_racap.setor_racap
-  AND racap_status_racap.id = racap_racap.status_racap
-  AND status_racap = '$statusRacap'
-  AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
-  break;
-
-  case "2":
-  $reportTitle = "<h3>Relação de RACAP's Pendentes de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
-  $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap,
-  racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
-
-  FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-  WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-  AND racap_setor.id = racap_racap.setor_racap
-  AND racap_status_racap.id = racap_racap.status_racap
-  AND status_racap = '$statusRacap'
-  AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
-  break;
-
-  case "3":
-  $reportTitle = "<h3>Relação de RACAP's em Análise de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
-  $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap,
-  racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
-
-  FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-  WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-  AND racap_setor.id = racap_racap.setor_racap
-  AND racap_status_racap.id = racap_racap.status_racap
-  AND status_racap = '$statusRacap'
-  AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
-  break;
-
-  case "4":
-  $reportTitle = "<h3>Relação de RACAP's Encerradas de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
-  $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap,
-  racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
-
-  FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-  WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-  AND racap_setor.id = racap_racap.setor_racap
-  AND racap_status_racap.id = racap_racap.status_racap
-  AND status_racap = '$statusRacap'
-  AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
-  break;
-
-  case "5":
-  $reportTitle = "<h3>Relação de RACAP's Canceladas de " . $dataIniRep . " até " . $dataFimRep . "</h3>";
-  $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap,
-  racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
-
-  FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-  WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-  AND racap_setor.id = racap_racap.setor_racap
-  AND racap_status_racap.id = racap_racap.status_racap
-  AND status_racap = '$statusRacap'
-  AND data_racap BETWEEN '$dataIni' AND '$dataFim'";
-  break;
-
-  case "6":
-  $query = "SELECT racap_racap.id, data_racap, racap_tipo_racap.descricao AS 'tipo', motivo_racap,
-  racap_setor.nomeSetor, racap_status_racap.descricao AS 'status', prazo_racap
-
-  FROM racap_racap, racap_tipo_racap, racap_setor, racap_status_racap
-
-  WHERE racap_tipo_racap.id = racap_racap.tipo_racap
-  AND racap_setor.id = racap_racap.setor_racap
-  AND racap_status_racap.id = racap_racap.status_racap
-  AND data_racap BETWEEN '$dataIni' AND '$dataFim' ORDER BY racap_racap.id";
-  break;
-  } */
+$query = $query." ORDER BY racap_racap.id";
 
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);
