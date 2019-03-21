@@ -56,6 +56,8 @@ $historicoRACAP = $_POST['historicoRACAP'];
 
 $selectResponsavel = $_POST['selectResponsavel'];
 
+$autor = $_SESSION['nomeUsuario'];
+
 $query = "SELECT * FROM racap_racap WHERE id = '$sequencial'";
 $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);
@@ -66,7 +68,8 @@ if (mysqli_affected_rows($conexao) == 1) {
             prazo_racap = '$prazoRacap',
             motivo_abertura_racap_id = '$motivoAbertura', 
             motivo_racap = '$motivoDescricao', setor_racap = '$setorRacap',
-            historico_racap = '$historicoRACAP', causa_racap = '$causaRacap'
+            historico_racap = '$historicoRACAP', causa_racap = '$causaRacap',
+            autor_racap = '$autor'
             WHERE id = '$sequencial'";
     $sql = mysqli_query($conexao, $query);
 
@@ -89,10 +92,10 @@ if (mysqli_affected_rows($conexao) == 1) {
 } elseif (mysqli_affected_rows($conexao) == 0) {
     $query = "INSERT INTO racap_racap (id, status_racap, tipo_racap, data_racap,
         prazo_racap, motivo_abertura_racap_id, motivo_racap, setor_racap,
-        historico_racap, causa_racap)
+        historico_racap, causa_racap, autor_racap)
 	VALUES ('$sequencial', '$statusRacap', '$tipoRacap', '$dataAbertura',
         '$prazoRacap', '$motivoAbertura', '$motivoDescricao', '$setorRacap',
-        '$historicoRACAP', '$causaRacap')";
+        '$historicoRACAP', '$causaRacap','$autor')";
 
     $sql = mysqli_query($conexao, $query);
 

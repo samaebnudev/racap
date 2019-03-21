@@ -209,7 +209,7 @@ $privilegio = $_SESSION['tipoPrivilegio'];
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <label for='prazoRacap'>Prazo da RACAP:</label>
+                    <label for='prazoRacap'>Prazo da Ação:</label>
                     <input type='datetime-local' name='prazoRacap' id='prazoRacap' style="width:18%;"required/>
 
                     <br/><br/>
