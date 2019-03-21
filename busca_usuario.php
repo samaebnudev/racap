@@ -7,6 +7,7 @@ $userDados = array ('success' => false,
 'nomeUsuario' => "",
 'setorUsuario' => "",
 'perfilUsuario' => "",
+'emailUsuario'=> "",
 'flgAtivo' => ""
 );
 
@@ -25,6 +26,7 @@ if (isset($_POST['selectbuscaBanco'])){
                 $userDados ['nomeUsuario'] = (string) $row ['nomeServidor'];
                 $userDados ['setorUsuario'] = (string) $row ['setor'];
                 $userDados ['perfilUsuario'] = (string) $row ['perfil_acesso'];
+                $userDados ['emailUsuario'] = (string) $row ['emailUsuario'];
                 $userDados ['flgAtivo'] = (string) $row ['flgAtivo'];
 	}
 }

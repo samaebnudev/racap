@@ -16,6 +16,7 @@ $(document).ready(function ( ) {
                     $('#nomeUsuario').val(data.nomeUsuario);
                     $('#setorUsuario').val(data.setorUsuario)
                     $('#perfilUsuario').val(data.perfilUsuario);
+                    $('#emailUsuario').val(data.emailUsuario);
 
                     if (data.flgAtivo == "S") {
                         $('#flgAtivo').prop("checked", true);

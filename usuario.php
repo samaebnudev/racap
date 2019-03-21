@@ -150,6 +150,11 @@ if (isset($_SESSION['id'])) {
             <input type="button" value="Mostrar" onclick="mostraSenha()"/>
 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            <label for="emailUsuario">E-mail: </label>
+            <input type="email" name="emailUsuario" id="emailUsuario" title="E-mail do usuário do sistema"/>
+            
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <label for="flgAtivo"><input type="checkbox" name="flgAtivo" id="flgAtivo" value="S" title="Marcar este campo para tornar o usuário ativo no sistema."/> Usuário Ativo.</label>
             <br/><br/>
