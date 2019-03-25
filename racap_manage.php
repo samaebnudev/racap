@@ -14,6 +14,7 @@ date_default_timezone_set('Brazil/East');
 header("Content-type: text/html; charset=utf-8");
 include "conecta_banco.inc";
 include "getIP.php";
+include "sendMail.php";
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -233,6 +234,13 @@ if ($racapMensagem == "RACAP incluída com sucesso." || $racapMensagem == "RACAP
                 $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
                 $sql = mysqli_query($conexao, $query);
+                
+                $idUsuario = $elementosDiferentesForm[$i];
+                
+                $mail = sendMail($sequencial, $idUsuario);
+                if ($mail != "E-mail enviado com sucesso."){
+                  echo '<script type="text/javascript">alert("' . $mail . '");</script>';
+                }
             }
         }
     } elseif ($novaRacap == true) {
@@ -256,6 +264,13 @@ if ($racapMensagem == "RACAP incluída com sucesso." || $racapMensagem == "RACAP
                 $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
 			VALUES ('0', '$dataRegistro', '$ocorrencia', '$login', '$ip')";
                 $sql = mysqli_query($conexao, $query);
+                
+                $idUsuario = $selectResponsavel[$i];
+                
+                $mail = sendMail($sequencial, $idUsuario);
+                if ($mail != "E-mail enviado com sucesso."){
+                  echo '<script type="text/javascript">alert("' . $mail . '");</script>';
+                }
             }
         }
     }
