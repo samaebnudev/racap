@@ -2,7 +2,8 @@ $(document).ready(function ( ) {
     $("#racapAcaoRacap :input").prop("disabled", true);
     $('#cadFechaRacap :input').prop("disabled",true);
     $("#tabelaAnexos :input").prop("disabled", true);
-
+    $('#autorRacap').html($('#autorRacapHidden').val());
+    
     $('#cadRACAP').submit(function () {
         $('#statusRacap').prop('disabled', false);
     });
@@ -52,7 +53,8 @@ $(document).ready(function ( ) {
                             this.reset();
                         });
                     }
-
+                    
+                    $('#autorRacap').html(data.autorRacap);
                     $('#idRacap').val(data.id);
                     //Coloca o sequencial da RACAP no Form de anexos.
                     $('#numRACAPFormAnexo').val(data.id);
@@ -80,6 +82,9 @@ $(document).ready(function ( ) {
 
 
                 } else {
+                    
+                    $('#autorRacap').html($('#autorRacapHidden').val());
+                    
                     $('#cadRACAP').each(function () {
                         this.reset();
                     });

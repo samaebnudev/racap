@@ -7,6 +7,7 @@ if ($_SESSION['nomeUsuario'] == '') {
 }
 
 $privilegio = $_SESSION['tipoPrivilegio'];
+$nomeUsuario = $_SESSION['nomeUsuario'];
 //$privilegio = 1;
 ?>
 
@@ -80,6 +81,9 @@ $privilegio = $_SESSION['tipoPrivilegio'];
         <div class='panel'>
             <form method="POST" id="cadRACAP" action="racap_manage.php" enctype="multipart/form-data">
                 <fieldset>
+                    <?phpecho "<input type='hidden' name='autorRacapHidden' id='autorRacapHidden' value='Autor: ".$nomeUsuario."'/>";?>
+                    <div id="autorRacap">Autor: Lorem Ipsum</div>
+                    <br/>
                     <label for="sequencial">Número da RACAP:</label>
                     <input type="number" step="1" name="sequencial"
                            id="sequencial" style="width: 5%;" readonly />
