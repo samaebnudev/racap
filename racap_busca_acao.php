@@ -14,6 +14,7 @@ $userDados = array('success' => false,
     'numeroAcao' => "",
     'tituloAcao' => "",
     'selectStatusAcao' => "",
+    'prazoExecucao'=>"",
     'dataAcao' => "",
     'acaoPrazo' => "",
     'acaoEficiencia' => "",
@@ -42,6 +43,7 @@ if (isset($_POST['selectAcaoRacap'])) {
         //echo "Titulo da Acao : ".$userDados['tituloAcao']."<br/>";
         $userDados ['selectStatusAcao'] = $row['status_acao'];
         //echo "Status da Acao : ".$userDados['selectStatusAcao']."<br/>";
+        $userDados['prazoExecucao'] = $row['prazo_execucao'];
         $userDados ['dataAcao'] = $row['data_acao'];
         //echo "Data de Execucao : ".$userDados['dataAcao']."<br/>";
         $userDados ['acaoPrazo'] = $row['acao_no_prazo'];

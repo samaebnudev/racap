@@ -273,19 +273,22 @@ $nomeUsuario = $_SESSION['nomeUsuario'];
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <label for="dataAcao">Data de Execução: </label>
-                <input type="datetime-local" id="dataAcao" name="dataAcao"/>
+                <label for="prazoExecucao">Prazo de Execução: </label>
+                <input type="datetime-local" id="prazoExecucao" name="prazoExecucao"/>
 
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <label for='acaoPrazo'>Ação no Prazo: Sim 
+                <!--<label for='acaoPrazo'>Ação no Prazo: Sim -->
                     <input type='radio' name='acaoPrazo' id='acaoPrazoSim' class="noClick" value='S'/>
-                </label>
-                <label>Não
+                <!--</label>-->
+                <!--<label>Não-->
                     <input type='radio' name='acaoPrazo' id='acaoPrazoNao' class="noClick" value='N'/>
-                </label>
+                <!--</label>-->
 
                 <br/><br/>
-
+                
+                <label for="dataAcao">Data de Execução: </label>
+                <input type="datetime-local" id="dataAcao" name="dataAcao"/>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <label for='acaoEficiencia'>Ação Eficaz: Sim 
                     <input type='radio' name='acaoEficiencia' id='acaoEficienciaSim' value='S'/>
                 </label>

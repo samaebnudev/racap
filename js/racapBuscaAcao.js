@@ -5,6 +5,9 @@
  */
 
 $(document).ready(function ( ) {
+    
+    $('#acaoPrazoSim').hide();
+    $('#acaoPrazoNao').hide();
 
     $('.noClick').click(function () {
         return false;
@@ -35,9 +38,16 @@ $(document).ready(function ( ) {
                     } else {
                         $("#racapAcaoSubmit").prop("disabled", false);
                     }
-
+                    
+                    if (data.prazoExecucao != null) {
+                        var dateBuffer = data.prazoExecucao.replace(" ", "T");
+                        $('#prazoExecucao').val(dateBuffer);
+                    } else {
+                        $('#prazoExecucao').val("");
+                    }
+                    
                     if (data.dataAcao != null) {
-                        var dateBuffer = data.dataAcao.replace(" ", "T");
+                        dateBuffer = data.dataAcao.replace(" ", "T");
                         $('#dataAcao').val(dateBuffer);
                     } else {
                         $('#dataAcao').val("");
