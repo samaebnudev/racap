@@ -14,7 +14,7 @@ $reportTitle = "<p id='reportTitle'>Registro de Ações Corretivas, Preventivas 
 $dataAtual = date("d/m/Y H:i:s");
 //$dateString = "<div id='reportDate'>" . $dataAtual . "</div>";
 
-$query = "SELECT racap_racap.id, data_racap, motivo_racap, historico_racap, prazo_racap, racap_setor.nomesetor AS 'setor',
+$query = "SELECT racap_racap.id, autor_racap, data_racap, motivo_racap, historico_racap, prazo_racap, racap_setor.nomesetor AS 'setor',
 racap_tipo_racap.descricao AS 'tipo', racap_motivo_abertura.descricao AS 'motivoAbertura', racap_causa.descricao AS 'causa',
 racap_status_racap.descricao AS 'status'
 FROM racap_racap, racap_tipo_racap, racap_motivo_abertura, racap_causa, racap_setor, racap_status_racap
@@ -28,6 +28,7 @@ $row = mysqli_fetch_assoc($sql);
 if (mysqli_affected_rows($conexao) == 1) {
 
     $numero = $row['id'];
+    $autor = $row['autor_racap'];
     $dataRacap = date('d/m/Y', strtotime($row['data_racap']));
     $motivoRacap = $row['motivo_racap'];
     
@@ -204,6 +205,9 @@ if (mysqli_affected_rows($conexao) == 1) {
 
         <div class='report'>
             <table class='reportTable'>
+                <tr>
+                    <td class='reportTableHeader' >Autor(a):</td><td class='reportTableInfo' colspan="8"><?php echo $autor; ?></td>
+                </tr>
                 <tr>
                     <td class='reportTableHeader' >Nº:</td><td class='reportTableInfo'><?php echo $numero; ?></td>
                     <td class='reportTableHeader'>Título:</td><td class='reportTableInfo' colspan='5'><?php echo $motivoRacap; ?></td>

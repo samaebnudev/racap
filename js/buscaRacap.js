@@ -2,6 +2,7 @@ $(document).ready(function ( ) {
     $("#racapAcaoRacap :input").prop("disabled", true);
     $('#cadFechaRacap :input').prop("disabled",true);
     $("#tabelaAnexos :input").prop("disabled", true);
+    $('#autorRacap').html("");
     $('#autorRacap').html($('#autorRacapHidden').val());
     
     $('#cadRACAP').submit(function () {
@@ -29,6 +30,8 @@ $(document).ready(function ( ) {
                 if (data.success == true) {
                     $('#sequencial').val(data.id);
                     $('#statusRacap').val(data.statusRacap);
+                    $('#autorRacap').html("");
+                    $('#autorRacap').html("Autor: "+data.autorRacap);
 
                     if (data.statusRacap > '3') {
                         $("#cadRACAP :input").prop("disabled", true);
@@ -54,7 +57,6 @@ $(document).ready(function ( ) {
                         });
                     }
                     
-                    $('#autorRacap').html(data.autorRacap);
                     $('#idRacap').val(data.id);
                     //Coloca o sequencial da RACAP no Form de anexos.
                     $('#numRACAPFormAnexo').val(data.id);
@@ -83,6 +85,7 @@ $(document).ready(function ( ) {
 
                 } else {
                     
+                    $('#autorRacap').html("");
                     $('#autorRacap').html($('#autorRacapHidden').val());
                     
                     $('#cadRACAP').each(function () {

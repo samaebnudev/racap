@@ -80,9 +80,9 @@ $nomeUsuario = $_SESSION['nomeUsuario'];
         <button type="button" class='accordion' id="thing3">RACAP's:</button>
         <div class='panel'>
             <form method="POST" id="cadRACAP" action="racap_manage.php" enctype="multipart/form-data">
+                <?php echo "<input type='hidden' name='autorRacapHidden' id='autorRacapHidden' value='Autor: ".$nomeUsuario."'/>"?>
                 <fieldset>
-                    <?phpecho "<input type='hidden' name='autorRacapHidden' id='autorRacapHidden' value='Autor: ".$nomeUsuario."'/>";?>
-                    <div id="autorRacap">Autor: Lorem Ipsum</div>
+                    <div id="autorRacap"></div>
                     <br/>
                     <label for="sequencial">Número da RACAP:</label>
                     <input type="number" step="1" name="sequencial"
