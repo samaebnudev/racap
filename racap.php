@@ -274,7 +274,7 @@ $nomeUsuario = $_SESSION['nomeUsuario'];
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <label for="prazoExecucao">Prazo de Execução: </label>
-                <input type="datetime-local" id="prazoExecucao" name="prazoExecucao"/>
+                <input type="datetime-local" id="prazoExecucao" name="prazoExecucao" required/>
 
                 <!--<label for='acaoPrazo'>Ação no Prazo: Sim -->
                     <input type='radio' name='acaoPrazo' id='acaoPrazoSim' class="noClick" value='S'/>

@@ -67,6 +67,17 @@ if (isset($_POST['acaoEficiencia'])) {
     $acaoEficiencia = "";
 }
 
+
+$buffer = $_POST['prazoExecucao'];
+
+if ($buffer != NULL) {
+    $dateBuffer = explode("T", $buffer);
+    $prazoExecucao = implode(" ", $dateBuffer);
+    $prazoExecucao = date('Y-m-d H:i:00', strtotime($prazoExecucao));
+} else {
+    $prazoExecucao = NULL;
+}
+
 $buffer = $_POST['dataAcao'];
 
 if ($buffer != NULL) {
@@ -92,7 +103,12 @@ $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
-    $query = "UPDATE racap_acao SET id_racap = '$idRacap', id_acao = '$numeroAcao', status_acao = '$selectStatusAcao', titulo_acao = '$tituloAcao', descricao_acao = '$descricaoAcao', acao_no_prazo = '$acaoPrazo', data_acao = '$dataAcao', acao_eficaz = '$acaoEficiencia', data_eficacia = '$dataEficiencia' WHERE id = '$sequencial'";
+    $query = "UPDATE racap_acao SET id_racap = '$idRacap', id_acao = '$numeroAcao', "
+            . "status_acao = '$selectStatusAcao', titulo_acao = '$tituloAcao', "
+            . "descricao_acao = '$descricaoAcao', acao_no_prazo = '$acaoPrazo', "
+            . "data_acao = '$dataAcao', acao_eficaz = '$acaoEficiencia', data_eficacia = '$dataEficiencia', "
+            . "prazo_execucao = '$prazoExecucao' WHERE id = '$sequencial'";
+    
     $sql = mysqli_query($conexao, $query);
     
     if ($sql) {
@@ -112,9 +128,9 @@ if (mysqli_affected_rows($conexao) == 1) {
 elseif (mysqli_affected_rows($conexao) == 0) {
     $query = "INSERT INTO racap_acao (id, id_racap, id_acao,
         status_acao, titulo_acao, descricao_acao, acao_no_prazo, data_acao,
-        acao_eficaz, data_eficacia) VALUES ('0', '$idRacap', '$numeroAcao',
+        acao_eficaz, data_eficacia, prazo_execucao) VALUES ('0', '$idRacap', '$numeroAcao',
         '$selectStatusAcao', '$tituloAcao', '$descricaoAcao', '$acaoPrazo',
-        '$dataAcao', '$acaoEficiencia', '$dataEficiencia')";
+        '$dataAcao', '$acaoEficiencia', '$dataEficiencia','$prazoExecucao')";
     
     $sql = mysqli_query($conexao, $query);
 
