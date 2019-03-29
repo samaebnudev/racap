@@ -15,6 +15,7 @@ header("Content-type: text/html; charset=utf-8");
 include "conecta_banco.inc";
 include "getIP.php";
 include 'checar_acao.php';
+include "calculaPrazoRacap.php";
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -150,11 +151,20 @@ elseif (mysqli_affected_rows($conexao) == 0) {
     }
 }
 
+$checaFechamento = false;
+
 if ($selectStatusAcao >= "3"){
     $checaAcao = checarStatus($conexao);
     $message = $message."\\n".$checaAcao;
+    
+    if ($checaAcao == "Todas as Ações Foram Executadas ou Canceladas. Já é possível Fechar a RACAP."){
+        $checaFechamento = true;
+    }
 }
 
+if ($checaFechamento == false){
+ $calculaPrazo = calculaPrazoRacap($conexao);   
+}
 
 echo "<script> alert ('".$message."');</script>";
 echo $urlBack;
