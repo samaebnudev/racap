@@ -60,6 +60,7 @@ if (mysqli_affected_rows($conexao) == 1) {
         $_SESSION ['nomeUsuario'] = $row ['nomeServidor'];
         $_SESSION ['senha'] = $password;
         $_SESSION ['flgAtivo'] = $flgAtivo;
+        $_SESSION['loginUsuario'] = $row['id'];
 
         $dataRegistro = date("Y-m-d H:i:s");
         $ocorrencia = "Entrou no Sistema.";

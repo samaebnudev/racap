@@ -16,6 +16,10 @@ $(document).ready(function ( ) {
      $('#statusRacap').prop('disabled', true);
      }
      });*/
+    
+    if ($('#privilegioRACAP').val()=='3'){
+      $("#cadRACAP :input").prop("disabled", true);
+    }
 
     $('#buscaBanco').on('change', function () {
 
@@ -45,11 +49,18 @@ $(document).ready(function ( ) {
                         });
 
                     } else {
-                        $("#cadRACAP :input").prop("disabled", false);
+                        
+                        if ($('#privilegioRACAP').val()!="3"){
+                            $("#cadRACAP :input").prop("disabled", false);
+                            $('#statusRacap').prop('disabled', true);
+                            $('#cadFechaRacap :input').prop("disabled",false);
+                        }else{
+                            $("#cadRACAP :input").prop("disabled", true);
+                            $('#cadFechaRacap :input').prop("disabled",true);
+                        }
+                        
                         $("#racapAcaoRacap :input").prop("disabled", false);
                         $("#tabelaAnexos :input").prop("disabled", false);
-                        $('#cadFechaRacap :input').prop("disabled",false);
-                        $('#statusRacap').prop('disabled', true);
                         $('#sequencialAcao').val("");
 
                         $('#racapAcaoRacap').each(function () {
@@ -100,7 +111,12 @@ $(document).ready(function ( ) {
                         this.reset();
                     });
 
-                    $("#cadRACAP :input").prop("disabled", false);
+                    if ($('#privilegioRACAP').val()=="3"){
+                        $("#cadRACAP :input").prop("disabled", true);
+                    }else{
+                        $("#cadRACAP :input").prop("disabled", false);
+                    }
+                    
                     $("#tabelaAnexos :input").prop("disabled", true);
                     $("#racapAcaoRacap :input").prop("disabled", true);
                     $("#cadFechaRacap :input").prop("disabled", true);

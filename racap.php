@@ -8,6 +8,7 @@ if ($_SESSION['nomeUsuario'] == '') {
 
 $privilegio = $_SESSION['tipoPrivilegio'];
 $nomeUsuario = $_SESSION['nomeUsuario'];
+$loginUsuario = $_SESSION['loginUsuario'];
 //$privilegio = 1;
 ?>
 
@@ -55,13 +56,24 @@ $nomeUsuario = $_SESSION['nomeUsuario'];
             </div>
         </div>
         <br/>
-
+        
+        <?php echo "<input type='hidden' name='privilegioRACAP' id='privilegioRACAP' value='$privilegio'/>";
+        ?>
+        
         <form method="POST" id="buscaBanco" style="text-align: center;">
             <label for="selectbuscaBanco">Buscar RACAP: </label>
             <select id="selectbuscaBanco" name="selectbuscaBanco" class="selectSingleFilter">
                 <option></option>
                 <?php
-                $query = "SELECT * FROM racap_racap";
+                
+                if ($privilegio == 1){
+                    $query = "SELECT id, motivo_racap FROM racap_racap";
+                }elseif ($privilegio == 2) {
+                    $query = "SELECT id, motivo_racap FROM racap_racap WHERE autor_racap = '$nomeUsuario'";
+                }elseif ($privilegio == 3){
+                    $query = "SELECT racap_racap.id, racap_racap.motivo_racap FROM racap_racap WHERE racap_racap.id IN (SELECT id_racap FROM racap_responsavel_racap WHERE id_responsavel = '$loginUsuario')";
+                }
+                
                 $sql = mysqli_query($conexao, $query);
                 $row = mysqli_fetch_assoc($sql);
 
