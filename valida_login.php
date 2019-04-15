@@ -92,6 +92,16 @@ if (mysqli_affected_rows($conexao) == 1) {
            
             $query = "UPDATE racap_parametros SET data_verificacao = '$dataParametro' WHERE id='1'";
             $sql = mysqli_query($conexao, $query);
+        }elseif($dataParametro < $dataParametroBanco){
+            $query = "UPDATE racap_racap SET status_racap= '1' WHERE prazo_racap > '$dataParametro' AND status_racap = '2'";
+            $sql = mysqli_query($conexao, $query);
+
+            if ($sql) {
+                $ocorrencia = "Correção de Status da RACAP devido à mudança de Prazo.";
+                $query = "INSERT INTO racap_log (id, dataRegistro, ocorrencia, usuario, ip) 
+		VALUES ('0', '$dataRegistro', '$ocorrencia', '$nomeUsuario', '$ip')";
+                $sql = mysqli_query($conexao, $query);
+            }
         }
 
         mysqli_close($conexao);

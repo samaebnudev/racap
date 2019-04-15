@@ -301,7 +301,7 @@ $loginUsuario = $_SESSION['loginUsuario'];
                 <input type="datetime-local" id="dataAcao" name="dataAcao"/>
                 
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <label for='acaoEficiencia'>Ação Eficaz: Sim 
+               <!-- <label for='acaoEficiencia'>Ação Eficaz: Sim 
                     <input type='radio' name='acaoEficiencia' id='acaoEficienciaSim' value='S'/>
                 </label>
                 <label>Não
@@ -311,7 +311,7 @@ $loginUsuario = $_SESSION['loginUsuario'];
                 &nbsp;&nbsp;&nbsp;&nbsp;
 
                 <label for="dataEficiencia">Data da Eficácia: </label>
-                <input type="datetime-local" id="dataEficiencia" name="dataEficiencia"/>
+                <input type="datetime-local" id="dataEficiencia" name="dataEficiencia"/>-->
 
                 <br/><br/>
 
