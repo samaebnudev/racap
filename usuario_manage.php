@@ -28,7 +28,11 @@ $setorUsuario = $_POST['setorUsuario'];
 $perfilUsuario = $_POST['perfilUsuario'];
 
 
-$senha = password_hash($_POST['senhaUsuario'], PASSWORD_DEFAULT);
+if (isset($_POST['senhaUsuario'])){
+ $senha = password_hash($_POST['senhaUsuario'], PASSWORD_DEFAULT);   
+}else {
+    $senha = "";
+}
 //$senha = crypt ($_POST['senhaUsuario']);
 
 $emailUsuario = $_POST['emailUsuario'];
