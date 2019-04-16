@@ -22,7 +22,7 @@ function sendMail($idRacap,$idUsuario){
         $queryRacap = "SELECT motivo_racap FROM racap_racap WHERE id='$idRacap'";
         $sql = mysqli_query($conexao, $queryRacap);
         $row = mysqli_fetch_array($sql);
-        $motivoRacap = $row['motivo_racap'];
+        $motivoRacap = utf8_encode($row['motivo_racap']);
         
         $mensagemAssunto = "Responsável Técnico. RACAP - ".$idRacap;
         
@@ -48,7 +48,7 @@ function sendMail($idRacap,$idUsuario){
         $mailer->AddAddress($emailUsuario,$nomeUsuario);
         //Destinatários
         $mailer->Subject = utf8_decode($mensagemAssunto);
-        $mailer->Body = $mensagemCorpo;
+        $mailer->Body = utf8_decode($mensagemCorpo);
         if(!$mailer->Send())
         {
             $mailResponse = "A mensagem não pôde ser enviada."
