@@ -31,7 +31,7 @@ $perfilUsuario = $_POST['perfilUsuario'];
 if (isset($_POST['senhaUsuario'])){
  $senha = password_hash($_POST['senhaUsuario'], PASSWORD_DEFAULT);   
 }else {
-    $senha = "";
+    $senha = NULL;
 }
 //$senha = crypt ($_POST['senhaUsuario']);
 
@@ -49,13 +49,13 @@ $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
     
-    if ($senha!=""){
+    if ($senha!=NULL){
      $query = "UPDATE racap_usuario SET matServidor = '$matUsuario',
 	nomeServidor = '$nomeUsuario', 	setor='$setorUsuario', 
         senha = '$senha', flgAtivo = '$flgAtivo', perfil_acesso = '$perfilUsuario',
         emailUsuario = '$emailUsuario'
 	WHERE id = '$sequencial'";   
-    }else{
+    }elseif($senha==NULL){
         $query = "UPDATE racap_usuario SET matServidor = '$matUsuario',
 	nomeServidor = '$nomeUsuario', 	setor='$setorUsuario', 
         flgAtivo = '$flgAtivo', perfil_acesso = '$perfilUsuario',

@@ -16,8 +16,8 @@ include "conecta_banco.inc";
             <br/>
             <div class="loginContainer">
                 <form action="valida_login.php" method="POST">
-                    <label><br/>Usuário: <input type="text" maxlength="100" name="usuario"/><br/><br/></label>
-                    <label>&nbsp;&nbsp;Senha: <input type="password" size="15" name="senha" maxlength="20"/><br/><br/></label>
+                    <label><br/>Usuário: <input type="text" maxlength="100" name="usuario" required/><br/><br/></label>
+                    <label>&nbsp;&nbsp;Senha: <input type="password" size="15" name="senha" maxlength="20" required/><br/><br/></label>
                     <input type="submit" class="btnLogin" value="Login"/>
                 </form>
             </div>
