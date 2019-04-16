@@ -53,7 +53,12 @@ $(document).ready(function ( ) {
                         if ($('#privilegioRACAP').val()!="3"){
                             $("#cadRACAP :input").prop("disabled", false);
                             $('#statusRacap').prop('disabled', true);
-                            $('#cadFechaRacap :input').prop("disabled",false);
+                            
+                            if ($('#privilegioRACAP').val()=="2"){
+                                $('#cadFechaRacap :input').prop("disabled",true);
+                            }else{
+                                $('#cadFechaRacap :input').prop("disabled",false);
+                            }
                         }else{
                             $("#cadRACAP :input").prop("disabled", true);
                             $('#cadFechaRacap :input').prop("disabled",true);

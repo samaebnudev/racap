@@ -92,7 +92,7 @@ if (mysqli_affected_rows($conexao) == 1) {
            
             $query = "UPDATE racap_parametros SET data_verificacao = '$dataParametro' WHERE id='1'";
             $sql = mysqli_query($conexao, $query);
-        }elseif($dataParametro < $dataParametroBanco){
+        }else{
             $query = "UPDATE racap_racap SET status_racap= '1' WHERE prazo_racap > '$dataParametro' AND status_racap = '2'";
             $sql = mysqli_query($conexao, $query);
 

@@ -44,11 +44,20 @@ $sql = mysqli_query($conexao, $query);
 $row = mysqli_fetch_assoc($sql);
 
 if (mysqli_affected_rows($conexao) == 1) {
-    $query = "UPDATE racap_usuario SET matServidor = '$matUsuario',
+    
+    if ($senha!=""){
+     $query = "UPDATE racap_usuario SET matServidor = '$matUsuario',
 	nomeServidor = '$nomeUsuario', 	setor='$setorUsuario', 
         senha = '$senha', flgAtivo = '$flgAtivo', perfil_acesso = '$perfilUsuario',
         emailUsuario = '$emailUsuario'
-	WHERE id = '$sequencial'";
+	WHERE id = '$sequencial'";   
+    }else{
+        $query = "UPDATE racap_usuario SET matServidor = '$matUsuario',
+	nomeServidor = '$nomeUsuario', 	setor='$setorUsuario', 
+        flgAtivo = '$flgAtivo', perfil_acesso = '$perfilUsuario',
+        emailUsuario = '$emailUsuario'
+	WHERE id = '$sequencial'";   
+    }
 
     $sql = mysqli_query($conexao, $query);
 

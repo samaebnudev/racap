@@ -22,7 +22,7 @@ function sendMail($idRacap,$idUsuario){
         $queryRacap = "SELECT motivo_racap FROM racap_racap WHERE id='$idRacap'";
         $sql = mysqli_query($conexao, $queryRacap);
         $row = mysqli_fetch_array($sql);
-        $motivoRacap = $row['motivo_racap'];
+        $motivoRacap = utf8_decode($row['motivo_racap']);
         
         $mensagemAssunto = "Responsável Técnico. RACAP - ".$idRacap;
         
