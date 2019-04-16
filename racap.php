@@ -69,7 +69,7 @@ $loginUsuario = $_SESSION['loginUsuario'];
                 if ($privilegio == 1){
                     $query = "SELECT id, motivo_racap FROM racap_racap";
                 }elseif ($privilegio == 2) {
-                    $query = "SELECT id, motivo_racap FROM racap_racap WHERE autor_racap = '$nomeUsuario'";
+                    $query = "SELECT id, motivo_racap FROM racap_racap WHERE autor_racap = '$nomeUsuario' OR racap_racap.id IN (SELECT id_racap FROM racap_responsavel_racap WHERE id_responsavel = '$loginUsuario')";
                 }elseif ($privilegio == 3){
                     $query = "SELECT racap_racap.id, racap_racap.motivo_racap FROM racap_racap WHERE racap_racap.id IN (SELECT id_racap FROM racap_responsavel_racap WHERE id_responsavel = '$loginUsuario')";
                 }
