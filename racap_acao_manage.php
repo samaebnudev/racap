@@ -129,7 +129,7 @@ if (mysqli_affected_rows($conexao) == 1) {
 elseif (mysqli_affected_rows($conexao) == 0) {
     $query = "INSERT INTO racap_acao (id, id_racap, id_acao,
         status_acao, titulo_acao, descricao_acao, acao_no_prazo, data_acao,
-        acao_eficaz, data_eficacia, prazo_execucao) VALUES ('0', '$idRacap', '$numeroAcao',
+        acao_eficaz, prazo_execucao) VALUES ('0', '$idRacap', '$numeroAcao',
         '$selectStatusAcao', '$tituloAcao', '$descricaoAcao', '$acaoPrazo',
         '$dataAcao', '$acaoEficiencia', '$prazoExecucao')";
     
