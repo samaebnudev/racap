@@ -52,7 +52,7 @@ if (isset($_POST['selectAcaoRacap'])) {
         //echo "Acao Eficiente S/N : ".$userDados['acaoEficiencia']."<br/>";
         $userDados ['dataEficiencia'] = $row['data_eficacia'];
         //echo "Data da Eficacia : ".$userDados['dataEficiencia']."<br/>";
-        $userDados['descricaoAcao'] = $row ['descricao_acao'];
+        $userDados['descricaoAcao'] = stripslashes($row ['descricao_acao']);
         //echo "Descricao : ".$userDados['descricaoAcao']."<br/>";
     }
 }

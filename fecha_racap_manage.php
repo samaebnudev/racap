@@ -31,7 +31,7 @@ if ($buffer != NULL) {
 
 $idRacap = $_POST ['numRACAP'];
 $dataFechamento = date('Y-m-d H:i:s');
-$observacaoRACAP = $_POST['observacaoRACAP'];
+$observacaoRACAP = addslashes($_POST['observacaoRACAP']);
 $statusPos = $_POST['statusRacapPos'];
 
 if ($statusPos == "4") {

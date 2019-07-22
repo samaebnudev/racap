@@ -53,7 +53,7 @@ if (isset($_POST['prazoRacap'])) {
     $prazoRacap = NULL;
 }
 
-$historicoRACAP = $_POST['historicoRACAP'];
+$historicoRACAP = addslashes($_POST['historicoRACAP']);
 
 $selectResponsavel = $_POST['selectResponsavel'];
 

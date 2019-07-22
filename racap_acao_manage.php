@@ -53,7 +53,7 @@ if ($buffer != NULL){
 
 $selectStatusAcao = $_POST['selectStatusAcao'];
 $tituloAcao = $_POST['tituloAcao'];
-$descricaoAcao = $_POST['descricaoAcao'];
+$descricaoAcao = addslashes($_POST['descricaoAcao']);
 
 if (isset($_POST['acaoPrazo'])) {
     $acaoPrazo = $_POST['acaoPrazo'];
@@ -89,7 +89,7 @@ if ($buffer != NULL) {
     $dataAcao = NULL;
 }
 
-$buffer = $_POST['dataEficiencia'];
+/*$buffer = $_POST['dataEficiencia'];
 
 if ($buffer != NULL) {
     $dateBuffer = explode("T", $buffer);
@@ -97,7 +97,7 @@ if ($buffer != NULL) {
     $dataEficiencia = date('Y-m-d H:i:00', strtotime($dataEficiencia));
 } else {
     $dataEficiencia = NULL;
-}
+}*/
 
 $query = "SELECT * FROM racap_acao WHERE id = '$sequencial'";
 $sql = mysqli_query($conexao, $query);
@@ -107,7 +107,7 @@ if (mysqli_affected_rows($conexao) == 1) {
     $query = "UPDATE racap_acao SET id_racap = '$idRacap', id_acao = '$numeroAcao', "
             . "status_acao = '$selectStatusAcao', titulo_acao = '$tituloAcao', "
             . "descricao_acao = '$descricaoAcao', acao_no_prazo = '$acaoPrazo', "
-            . "data_acao = '$dataAcao', acao_eficaz = '$acaoEficiencia', data_eficacia = '$dataEficiencia', "
+            . "data_acao = '$dataAcao', acao_eficaz = '$acaoEficiencia',"
             . "prazo_execucao = '$prazoExecucao' WHERE id = '$sequencial'";
     
     $sql = mysqli_query($conexao, $query);
@@ -131,7 +131,7 @@ elseif (mysqli_affected_rows($conexao) == 0) {
         status_acao, titulo_acao, descricao_acao, acao_no_prazo, data_acao,
         acao_eficaz, data_eficacia, prazo_execucao) VALUES ('0', '$idRacap', '$numeroAcao',
         '$selectStatusAcao', '$tituloAcao', '$descricaoAcao', '$acaoPrazo',
-        '$dataAcao', '$acaoEficiencia', '$dataEficiencia','$prazoExecucao')";
+        '$dataAcao', '$acaoEficiencia', '$prazoExecucao')";
     
     $sql = mysqli_query($conexao, $query);
 
